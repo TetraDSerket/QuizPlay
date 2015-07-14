@@ -14,7 +14,7 @@
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
-	<integer>0</integer>
+	<integer>2</integer>
 	<key>currentSequenceId</key>
 	<integer>0</integer>
 	<key>docDimensionsType</key>
@@ -155,7 +155,7 @@
 					<key>type</key>
 					<string>Float</string>
 					<key>value</key>
-					<real>40</real>
+					<real>1000</real>
 				</dict>
 			</array>
 		</dict>
@@ -184,7 +184,7 @@
 					<key>value</key>
 					<array>
 						<real>179.66915893554688</real>
-						<real>285.26300048828125</real>
+						<real>276.63858032226562</real>
 						<integer>0</integer>
 						<integer>0</integer>
 						<integer>0</integer>
@@ -283,9 +283,11 @@
 					<key>type</key>
 					<string>Float</string>
 					<key>value</key>
-					<real>40</real>
+					<real>1000</real>
 				</dict>
 			</array>
+			<key>selected</key>
+			<true/>
 		</dict>
 	</array>
 	<key>jsControlled</key>
@@ -450,7 +452,7 @@
 							<key>cornerRadius</key>
 							<real>160</real>
 							<key>density</key>
-							<real>25</real>
+							<real>1</real>
 							<key>dynamic</key>
 							<true/>
 							<key>elasticity</key>
@@ -485,7 +487,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>343.450439453125</real>
+									<real>305.37557983398438</real>
 									<integer>0</integer>
 									<integer>2</integer>
 									<integer>0</integer>
@@ -831,7 +833,7 @@
 								<key>value</key>
 								<array>
 									<real>160</real>
-									<real>286.01223754882812</real>
+									<real>277.3878173828125</real>
 									<integer>0</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -1117,8 +1119,6 @@
 								<array/>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>

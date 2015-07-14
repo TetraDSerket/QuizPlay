@@ -19,6 +19,11 @@ class GameplaySling: CCNode
 //        let actionFollow = CCActionFollow(target: slingPocket, worldBoundary: boundingBox())
 //        gamePhysicsNode.runAction(actionFollow)
         gamePhysicsNode.debugDraw = true
+    }
+    
+    override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!)
+    {
+        //let touchLocation = touch.locationInNode(contentNode)
         
     }
     
