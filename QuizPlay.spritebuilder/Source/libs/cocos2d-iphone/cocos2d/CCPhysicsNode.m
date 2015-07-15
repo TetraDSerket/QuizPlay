@@ -366,7 +366,8 @@ static void PhysicsSeparate(cpArbiter *arb, cpSpace *space, CCPhysicsCollisionHa
 			method_getReturnType(methods[i], returnType, 2);
 			
 			if([phase isEqualToString:@"ccPhysicsCollisionBegin"]){
-				NSAssert(strcmp(returnType, @encode(BOOL)) == 0, @"CCPhysicsCollisionBegin delegate methods must return a BOOL.");
+				NSAssert((strcmp(returnType, @encode(BOOL)) == 0 || strcmp(returnType, "B") == 0), @"CCPhysicsCollisionBegin delegate methods must return a BOOL.");
+                //NSAssert(strcmp(returnType, @encode(BOOL)) == 0, @"CCPhysicsCollisionBegin delegate methods must return a BOOL.");
 				[self handlerForTypeA:typeA typeB:typeB].begin = methods[i];
 			} else if([phase isEqualToString:@"ccPhysicsCollisionPreSolve"]){
 				NSAssert(strcmp(returnType, @encode(BOOL)) == 0, @"CCPhysicsCollisionPreSolve delegate methods must return a BOOL.");

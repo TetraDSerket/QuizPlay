@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import Darwin
 
 class GameplaySling: CCNode, CCPhysicsCollisionDelegate
 {
     weak var gamePhysicsNode: CCPhysicsNode!
     weak var slingPocket: CCNode!
     weak var contentNode: CCNode!
+    weak var gradientNode: CCNodeGradient!
     weak var mouseJointNode: CCNode!
+    weak var launchNode: CCNode!
+    weak var bar1: CCNode!
+    weak var bar2: CCNode!
     weak var hero: CCSprite!
     var mouseJoint: CCPhysicsJoint?
     var actionFollow: CCActionFollow?
@@ -24,19 +29,31 @@ class GameplaySling: CCNode, CCPhysicsCollisionDelegate
         userInteractionEnabled = true
         gamePhysicsNode.collisionDelegate = self
         mouseJointNode.physicsBody.collisionMask = []
-
+        launchNode.physicsBody.collisionMask = []
+        bar1.physicsBody.collisionMask = []
+        bar2.physicsBody.collisionMask = []
     }
     
     override func onEnterTransitionDidFinish()
     {
-        let actionFollow = CCActionFollow(target: hero, worldBoundary: boundingBox())
-        contentNode.runAction(actionFollow)
         gamePhysicsNode.debugDraw = true
     }
     
     override func update(delta: CCTime)
     {
-        slingPocket.physicsBody.velocity.x = 0
+        //var num = CDouble(10)
+        let slingPocketLocation = slingPocket.convertToWorldSpace(slingPocket.position)
+//        println(slingPocketLocation)
+//        println("asldjf\(slingPocket.position)")
+        let slingx = slingPocketLocation.x
+        let slingy = slingPocketLocation.y
+        if slingy < 280
+        {
+            let rotation = atan((160-slingx)/(280-slingy))*180/3.14
+            slingPocket.rotation = Float(rotation)
+        }
+        
+        //sin(num)
     }
     
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!)
@@ -45,8 +62,7 @@ class GameplaySling: CCNode, CCPhysicsCollisionDelegate
         if CGRectContainsPoint(slingPocket.boundingBox(), touchLocation)
         {
             mouseJointNode.position = touchLocation
-            mouseJoint = CCPhysicsJoint.connectedSpringJointWithBodyA(mouseJointNode.physicsBody, bodyB: slingPocket.physicsBody, anchorA: CGPointZero, anchorB: CGPoint(x: 150, y: 150), restLength: 0, stiffness: 3000, damping: 150)
-            
+            mouseJoint = CCPhysicsJoint.connectedSpringJointWithBodyA(mouseJointNode.physicsBody, bodyB: slingPocket.physicsBody, anchorA: CGPointZero, anchorB: CGPoint(x: 150, y: 150), restLength: 0, stiffness: 6000, damping: 150)
         }
     }
     
@@ -61,10 +77,11 @@ class GameplaySling: CCNode, CCPhysicsCollisionDelegate
     {
         if let joint = mouseJoint
         {
-            // releases the joint and lets the catapult snap back
             joint.invalidate()
             mouseJoint = nil
         }
+        let actionFollow = CCActionFollow(target: hero, worldBoundary: gradientNode.boundingBox())
+        contentNode.runAction(actionFollow)
     }
     
     override func touchEnded(touch: CCTouch!, withEvent event: CCTouchEvent!)
