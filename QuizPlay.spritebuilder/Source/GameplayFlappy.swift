@@ -8,8 +8,11 @@
 
 import Foundation
 
-class GameplayFlappy2: CCScene, CCPhysicsCollisionDelegate
+class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
 {
+    var isWordFirst: Bool = true //if true, the word will be first and the definition afterwards in the Dictionary
+    var numberOfOptions: Int = 4
+    
     weak var hero: CCSprite!
     weak var gamePhysicsNode: CCPhysicsNode!
     weak var ground1: CCSprite!
@@ -17,18 +20,38 @@ class GameplayFlappy2: CCScene, CCPhysicsCollisionDelegate
     weak var obstaclesLayer: CCNode!
     weak var restartButton: CCButton!
     weak var scoreLabel: CCLabelTTF!
+    weak var questionLabel: CCLabelTTF!
     var sinceTouch: CCTime = 0
     var scrollSpeed: CGFloat = 80
+    var quizWords = Dictionary<String, String>()
+    var question: String!
+    {
+        didSet
+        {
+            questionLabel.string = question
+        }
+    }
+    var answer: String!
+    var choices = [String]()
     var grounds = [CCSprite]() //array for the ground sprites
     var obstacles : [CCNode] = [] //array of obstacles
     let firstObstaclePosition : CGFloat = 280
     let distanceBetweenObstacles : CGFloat = 160
     var gameOver = false
     var points: NSInteger = 0
+    {
+        didSet
+        {
+            scoreLabel.string = String(points)
+        }
+    }
     
     
     func didLoadFromCCB() //what happens first, right when the app starts?
     {
+        initializeQuizWordsArray()
+        chooseQuestionAndAnswer()
+        println("\(choices) and \(question) and \(answer)")
         userInteractionEnabled = true
         //add the two grounds to the ground array
         grounds.append(ground1)
@@ -44,11 +67,59 @@ class GameplayFlappy2: CCScene, CCPhysicsCollisionDelegate
         //gamePhysicsNode.debugDraw = true
     }
     
+    func chooseQuestionAndAnswer()
+    {
+        var tempQuizWords = quizWords
+        if isWordFirst
+        {
+            for index in 0..<numberOfOptions
+            {
+                //let random = arc4random_uniform(UInt32(numberOfOptions))
+                if(index == 0)
+                {
+                    //a random key is put into the question variable and its pair is put into the answer, then both are removed from the temp dictionary
+                    let random = Int(arc4random_uniform(UInt32(tempQuizWords.count)))
+                    answer = Array(tempQuizWords.keys)[random]
+                    question = tempQuizWords[answer]!
+                    choices.append(answer)
+                    tempQuizWords.removeValueForKey(answer)
+                }
+                else
+                {
+                    let random = Int(arc4random_uniform(UInt32(tempQuizWords.count)))
+                    let key = Array(tempQuizWords.keys)[random]
+                    choices.append(key)
+                }
+            }
+        }
+        else //if definition first is chosen
+        {
+            for index in 0..<numberOfOptions
+            {
+                if(index == 0)
+                {
+                    let random = Int(arc4random_uniform(UInt32(tempQuizWords.count)))
+                    question = Array(tempQuizWords.keys)[random]
+                    answer = tempQuizWords[question]!
+                    choices.append(answer)
+                    tempQuizWords.removeValueForKey(question)
+                }
+                else
+                {
+                    let random = Int(arc4random_uniform(UInt32(tempQuizWords.count)))
+                    let key = Array(tempQuizWords.keys)[random]
+                    choices.append(tempQuizWords[key]!)
+                }
+            }
+
+        }
+    }
+    
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent)
     {
         if (gameOver == false)
         {
-            hero.physicsBody.applyImpulse(ccp(0, 400))
+            hero.physicsBody.applyImpulse(ccp(0, 300))
             hero.physicsBody.applyAngularImpulse(10000)
             sinceTouch = 0
         }
@@ -84,12 +155,10 @@ class GameplayFlappy2: CCScene, CCPhysicsCollisionDelegate
         hero.position = ccp(hero.position.x + scrollSpeed * CGFloat(delta), hero.position.y)
         //moves physics node (camera) to the left
         gamePhysicsNode.position = ccp(gamePhysicsNode.position.x - scrollSpeed * CGFloat(delta), gamePhysicsNode.position.y)
-        //rounds the physics node to the nearest int to prevent black line artifact
+        //rounds the physics node to the nearest int to prevent black line artifact / fixes that one problem
         let scale = CCDirector.sharedDirector().contentScaleFactor
         gamePhysicsNode.position = ccp(round(gamePhysicsNode.position.x * scale) / scale, round(gamePhysicsNode.position.y * scale) / scale)
         hero.position = ccp(round(hero.position.x * scale) / scale, round(hero.position.y * scale) / scale)
-        //easier way, but lesser quality
-        //gamePhysicsNode.position = ccp(round(gamePhysicsNode.position.x), round(gamePhysicsNode.position.y))
         
         //loop ground whenever the ground image is moved completely off the stage
         //go through grounds array
@@ -102,7 +171,7 @@ class GameplayFlappy2: CCScene, CCPhysicsCollisionDelegate
             if groundScreenPosition.x <= (-ground.contentSize.width * CGFloat(ground.scaleX))
             {
                 //move the ground two ground-widths to the right
-                ground.position = ccp(ground.position.x + ground.contentSize.width * CGFloat(ground.scaleX) * 2, ground.position.y)
+                ground.position = ccp(ground.position.x + ground.contentSize.width * CGFloat(ground.scaleX) * 2 - 10, ground.position.y)
             }
         }
         
@@ -141,10 +210,17 @@ class GameplayFlappy2: CCScene, CCPhysicsCollisionDelegate
         obstacle.position = ccp(prevObstaclePos + distanceBetweenObstacles, 0)
         //call Obstacle method to randomize position
         obstacle.setupRandomPosition()
+        obstacle.setString(answerString: chooseStringToPutOnCarrot())
         //add new obstacle to the physics node
         obstaclesLayer.addChild(obstacle)
         //add new obstacle to the array of obstacles
         obstacles.append(obstacle)
+    }
+    
+    func chooseStringToPutOnCarrot() -> String
+    {
+        let random = Int(arc4random_uniform(UInt32(choices.count)))
+        return choices[random]
     }
     
     //detects collisions between hero and level items, which were defined in SpriteBuilder
@@ -160,16 +236,30 @@ class GameplayFlappy2: CCScene, CCPhysicsCollisionDelegate
         //remove goal so no duplicate scoring
         goal.removeFromParent()
         points++
-        //set the scorelabel to a string value of points
-        scoreLabel.string = String(points)
+        return true
+    }
+    
+    //detects collisions between the hero and an answer carrot
+    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, answerCarrot: CCNode!) -> Bool
+    {
+        let answerLabel = answerCarrot.children[0] as! CCLabelTTF
+        if(answerLabel.string == answer)
+        {
+            println("YOU ARE WINNER YOU WON YOU IS OF THE WINNING")
+        }
+        else
+        {
+            triggerGameOver()
+        }
         return true
     }
     
     //restarts game
     func restart()
     {
-        let scene = CCBReader.loadAsScene("GameplayFlappy2")
-        CCDirector.sharedDirector().presentScene(scene)
+        let scene = CCBReader.loadAsScene("GameplayFlappy")
+        let transition = CCTransition(fadeWithDuration: 0.8)
+        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
     //handles what happens when the game is over
@@ -192,5 +282,17 @@ class GameplayFlappy2: CCScene, CCPhysicsCollisionDelegate
             let shakeSequence = CCActionSequence(array: [move, moveBack])
             runAction(shakeSequence)
         }
+        
     }
+    
+    func initializeQuizWordsArray()
+    {
+        quizWords["Gaius"] = "Stealing candy from a baby is actually really hard"
+        quizWords["Henry"] = "Oh boy oh boy oh boy are we gonna kill people?"
+        quizWords["Keladry"] = "Be like stone. Pretty and smooth, but able to bash someone's head in"
+        quizWords["Robin"] = "It's time to tip the scales!"
+        quizWords["Inkling"] = "Identity crisis"
+        quizWords["Mario"] = "It's-a me, ____"
+    }
+
 }

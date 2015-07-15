@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2819B4441B55777F00C358E9 /* GameplaySling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B4431B55777F00C358E9 /* GameplaySling.swift */; };
-		2819B45E1B56C4B500C358E9 /* GameplayFlappy2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B45D1B56C4B500C358E9 /* GameplayFlappy2.swift */; };
+		2819B45E1B56C4B500C358E9 /* GameplayFlappy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */; };
 		2819B4601B56C98E00C358E9 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B45F1B56C98E00C358E9 /* Obstacle.swift */; };
 		2819B4621B56C9EB00C358E9 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B4611B56C9EB00C358E9 /* Goal.swift */; };
 		5B121030197484FA004C1E1D /* QuizPlayActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* QuizPlayActivity.m */; };
@@ -153,7 +153,7 @@
 
 /* Begin PBXFileReference section */
 		2819B4431B55777F00C358E9 /* GameplaySling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplaySling.swift; path = Source/GameplaySling.swift; sourceTree = "<group>"; };
-		2819B45D1B56C4B500C358E9 /* GameplayFlappy2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplayFlappy2.swift; path = Source/GameplayFlappy2.swift; sourceTree = "<group>"; };
+		2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplayFlappy.swift; path = Source/GameplayFlappy.swift; sourceTree = "<group>"; };
 		2819B45F1B56C98E00C358E9 /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Obstacle.swift; path = Source/Obstacle.swift; sourceTree = "<group>"; };
 		2819B4611B56C9EB00C358E9 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Goal.swift; path = Source/Goal.swift; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
@@ -445,7 +445,7 @@
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				7A046D7519E84C36004C4763 /* MainScene.swift */,
 				2819B4431B55777F00C358E9 /* GameplaySling.swift */,
-				2819B45D1B56C4B500C358E9 /* GameplayFlappy2.swift */,
+				2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */,
 				2819B45F1B56C98E00C358E9 /* Obstacle.swift */,
 				2819B4611B56C9EB00C358E9 /* Goal.swift */,
 				D352B48019EC608A00829775 /* MetalShaders */,
@@ -829,7 +829,7 @@
 				2819B4601B56C98E00C358E9 /* Obstacle.swift in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 				2819B4441B55777F00C358E9 /* GameplaySling.swift in Sources */,
-				2819B45E1B56C4B500C358E9 /* GameplayFlappy2.swift in Sources */,
+				2819B45E1B56C4B500C358E9 /* GameplayFlappy.swift in Sources */,
 				2819B4621B56C9EB00C358E9 /* Goal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

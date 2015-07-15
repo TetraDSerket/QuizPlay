@@ -14,10 +14,11 @@ class Obstacle : CCNode
     //defining the carrot pictures
     weak var topCarrot : CCNode!
     weak var bottomCarrot : CCNode!
+    weak var answerLabel: CCLabelTTF!
     
-    let topCarrotMinimumPositionY : CGFloat = 128
-    let bottomCarrotMaximumPositionY : CGFloat = 440
-    let carrotDistance : CGFloat = 142
+    let topCarrotMinimumPositionY : CGFloat = 80
+    let bottomCarrotMaximumPositionY : CGFloat = 350
+    let carrotDistance : CGFloat = 130
     
     func didLoadFromCCB()
     {
@@ -36,6 +37,11 @@ class Obstacle : CCNode
         //set top and bottom carrots to position
         topCarrot.position = ccp(topCarrot.position.x, topCarrotMinimumPositionY + (random * range));
         bottomCarrot.position = ccp(bottomCarrot.position.x, topCarrot.position.y + carrotDistance);
+    }
+    
+    func setString(#answerString: String)
+    {
+        answerLabel.string = answerString
     }
 }
 

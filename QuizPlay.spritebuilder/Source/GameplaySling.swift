@@ -52,8 +52,7 @@ class GameplaySling: CCNode, CCPhysicsCollisionDelegate
             let rotation = atan((160-slingx)/(280-slingy))*180/3.14
             slingPocket.rotation = Float(rotation)
         }
-        
-        //sin(num)
+
     }
     
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!)
