@@ -4,9 +4,16 @@ class MainScene: CCNode
 {
     func playButton()
     {
-        let gameplayScene = CCBReader.loadAsScene("GameplayFlappy")
+        let flappyScene = CCBReader.loadAsScene("GameplayFlappy")
         let transition = CCTransition(fadeWithDuration: 0.8)
-        CCDirector.sharedDirector().presentScene(gameplayScene, withTransition: transition)
+        CCDirector.sharedDirector().presentScene(flappyScene, withTransition: transition)
+    }
+    
+    func playPlatformButton()
+    {
+//        let platformScene = CCBReader.loadAsScene("GameplayPlatform")
+//        let transition = CCTransition(fadeWithDuration: 0.8)
+//        CCDirector.sharedDirector().presentScene(platformScene, withTransition: transition)
     }
 
 }

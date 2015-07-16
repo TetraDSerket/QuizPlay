@@ -51,7 +51,8 @@ class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
     {
         initializeQuizWordsArray()
         chooseQuestionAndAnswer()
-        println("\(choices) and \(question) and \(answer)")
+        println("\(choices) and \(question)")
+        println("Answer is: \(answer)")
         userInteractionEnabled = true
         //add the two grounds to the ground array
         grounds.append(ground1)
@@ -245,13 +246,24 @@ class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
         let answerLabel = answerCarrot.children[0] as! CCLabelTTF
         if(answerLabel.string == answer)
         {
-            println("YOU ARE WINNER YOU WON YOU IS OF THE WINNING")
+            handleRightAnswer()
         }
         else
         {
-            triggerGameOver()
+            handleWrongAnswer()
         }
         return true
+    }
+    
+    func handleRightAnswer()
+    {
+        println("YOU WON YAY")
+        chooseQuestionAndAnswer()
+    }
+    
+    func handleWrongAnswer()
+    {
+        println("You ARE WRONG VERY WRONG")
     }
     
     //restarts game
@@ -290,9 +302,11 @@ class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
         quizWords["Gaius"] = "Stealing candy from a baby is actually really hard"
         quizWords["Henry"] = "Oh boy oh boy oh boy are we gonna kill people?"
         quizWords["Keladry"] = "Be like stone. Pretty and smooth, but able to bash someone's head in"
-        quizWords["Robin"] = "It's time to tip the scales!"
-        quizWords["Inkling"] = "Identity crisis"
+        quizWords["Inkling"] = "To be a kid or to be a squid, that is the question"
         quizWords["Mario"] = "It's-a me, ____"
+        quizWords["Sakurai"] = "Lol take this Roy"
+        quizWords["Gandalf"] = "FLY YOU FOOLS"
+        quizWords["Hagrid"] = "yer a wizard harry"
     }
 
 }
