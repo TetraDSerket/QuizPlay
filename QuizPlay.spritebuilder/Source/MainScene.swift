@@ -4,7 +4,7 @@ class MainScene: CCNode
 {
     override func onEnter()
     {
-        //WebHelper.getQuizletData()
+        WebHelper.getQuizletData()
     }
     
     func playButton()

@@ -397,7 +397,6 @@
 		7A40362019DDEF0D007B6E8F /* Platforms */ = {
 			isa = PBXGroup;
 			children = (
-				28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */,
 				7A40362119DDF08C007B6E8F /* iOS */,
 				7A40362219DDF090007B6E8F /* Android */,
 				7A9791C019E6FAC5001FFC4D /* Mac */,
@@ -522,6 +521,7 @@
 				2819B4431B55777F00C358E9 /* GameplaySling.swift */,
 				2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */,
 				28615B0B1B585B2000E37B45 /* WebHelper.swift */,
+				28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */,
 				28615B0D1B585DCD00E37B45 /* QuizletResponseModel.swift */,
 				2819B45F1B56C98E00C358E9 /* Obstacle.swift */,
 				2819B4611B56C9EB00C358E9 /* Goal.swift */,

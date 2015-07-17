@@ -15,18 +15,19 @@ class WebHelper: NSObject
     {
         Alamofire.request(.GET, "https://api.quizlet.com/2.0/sets/415?client_id=d8cM6gPAhD&whitespace=1")
             .responseJSON
-            { request, response, data, error in
-                println(data)
-                var model: QuizletResponseModel = QuizletResponseModel()
-                
-//                let json = JSON(data)
-//                if let appName = json["feed"]["entry"][0]["im:name"]["label"].string {
-//                    println("SwiftyJSON: \(appName)")
-            }
-//                println("REQUEST \(request)")
-//                println("RESPONSE \(response)")
-//                println("DATA \(data)")
-//                println("ERROR \(error)")
+        { request, response, data, error in
+            QuizletResponseModel.parseQuizletFlashcardJSON(data)
+            
+//            if let appName = json["feed"]["entry"][0]["im:name"]["label"].string
+//            {
+//                println("SwiftyJSON: \(appName)")
+//            }
+            
+//            println("REQUEST \(request)")
+//            println("RESPONSE \(response)")
+//            println("DATA \(data)")
+//            println("ERROR \(error)")
+        }
         
     }
 }

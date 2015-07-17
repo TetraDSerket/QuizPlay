@@ -17,4 +17,20 @@ class QuizletResponseModel: NSObject
             
         }
     }
+    
+    class func parseQuizletFlashcardJSON(data: AnyObject!) -> Dictionary<String,String>
+    {
+        var quizWords = Dictionary<String, String>()
+        let json = JSON(data)
+        println(json["terms"][0]["definition"])
+        
+        for index in 0..<json["terms"].count
+        {
+            println(json["terms"][index]["term"])
+//            let definition: String = json["terms"][index]["definition"]
+//            quizWords[term] = definition
+        }
+        println(quizWords)
+        return quizWords
+    }
 }

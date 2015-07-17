@@ -440,8 +440,9 @@ extension JSON: RawRepresentable {
         switch self.type {
         case .Array, .Dictionary:
             if let data = self.rawData(options: opt) {
-                //look at this later Varsha: return NSString(data: data, encoding: encoding)
-                return "look"
+                //look at this later Varsha: 
+                return NSString(data: data, encoding: encoding) as? String
+//                return "look"
             } else {
                 return nil
             }
