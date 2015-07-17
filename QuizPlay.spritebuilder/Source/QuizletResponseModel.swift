@@ -8,6 +8,13 @@
 
 import UIKit
 
-class QuizletResponseModel: NSObject {
-   
+class QuizletResponseModel: NSObject
+{
+    var JSONthing : AnyObject!
+    {
+        didSet
+        {
+            
+        }
+    }
 }

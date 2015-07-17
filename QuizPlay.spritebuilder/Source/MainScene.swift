@@ -2,6 +2,11 @@ import Foundation
 
 class MainScene: CCNode
 {
+    override func onEnter()
+    {
+        //WebHelper.getQuizletData()
+    }
+    
     func playButton()
     {
         let flappyScene = CCBReader.loadAsScene("GameplayFlappy")

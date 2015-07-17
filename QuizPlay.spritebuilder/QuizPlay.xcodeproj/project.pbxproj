@@ -12,6 +12,11 @@
 		2819B4601B56C98E00C358E9 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B45F1B56C98E00C358E9 /* Obstacle.swift */; };
 		2819B4621B56C9EB00C358E9 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B4611B56C9EB00C358E9 /* Goal.swift */; };
 		28615AF41B58539F00E37B45 /* GameplayPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28615AF31B58539F00E37B45 /* GameplayPlatform.swift */; };
+		28615B061B585AB200E37B45 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28615AFF1B585A1000E37B45 /* Alamofire.framework */; };
+		28615B071B585AB200E37B45 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28615AFF1B585A1000E37B45 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		28615B0C1B585B2000E37B45 /* WebHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28615B0B1B585B2000E37B45 /* WebHelper.swift */; };
+		28615B0E1B585DCD00E37B45 /* QuizletResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28615B0D1B585DCD00E37B45 /* QuizletResponseModel.swift */; };
+		28615B101B587E6000E37B45 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */; };
 		5B121030197484FA004C1E1D /* QuizPlayActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* QuizPlayActivity.m */; };
 		5B121038197487F2004C1E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
 		7A046D7919E84ED5004C4763 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A046D7519E84C36004C4763 /* MainScene.swift */; };
@@ -108,6 +113,41 @@
 			remoteGlobalIDString = B7E7DE341A76DB7D004234B7;
 			remoteInfo = cocos2dMacFramework;
 		};
+		28615AFE1B585A1000E37B45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28615AF71B585A1000E37B45 /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F8111E3319A95C8B0040E7D1;
+			remoteInfo = "Alamofire iOS";
+		};
+		28615B001B585A1000E37B45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28615AF71B585A1000E37B45 /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4DD67C0B1A5C55C900ED2280;
+			remoteInfo = "Alamofire OSX";
+		};
+		28615B021B585A1000E37B45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28615AF71B585A1000E37B45 /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F8111E3E19A95C8B0040E7D1;
+			remoteInfo = "Alamofire iOS Tests";
+		};
+		28615B041B585A1000E37B45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28615AF71B585A1000E37B45 /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F829C6B21A7A94F100A2CD59;
+			remoteInfo = "Alamofire OSX Tests";
+		};
+		28615B081B585AB200E37B45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28615AF71B585A1000E37B45 /* Alamofire.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
+			remoteInfo = "Alamofire iOS";
+		};
 		7A9790FD19E62E40001FFC4D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B7378940180761A80076A88C /* cocos2d.xcodeproj */;
@@ -152,12 +192,30 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		28615B0A1B585AB200E37B45 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				28615B071B585AB200E37B45 /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		2819B4431B55777F00C358E9 /* GameplaySling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplaySling.swift; path = Source/GameplaySling.swift; sourceTree = "<group>"; };
 		2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplayFlappy.swift; path = Source/GameplayFlappy.swift; sourceTree = "<group>"; };
 		2819B45F1B56C98E00C358E9 /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Obstacle.swift; path = Source/Obstacle.swift; sourceTree = "<group>"; };
 		2819B4611B56C9EB00C358E9 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Goal.swift; path = Source/Goal.swift; sourceTree = "<group>"; };
 		28615AF31B58539F00E37B45 /* GameplayPlatform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplayPlatform.swift; path = Source/GameplayPlatform.swift; sourceTree = "<group>"; };
+		28615AF71B585A1000E37B45 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = ../alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
+		28615B0B1B585B2000E37B45 /* WebHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebHelper.swift; path = Source/WebHelper.swift; sourceTree = "<group>"; };
+		28615B0D1B585DCD00E37B45 /* QuizletResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizletResponseModel.swift; path = Source/QuizletResponseModel.swift; sourceTree = "<group>"; };
+		28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
 		5B12100F197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B121011197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
@@ -271,6 +329,7 @@
 				B77F1B3617B978D7009739AE /* OpenAL.framework in Frameworks */,
 				B77F1B3817B978D7009739AE /* AudioToolbox.framework in Frameworks */,
 				B77F1B3A17B978D7009739AE /* AVFoundation.framework in Frameworks */,
+				28615B061B585AB200E37B45 /* Alamofire.framework in Frameworks */,
 				B77F1B3C17B978D7009739AE /* UIKit.framework in Frameworks */,
 				B77F1B3E17B978D7009739AE /* Foundation.framework in Frameworks */,
 				B77F1B4017B978D7009739AE /* CoreGraphics.framework in Frameworks */,
@@ -281,6 +340,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28615AF81B585A1000E37B45 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				28615AFF1B585A1000E37B45 /* Alamofire.framework */,
+				28615B011B585A1000E37B45 /* Alamofire.framework */,
+				28615B031B585A1000E37B45 /* Alamofire iOS Tests.xctest */,
+				28615B051B585A1000E37B45 /* Alamofire OSX Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5B12100D197483EE004C1E1D /* res */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,6 +397,7 @@
 		7A40362019DDEF0D007B6E8F /* Platforms */ = {
 			isa = PBXGroup;
 			children = (
+				28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */,
 				7A40362119DDF08C007B6E8F /* iOS */,
 				7A40362219DDF090007B6E8F /* Android */,
 				7A9791C019E6FAC5001FFC4D /* Mac */,
@@ -436,6 +507,7 @@
 		9222E2B918734FF800A246C7 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				28615AF71B585A1000E37B45 /* Alamofire.xcodeproj */,
 				B7378940180761A80076A88C /* cocos2d.xcodeproj */,
 			);
 			name = libs;
@@ -449,6 +521,8 @@
 				28615AF31B58539F00E37B45 /* GameplayPlatform.swift */,
 				2819B4431B55777F00C358E9 /* GameplaySling.swift */,
 				2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */,
+				28615B0B1B585B2000E37B45 /* WebHelper.swift */,
+				28615B0D1B585DCD00E37B45 /* QuizletResponseModel.swift */,
 				2819B45F1B56C98E00C358E9 /* Obstacle.swift */,
 				2819B4611B56C9EB00C358E9 /* Goal.swift */,
 				D352B48019EC608A00829775 /* MetalShaders */,
@@ -600,11 +674,13 @@
 				B77F1B2B17B978D7009739AE /* Frameworks */,
 				D352B47A19EC5D8A00829775 /* Compile Metal Shaders */,
 				B77F1B2C17B978D7009739AE /* Resources */,
+				28615B0A1B585AB200E37B45 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				7A97911019E6319A001FFC4D /* PBXTargetDependency */,
+				28615B091B585AB200E37B45 /* PBXTargetDependency */,
 			);
 			name = "QuizPlay iOS";
 			productName = Example;
@@ -645,6 +721,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 28615AF81B585A1000E37B45 /* Products */;
+					ProjectRef = 28615AF71B585A1000E37B45 /* Alamofire.xcodeproj */;
+				},
+				{
 					ProductGroup = 7A9790F619E62E3F001FFC4D /* Products */;
 					ProjectRef = B7378940180761A80076A88C /* cocos2d.xcodeproj */;
 				},
@@ -664,6 +744,34 @@
 			fileType = wrapper.framework;
 			path = cocos2dMacFramework.framework;
 			remoteRef = 2819B4471B55777F00C358E9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		28615AFF1B585A1000E37B45 /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = 28615AFE1B585A1000E37B45 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		28615B011B585A1000E37B45 /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = 28615B001B585A1000E37B45 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		28615B031B585A1000E37B45 /* Alamofire iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Alamofire iOS Tests.xctest";
+			remoteRef = 28615B021B585A1000E37B45 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		28615B051B585A1000E37B45 /* Alamofire OSX Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Alamofire OSX Tests.xctest";
+			remoteRef = 28615B041B585A1000E37B45 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		7A9790FE19E62E40001FFC4D /* libcocos2d.a */ = {
@@ -830,17 +938,25 @@
 				B73789871807631A0076A88C /* main.m in Sources */,
 				7A046D7919E84ED5004C4763 /* MainScene.swift in Sources */,
 				2819B4601B56C98E00C358E9 /* Obstacle.swift in Sources */,
+				28615B101B587E6000E37B45 /* SwiftyJSON.swift in Sources */,
+				28615B0C1B585B2000E37B45 /* WebHelper.swift in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 				2819B4441B55777F00C358E9 /* GameplaySling.swift in Sources */,
 				2819B45E1B56C4B500C358E9 /* GameplayFlappy.swift in Sources */,
 				28615AF41B58539F00E37B45 /* GameplayPlatform.swift in Sources */,
 				2819B4621B56C9EB00C358E9 /* Goal.swift in Sources */,
+				28615B0E1B585DCD00E37B45 /* QuizletResponseModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		28615B091B585AB200E37B45 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Alamofire iOS";
+			targetProxy = 28615B081B585AB200E37B45 /* PBXContainerItemProxy */;
+		};
 		7A97911019E6319A001FFC4D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "cocos2d-ios";
@@ -1131,7 +1247,7 @@
 					"\"Source/libs/cocos2d-iphone/external/ObjectAL\"/**",
 				);
 				INFOPLIST_FILE = Source/Resources/Platforms/iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -1165,7 +1281,7 @@
 					"\"Source/libs/cocos2d-iphone/external/ObjectAL\"/**",
 				);
 				INFOPLIST_FILE = Source/Resources/Platforms/iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-lz",

@@ -33,6 +33,7 @@ class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
     }
     var answer: String!
     var choices = [String]()
+    var lastWordChosen: String!
     var grounds = [CCSprite]() //array for the ground sprites
     var obstacles : [CCNode] = [] //array of obstacles
     let firstObstaclePosition : CGFloat = 280
@@ -84,6 +85,7 @@ class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
                     question = tempQuizWords[answer]!
                     choices.append(answer)
                     tempQuizWords.removeValueForKey(answer)
+                    lastWordChosen = answer
                 }
                 else
                 {
@@ -104,6 +106,7 @@ class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
                     answer = tempQuizWords[question]!
                     choices.append(answer)
                     tempQuizWords.removeValueForKey(question)
+                    lastWordChosen = answer
                 }
                 else
                 {
@@ -221,7 +224,15 @@ class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
     func chooseStringToPutOnCarrot() -> String
     {
         let random = Int(arc4random_uniform(UInt32(choices.count)))
-        return choices[random]
+        if choices[random] != lastWordChosen
+        {
+            lastWordChosen = choices[random]
+            return choices[random]
+        }
+        else
+        {
+            return chooseStringToPutOnCarrot()
+        }
     }
     
     //detects collisions between hero and level items, which were defined in SpriteBuilder
@@ -258,11 +269,13 @@ class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
     func handleRightAnswer()
     {
         println("YOU WON YAY")
+        points = points + 10
         chooseQuestionAndAnswer()
     }
     
     func handleWrongAnswer()
     {
+        points = points - 5
         println("You ARE WRONG VERY WRONG")
     }
     
@@ -299,14 +312,19 @@ class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
     
     func initializeQuizWordsArray()
     {
-        quizWords["Gaius"] = "Stealing candy from a baby is actually really hard"
-        quizWords["Henry"] = "Oh boy oh boy oh boy are we gonna kill people?"
-        quizWords["Keladry"] = "Be like stone. Pretty and smooth, but able to bash someone's head in"
-        quizWords["Inkling"] = "To be a kid or to be a squid, that is the question"
-        quizWords["Mario"] = "It's-a me, ____"
-        quizWords["Sakurai"] = "Lol take this Roy"
-        quizWords["Gandalf"] = "FLY YOU FOOLS"
-        quizWords["Hagrid"] = "yer a wizard harry"
+//        quizWords["Gaius"] = "Stealing candy from a baby is actually really hard"
+//        quizWords["Henry"] = "Oh boy oh boy oh boy are we gonna kill people?"
+//        quizWords["Keladry"] = "Be like stone. Pretty and smooth, but able to bash someone's head in"
+//        quizWords["Inkling"] = "To be a kid or to be a squid, that is the question"
+//        quizWords["Mario"] = "It's-a me, ____"
+//        quizWords["Sakurai"] = "Lol take this Roy"
+//        quizWords["Gandalf"] = "FLY YOU FOOLS"
+//        quizWords["Hagrid"] = "yer a wizard harry"
+        quizWords["mottai"] = "bald; shaved head; no hair"
+        quizWords["sofa"] = "hard and a cushion"
+        quizWords["blender"] = "loud and noisy"
+        quizWords["dumb"] = "not smart"
+        quizWords["gmail"] = "write emails to other people"
     }
 
 }

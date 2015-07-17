@@ -14,12 +14,12 @@ class GameplayPlatform: CCScene, CCPhysicsCollisionDelegate
     weak var gamePhysicsNode: CCPhysicsNode!
     weak var contentNode: CCNode!
     
-    func didLoadFromCCB()
-    {
-        self.
-    }
-    
-    func override onEnterTransitionDidFinish()
-    {
-    }
+//    func didLoadFromCCB()
+//    {
+//        self.
+//    }
+//    
+//    func override onEnterTransitionDidFinish()
+//    {
+//    }
 }
