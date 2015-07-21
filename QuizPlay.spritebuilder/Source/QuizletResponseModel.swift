@@ -7,30 +7,21 @@
 //
 
 import UIKit
+import Darwin
 
 class QuizletResponseModel: NSObject
 {
-    var JSONthing : AnyObject!
-    {
-        didSet
-        {
-            
-        }
-    }
-    
     class func parseQuizletFlashcardJSON(data: AnyObject!) -> Dictionary<String,String>
     {
         var quizWords = Dictionary<String, String>()
         let json = JSON(data)
-        println(json["terms"][0]["definition"])
         
         for index in 0..<json["terms"].count
         {
-            println(json["terms"][index]["term"])
-//            let definition: String = json["terms"][index]["definition"]
-//            quizWords[term] = definition
+            let term = json["terms"][index]["term"].string
+            let definition = json["terms"][index]["definition"].string
+            quizWords[term!] = definition
         }
-        println(quizWords)
         return quizWords
     }
 }

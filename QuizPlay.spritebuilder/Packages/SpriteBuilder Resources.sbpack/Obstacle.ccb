@@ -286,7 +286,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>135.09228515625</real>
+									<real>140</real>
 									<integer>0</integer>
 									<integer>2</integer>
 									<integer>0</integer>
@@ -328,7 +328,7 @@
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>Answer</string>
+									<string>mmmmmmmmmmmmmm</string>
 									<false/>
 								</array>
 							</dict>
@@ -347,7 +347,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>100</real>
+									<real>12</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -357,7 +357,7 @@
 								<key>type</key>
 								<string>Check</string>
 								<key>value</key>
-								<true/>
+								<false/>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -380,7 +380,7 @@
 								<key>value</key>
 								<array>
 									<real>70</real>
-									<real>40</real>
+									<real>50</real>
 									<integer>0</integer>
 									<integer>0</integer>
 								</array>
@@ -477,6 +477,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 						<key>seqExpanded</key>
 						<true/>
 					</dict>
@@ -646,8 +648,6 @@
 						<array/>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>

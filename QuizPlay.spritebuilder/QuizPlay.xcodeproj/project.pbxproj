@@ -17,6 +17,7 @@
 		28615B0C1B585B2000E37B45 /* WebHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28615B0B1B585B2000E37B45 /* WebHelper.swift */; };
 		28615B0E1B585DCD00E37B45 /* QuizletResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28615B0D1B585DCD00E37B45 /* QuizletResponseModel.swift */; };
 		28615B101B587E6000E37B45 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */; };
+		28A4FF391B5EB0300024B821 /* SearchSetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A4FF381B5EB0300024B821 /* SearchSetScene.swift */; };
 		5B121030197484FA004C1E1D /* QuizPlayActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* QuizPlayActivity.m */; };
 		5B121038197487F2004C1E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
 		7A046D7919E84ED5004C4763 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A046D7519E84C36004C4763 /* MainScene.swift */; };
@@ -216,6 +217,7 @@
 		28615B0B1B585B2000E37B45 /* WebHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebHelper.swift; path = Source/WebHelper.swift; sourceTree = "<group>"; };
 		28615B0D1B585DCD00E37B45 /* QuizletResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizletResponseModel.swift; path = Source/QuizletResponseModel.swift; sourceTree = "<group>"; };
 		28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		28A4FF381B5EB0300024B821 /* SearchSetScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchSetScene.swift; path = Source/SearchSetScene.swift; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
 		5B12100F197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B121011197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
@@ -517,12 +519,13 @@
 			children = (
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				7A046D7519E84C36004C4763 /* MainScene.swift */,
+				28A4FF381B5EB0300024B821 /* SearchSetScene.swift */,
 				28615AF31B58539F00E37B45 /* GameplayPlatform.swift */,
 				2819B4431B55777F00C358E9 /* GameplaySling.swift */,
 				2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */,
 				28615B0B1B585B2000E37B45 /* WebHelper.swift */,
-				28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */,
 				28615B0D1B585DCD00E37B45 /* QuizletResponseModel.swift */,
+				28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */,
 				2819B45F1B56C98E00C358E9 /* Obstacle.swift */,
 				2819B4611B56C9EB00C358E9 /* Goal.swift */,
 				D352B48019EC608A00829775 /* MetalShaders */,
@@ -942,6 +945,7 @@
 				28615B0C1B585B2000E37B45 /* WebHelper.swift in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 				2819B4441B55777F00C358E9 /* GameplaySling.swift in Sources */,
+				28A4FF391B5EB0300024B821 /* SearchSetScene.swift in Sources */,
 				2819B45E1B56C4B500C358E9 /* GameplayFlappy.swift in Sources */,
 				28615AF41B58539F00E37B45 /* GameplayPlatform.swift in Sources */,
 				2819B4621B56C9EB00C358E9 /* Goal.swift in Sources */,

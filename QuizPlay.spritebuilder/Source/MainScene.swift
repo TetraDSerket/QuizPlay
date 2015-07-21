@@ -2,16 +2,38 @@ import Foundation
 
 class MainScene: CCNode
 {
-    override func onEnter()
+    var quizWords = Dictionary<String, String>()
+    weak var playFlappyButton: CCButton!
+    
+    func didLoadFromCCB()
     {
-        WebHelper.getQuizletData()
+        WebHelper.getQuizletFlashcardData
+        {
+            (quizWords: Dictionary<String, String>) -> Void in
+            println(quizWords)
+            self.quizWords = quizWords
+            if(quizWords != Dictionary<String, String>())
+            {
+                self.playFlappyButton.visible = true
+            }
+        }
     }
     
     func playButton()
     {
-        let flappyScene = CCBReader.loadAsScene("GameplayFlappy")
+        let scene = CCScene()
+        let flappyScene = CCBReader.load("GameplayFlappy") as! GameplayFlappy
+        flappyScene.quizWords = quizWords
+        scene.addChild(flappyScene)
         let transition = CCTransition(fadeWithDuration: 0.8)
-        CCDirector.sharedDirector().presentScene(flappyScene, withTransition: transition)
+        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
+    }
+    
+    func searchQuizletButton()
+    {
+        let searchSetScene = CCBReader.loadAsScene("SearchSetScene")
+        let transition = CCTransition(fadeWithDuration: 0.8)
+        CCDirector.sharedDirector().presentScene(searchSetScene, withTransition: transition)
     }
     
     func playPlatformButton()

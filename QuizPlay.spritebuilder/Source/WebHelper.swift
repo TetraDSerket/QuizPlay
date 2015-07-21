@@ -6,28 +6,26 @@
 //  Copyright (c) 2015 Apportable. All rights reserved.
 //
 
+//template: Alamofire.request(.GET, "https://api.quizlet.com/2.0/sets/SETNUMBERHERE?client_id=d8cM6gPAhD&whitespace=1")
+
 import UIKit
 import Alamofire
 
 class WebHelper: NSObject
 {
-    class func getQuizletData()
+    static var quizWords = Dictionary<String, String>()
+    
+    class func getQuizletFlashcardData(resolve: (quizWords: Dictionary<String, String>) -> Void)
     {
-        Alamofire.request(.GET, "https://api.quizlet.com/2.0/sets/415?client_id=d8cM6gPAhD&whitespace=1")
+        //Homestuck: 18853693
+        //Indonesian: 1716014
+        
+        Alamofire.request(.GET, "https://api.quizlet.com/2.0/sets/17163034?client_id=d8cM6gPAhD&whitespace=1")
             .responseJSON
         { request, response, data, error in
-            QuizletResponseModel.parseQuizletFlashcardJSON(data)
-            
-//            if let appName = json["feed"]["entry"][0]["im:name"]["label"].string
-//            {
-//                println("SwiftyJSON: \(appName)")
-//            }
-            
-//            println("REQUEST \(request)")
-//            println("RESPONSE \(response)")
-//            println("DATA \(data)")
-//            println("ERROR \(error)")
+            self.quizWords = QuizletResponseModel.parseQuizletFlashcardJSON(data)
+            resolve(quizWords: self.quizWords)
         }
-        
+        //println("WebHelper \(quizWords.count)")
     }
 }

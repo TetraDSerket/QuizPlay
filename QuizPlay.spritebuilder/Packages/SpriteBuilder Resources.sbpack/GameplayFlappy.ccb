@@ -10,11 +10,11 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>26</integer>
+	<integer>27</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
-	<integer>1</integer>
+	<integer>2</integer>
 	<key>currentSequenceId</key>
 	<integer>0</integer>
 	<key>docDimensionsType</key>
@@ -151,7 +151,7 @@
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>7</integer>
+				<integer>26</integer>
 				<key>baseClass</key>
 				<string>CCPhysicsNode</string>
 				<key>children</key>
@@ -233,20 +233,22 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
-						<integer>23</integer>
+						<integer>14</integer>
 						<key>baseClass</key>
-						<string>CCBFile</string>
+						<string>CCSprite</string>
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>hero</string>
+						<string>ground</string>
 						<key>memberVarAssignmentName</key>
-						<string>hero</string>
+						<string>ground2</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>physicsBody</key>
@@ -256,32 +258,63 @@
 							<key>allowsRotation</key>
 							<true/>
 							<key>bodyShape</key>
-							<integer>1</integer>
+							<integer>0</integer>
 							<key>collisionCategories</key>
 							<array/>
 							<key>collisionMask</key>
 							<array/>
 							<key>collisionType</key>
-							<string>hero</string>
+							<string>level</string>
 							<key>cornerRadius</key>
-							<real>10</real>
+							<real>0.0</real>
 							<key>density</key>
 							<real>1</real>
 							<key>dynamic</key>
-							<true/>
+							<false/>
 							<key>elasticity</key>
 							<real>0.30000001192092896</real>
 							<key>friction</key>
-							<real>0.30000001192092896</real>
+							<real>0.0</real>
 							<key>points</key>
 							<array>
 								<array>
-									<real>8</real>
-									<real>8</real>
+									<real>0.0</real>
+									<real>0.0</real>
+								</array>
+								<array>
+									<real>0.0</real>
+									<real>92</real>
+								</array>
+								<array>
+									<real>211</real>
+									<real>92</real>
+								</array>
+								<array>
+									<real>211</real>
+									<real>0.0</real>
 								</array>
 							</array>
 							<key>polygons</key>
-							<array/>
+							<array>
+								<array>
+									<array>
+										<real>211</real>
+										<real>0.0</real>
+									</array>
+									<array>
+										<real>211</real>
+										<real>92</real>
+									</array>
+									<array>
+										<real>0.0</real>
+										<real>92</real>
+									</array>
+									<array>
+										<real>0.0</real>
+										<real>0.0</real>
+									</array>
+								</array>
+							</array>
 						</dict>
 						<key>properties</key>
 						<array>
@@ -300,11 +333,22 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>92.247703552246094</real>
-									<real>347.23538208007812</real>
+									<real>422</real>
+									<real>33.078479766845703</real>
 									<integer>0</integer>
 									<integer>0</integer>
 									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>anchorPoint</string>
+								<key>type</key>
+								<string>Point</string>
+								<key>value</key>
+								<array>
+									<real>0.0</real>
+									<real>0.5</real>
 								</array>
 							</dict>
 							<dict>
@@ -322,11 +366,46 @@
 							</dict>
 							<dict>
 								<key>name</key>
-								<string>ccbFile</string>
+								<string>spriteFrame</string>
 								<key>type</key>
-								<string>CCBFile</string>
+								<string>SpriteFrame</string>
 								<key>value</key>
-								<string>Hero.ccb</string>
+								<array>
+									<string></string>
+									<string>images/ground.png</string>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>normalMapSpriteFrame</string>
+								<key>type</key>
+								<string>SpriteFrame</string>
+								<key>value</key>
+								<array>
+									<string></string>
+									<string></string>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>color</string>
+								<key>type</key>
+								<string>Color3</string>
+								<key>value</key>
+								<array>
+									<real>1</real>
+									<real>1</real>
+									<real>1</real>
+									<real>1</real>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>effects</string>
+								<key>type</key>
+								<string>EffectControl</string>
+								<key>value</key>
+								<array/>
 							</dict>
 						</array>
 					</dict>
@@ -505,17 +584,17 @@
 					</dict>
 					<dict>
 						<key>UUID</key>
-						<integer>14</integer>
+						<integer>23</integer>
 						<key>baseClass</key>
-						<string>CCSprite</string>
+						<string>CCBFile</string>
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>ground</string>
+						<string>hero</string>
 						<key>memberVarAssignmentName</key>
-						<string>ground2</string>
+						<string>hero</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>physicsBody</key>
@@ -525,63 +604,32 @@
 							<key>allowsRotation</key>
 							<true/>
 							<key>bodyShape</key>
-							<integer>0</integer>
+							<integer>1</integer>
 							<key>collisionCategories</key>
 							<array/>
 							<key>collisionMask</key>
 							<array/>
 							<key>collisionType</key>
-							<string>level</string>
+							<string>hero</string>
 							<key>cornerRadius</key>
-							<real>0.0</real>
+							<real>10</real>
 							<key>density</key>
 							<real>1</real>
 							<key>dynamic</key>
-							<false/>
+							<true/>
 							<key>elasticity</key>
 							<real>0.30000001192092896</real>
 							<key>friction</key>
-							<real>0.0</real>
+							<real>0.30000001192092896</real>
 							<key>points</key>
 							<array>
 								<array>
-									<real>0.0</real>
-									<real>0.0</real>
-								</array>
-								<array>
-									<real>0.0</real>
-									<real>92</real>
-								</array>
-								<array>
-									<real>211</real>
-									<real>92</real>
-								</array>
-								<array>
-									<real>211</real>
-									<real>0.0</real>
+									<real>8</real>
+									<real>8</real>
 								</array>
 							</array>
 							<key>polygons</key>
-							<array>
-								<array>
-									<array>
-										<real>211</real>
-										<real>0.0</real>
-									</array>
-									<array>
-										<real>211</real>
-										<real>92</real>
-									</array>
-									<array>
-										<real>0.0</real>
-										<real>92</real>
-									</array>
-									<array>
-										<real>0.0</real>
-										<real>0.0</real>
-									</array>
-								</array>
-							</array>
+							<array/>
 						</dict>
 						<key>properties</key>
 						<array>
@@ -600,22 +648,11 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>422</real>
-									<real>33.078479766845703</real>
+									<real>92.247703552246094</real>
+									<real>347.23538208007812</real>
 									<integer>0</integer>
 									<integer>0</integer>
 									<integer>0</integer>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>anchorPoint</string>
-								<key>type</key>
-								<string>Point</string>
-								<key>value</key>
-								<array>
-									<real>0.0</real>
-									<real>0.5</real>
 								</array>
 							</dict>
 							<dict>
@@ -633,46 +670,11 @@
 							</dict>
 							<dict>
 								<key>name</key>
-								<string>spriteFrame</string>
+								<string>ccbFile</string>
 								<key>type</key>
-								<string>SpriteFrame</string>
+								<string>CCBFile</string>
 								<key>value</key>
-								<array>
-									<string></string>
-									<string>images/ground.png</string>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>normalMapSpriteFrame</string>
-								<key>type</key>
-								<string>SpriteFrame</string>
-								<key>value</key>
-								<array>
-									<string></string>
-									<string></string>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>color</string>
-								<key>type</key>
-								<string>Color3</string>
-								<key>value</key>
-								<array>
-									<real>1</real>
-									<real>1</real>
-									<real>1</real>
-									<real>1</real>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>effects</string>
-								<key>type</key>
-								<string>EffectControl</string>
-								<key>value</key>
-								<array/>
+								<string>Hero.ccb</string>
 							</dict>
 						</array>
 					</dict>
@@ -1398,7 +1400,7 @@
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>question</string>
+									<string>mmmmmmmmmmmmmmmmmmmm!</string>
 									<false/>
 								</array>
 							</dict>
@@ -1417,7 +1419,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>30</real>
+									<real>25</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -1427,7 +1429,7 @@
 								<key>type</key>
 								<string>Check</string>
 								<key>value</key>
-								<true/>
+								<false/>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1436,10 +1438,10 @@
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>300</real>
-									<real>100</real>
-									<integer>0</integer>
-									<integer>0</integer>
+									<real>1</real>
+									<real>1</real>
+									<integer>2</integer>
+									<integer>2</integer>
 								</array>
 							</dict>
 							<dict>
@@ -1534,8 +1536,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>

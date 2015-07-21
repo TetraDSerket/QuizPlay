@@ -42,6 +42,16 @@ class Obstacle : CCNode
     func setString(#answerString: String)
     {
         answerLabel.string = answerString
+        let length = count(answerLabel.string)
+        if(length > 13)
+        {
+            answerLabel.fontSize = CGFloat(12)
+            answerLabel.adjustsFontSizeToFit = false
+        }
+        if(length > 16)
+        {
+            answerLabel.fontSize = CGFloat(9)
+        }
     }
 }
 

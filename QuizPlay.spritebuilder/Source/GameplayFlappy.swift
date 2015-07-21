@@ -8,12 +8,18 @@
 
 import Foundation
 
-class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
+class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
 {
+    enum GameState
+    {
+        case Playing, GameOver
+    }
+    
     var isWordFirst: Bool = true //if true, the word will be first and the definition afterwards in the Dictionary
     var numberOfOptions: Int = 4
     
     weak var hero: CCSprite!
+    var gameState: GameState = .Playing
     weak var gamePhysicsNode: CCPhysicsNode!
     weak var ground1: CCSprite!
     weak var ground2: CCSprite!
@@ -22,6 +28,7 @@ class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
     weak var scoreLabel: CCLabelTTF!
     weak var questionLabel: CCLabelTTF!
     var sinceTouch: CCTime = 0
+    var sinceRightAnswer: Int = 0
     var scrollSpeed: CGFloat = 80
     var quizWords = Dictionary<String, String>()
     var question: String!
@@ -29,6 +36,24 @@ class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
         didSet
         {
             questionLabel.string = question
+            let length = count(questionLabel.string)
+            if(length > 10)
+            {
+                questionLabel.fontSize = CGFloat(35)
+            }
+            if(length > 20)
+            {
+                questionLabel.fontSize = CGFloat(30)
+            }
+            if(length > 30)
+            {
+                questionLabel.fontSize = CGFloat(20)
+            }
+            if(length > 40)
+            {
+                questionLabel.fontSize = CGFloat(15)
+            }
+            
         }
     }
     var answer: String!
@@ -47,27 +72,37 @@ class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
         }
     }
     
-    
-    func didLoadFromCCB() //what happens first, right when the app starts?
+    func didLoadFromCCB()
     {
-        initializeQuizWordsArray()
-        chooseQuestionAndAnswer()
-        println("\(choices) and \(question)")
-        println("Answer is: \(answer)")
-        userInteractionEnabled = true
         //add the two grounds to the ground array
         grounds.append(ground1)
         grounds.append(ground2)
+        
+        //assigning MainScene as the collision delegate class
+        gamePhysicsNode.collisionDelegate = self
+        //gamePhysicsNode.debugDraw = true
+        userInteractionEnabled = true
+    }
+    
+    override func onEnter()
+    {
+        super.onEnter()
+        
+        //initializeTrialQuizWordsArray()
+        chooseQuestionAndAnswer()
+//        println("\(choices) and \(question)")
+//        println("Answer is: \(answer)")
         
         //create three obstacles that will start off the infinite creation system
         spawnNewObstacle()
         spawnNewObstacle()
         spawnNewObstacle()
-        
-        //assigning MainScene as the collision delegate class
-        gamePhysicsNode.collisionDelegate = self
-        //gamePhysicsNode.debugDraw = true
     }
+//
+//    override func onEnterTransitionDidFinish()
+//    {
+//        
+//    }
     
     func chooseQuestionAndAnswer()
     {
@@ -123,7 +158,7 @@ class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
     {
         if (gameOver == false)
         {
-            hero.physicsBody.applyImpulse(ccp(0, 300))
+            hero.physicsBody.applyImpulse(ccp(0, 200))
             hero.physicsBody.applyAngularImpulse(10000)
             sinceTouch = 0
         }
@@ -224,9 +259,23 @@ class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
     func chooseStringToPutOnCarrot() -> String
     {
         let random = Int(arc4random_uniform(UInt32(choices.count)))
+        if(sinceRightAnswer > 4)
+        {
+            sinceRightAnswer = 0
+            println("TOO LONG NO ANSWER")
+            return answer
+        }
         if choices[random] != lastWordChosen
         {
             lastWordChosen = choices[random]
+            if(choices[random] == answer)
+            {
+                sinceRightAnswer = 0
+            }
+            else
+            {
+                sinceRightAnswer++
+            }
             return choices[random]
         }
         else
@@ -268,21 +317,30 @@ class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
     
     func handleRightAnswer()
     {
-        println("YOU WON YAY")
-        points = points + 10
-        chooseQuestionAndAnswer()
+        if(gameState == .Playing)
+        {
+            println("YOU WON YAY")
+            points = points + 10
+            chooseQuestionAndAnswer()
+        }
     }
     
     func handleWrongAnswer()
     {
-        points = points - 5
-        println("You ARE WRONG VERY WRONG")
+        if(gameState == .Playing)
+        {
+            points = points - 5
+            println("You ARE WRONG VERY WRONG")
+        }
     }
     
     //restarts game
     func restart()
     {
-        let scene = CCBReader.loadAsScene("GameplayFlappy")
+        let scene = CCScene()
+        let flappyScene = CCBReader.load("GameplayFlappy") as! GameplayFlappy
+        flappyScene.quizWords = quizWords
+        scene.addChild(flappyScene)
         let transition = CCTransition(fadeWithDuration: 0.8)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
@@ -310,17 +368,17 @@ class GameplayFlappy: CCScene, CCPhysicsCollisionDelegate
         
     }
     
-    func initializeQuizWordsArray()
+    func initializeTrialQuizWordsArray()
     {
 //        quizWords["Gaius"] = "Stealing candy from a baby is actually really hard"
 //        quizWords["Henry"] = "Oh boy oh boy oh boy are we gonna kill people?"
 //        quizWords["Keladry"] = "Be like stone. Pretty and smooth, but able to bash someone's head in"
 //        quizWords["Inkling"] = "To be a kid or to be a squid, that is the question"
-//        quizWords["Mario"] = "It's-a me, ____"
-//        quizWords["Sakurai"] = "Lol take this Roy"
-//        quizWords["Gandalf"] = "FLY YOU FOOLS"
-//        quizWords["Hagrid"] = "yer a wizard harry"
-        quizWords["mottai"] = "bald; shaved head; no hair"
+        quizWords["Mario"] = "It's-a me, ____"
+        quizWords["Sakurai"] = "Lol take this Roy"
+        quizWords["Gandalf"] = "FLY YOU FOOLS"
+        quizWords["Hagrid"] = "yer a wizard harry"
+        //quizWords["mottai"] = "bald; shaved head; no hair"
         quizWords["sofa"] = "hard and a cushion"
         quizWords["blender"] = "loud and noisy"
         quizWords["dumb"] = "not smart"
