@@ -24,4 +24,26 @@ class QuizletResponseModel: NSObject
         }
         return quizWords
     }
+    
+    class func parseQuizletSearchResultJSON(data: AnyObject!) ->[SearchResponse]
+    {
+        var searchValues: [SearchResponse] = []
+        let json = JSON(data)
+        
+        //println(json)
+        //println(json["sets"][0])
+        
+        for index in 0..<json["sets"].count
+        {
+            //id: json["sets"][index]["id"].string, title: json["sets"][index]["title"].string, createdBy: json["sets"][index]["created_by"].string
+            var temp: SearchResponse = SearchResponse()
+            var tempInt = json["sets"][index]["id"].intValue
+            temp.id = "\(tempInt)"
+            temp.title = json["sets"][index]["title"].string
+            temp.createdBy = json["sets"][index]["created_by"].string
+            searchValues.append(temp)
+        }
+        println(searchValues)
+        return searchValues
+    }
 }

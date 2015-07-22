@@ -7,15 +7,16 @@ class MainScene: CCNode
     
     func didLoadFromCCB()
     {
-        WebHelper.getQuizletFlashcardData
+        WebHelper.getQuizletFlashcardData(setNumber: "1775854",resolve: dealWithQuizWordsLoaded)
+    }
+    
+    func dealWithQuizWordsLoaded(quizWords: Dictionary<String, String>) -> Void
+    {
+        println(quizWords)
+        self.quizWords = quizWords
+        if(quizWords != Dictionary<String, String>())
         {
-            (quizWords: Dictionary<String, String>) -> Void in
-            println(quizWords)
-            self.quizWords = quizWords
-            if(quizWords != Dictionary<String, String>())
-            {
-                self.playFlappyButton.visible = true
-            }
+            self.playFlappyButton.visible = true
         }
     }
     
