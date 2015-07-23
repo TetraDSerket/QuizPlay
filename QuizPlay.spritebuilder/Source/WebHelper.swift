@@ -18,9 +18,6 @@ class WebHelper: NSObject
     
     class func getQuizletFlashcardData(#setNumber: String, resolve: (quizWords: Dictionary<String, String>) -> Void)
     {
-        //Homestuck: 18853693
-        //Indonesian: 1716014
-        
         Alamofire.request(.GET, "https://api.quizlet.com/2.0/sets/\(setNumber)?client_id=d8cM6gPAhD&whitespace=1")
             .responseJSON
         { request, response, data, error in

@@ -7,7 +7,11 @@ class MainScene: CCNode
     
     func didLoadFromCCB()
     {
-        WebHelper.getQuizletFlashcardData(setNumber: "1775854",resolve: dealWithQuizWordsLoaded)
+        //He Who Waits Behind The Wall: 47707152
+        //Smashing: 87515813
+        //Homestuck: 18853693
+        //Indonesian: 1716014
+        WebHelper.getQuizletFlashcardData(setNumber: "18725655",resolve: dealWithQuizWordsLoaded)
     }
     
     func dealWithQuizWordsLoaded(quizWords: Dictionary<String, String>) -> Void
