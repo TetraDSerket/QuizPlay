@@ -296,7 +296,10 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     {
         //remove goal so no duplicate scoring
         goal.removeFromParent()
-        points++
+        if(gameState == .Playing)
+        {
+            points++
+        }
         return true
     }
     
@@ -304,6 +307,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, answerCarrot: CCNode!) -> Bool
     {
         let answerLabel = answerCarrot.children[0] as! CCLabelTTF
+        answerCarrot.physicsBody.collisionMask = []
         if(answerLabel.string == answer)
         {
             handleRightAnswer()
@@ -348,6 +352,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     //handles what happens when the game is over
     func triggerGameOver()
     {
+        gameState = .GameOver
         if (gameOver == false)
         {
             gameOver = true

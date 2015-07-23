@@ -15,7 +15,7 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     weak var noSearchResultsLabel: CCLabelTTF!
     var tableView: CCTableView!
     var searchResults: [SearchResponse] = []
-    
+    var quizWords = Dictionary<String, String>()
     
     func searchQuizlet()
     {
@@ -46,10 +46,6 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         { (tableView) in
             NSLog("Selected cell at index: %i", Int(tableView.selectedRow))
         }
-        //var ableView = CCNodeColor(color: CCColor(red: 0.5, green: 0.5, blue: 0.5))
-//        ableView.positionType = tableNode.positionType
-//        ableView.position = tableNode.position
-//        ableView.anchorPoint = tableNode.anchorPoint
         tableView.contentSize = self.contentSize
         tableView.contentSizeType = self.contentSizeType
         tableNode.addChild(tableView)
@@ -58,7 +54,6 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     func tableView(tableView: CCTableView, nodeForRowAtIndex index: UInt) -> CCTableViewCell
     {
         var tableViewCell: CCTableViewCell = CCTableViewCell()
-        tableViewCell.button.enabled = true
         
         //red: colorFactor, green: 1.0 - colorFactor, blue: 0.2+0.5*colorFactor
         let widthx: Float = Float(CCDirector.sharedDirector().designSize.width) - 20
@@ -68,22 +63,37 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         colorNode.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
         tableViewCell.addChild(colorNode)
         
-//        var tableLabel = CCLabelTTF(string: searchResults[Int(index)].title, fontName: "Helvetica", fontSize: 14)
-//        tableLabel.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
-//        tableViewCell.addChild(tableLabel)
+        var tableLabel = CCLabelTTF(string: searchResults[Int(index)].title, fontName: "Helvetica", fontSize: 14)
+        tableLabel.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
+        tableViewCell.addChild(tableLabel)
         
-        var tableButton = CCButton(title: searchResults[Int(index)].title)
-        tableButton.setTarget(self, selector: "whenButtonsOnMenuArePressed:")
-        tableButton.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
-        tableButton.name = searchResults[Int(index)].id
-        tableViewCell.addChild(tableButton)
+        var tablePlayButton = CCButton()
+        tablePlayButton.preferredSize = CGSize(width: 50, height: 40)
+        tablePlayButton.setBackgroundSpriteFrame(CCSpriteFrame(imageNamed: "images/play_button.png"), forState: CCControlState(rawValue: UInt(1))!)
+        tablePlayButton.zoomWhenHighlighted = true
+        tablePlayButton.setTarget(self, selector: "whenPlayButtonsOnMenuArePressed:")
+        tablePlayButton.position = CGPoint(x: CCDirector.sharedDirector().designSize.width*3/4, y: 0)
+        tablePlayButton.name = searchResults[Int(index)].id
+        tableViewCell.addChild(tablePlayButton)
         
         return tableViewCell
     }
     
-    func whenButtonsOnMenuArePressed(button: CCButton!)
+    func whenPlayButtonsOnMenuArePressed(button: CCButton!)
     {
-        println("CLICKITY CLICK \(button.name)")
+        WebHelper.getQuizletFlashcardData(setNumber: button.name,resolve: dealWithQuizWordsLoaded)
+    }
+    
+    func dealWithQuizWordsLoaded(quizWords: Dictionary<String, String>) -> Void
+    {
+        println(quizWords)
+        self.quizWords = quizWords
+        let scene = CCScene()
+        let flappyScene = CCBReader.load("GameplayFlappy") as! GameplayFlappy
+        flappyScene.quizWords = quizWords
+        scene.addChild(flappyScene)
+        let transition = CCTransition(fadeWithDuration: 0.8)
+        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
     func tableViewNumberOfRows(tableView: CCTableView) -> UInt
@@ -95,6 +105,14 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     {
         return 40.0
     }
+}
+
+struct GameData
+{
+    var quizWords = Dictionary<String, String>()
+    var name: String!
+    var id: String!
+    var createdBy: String!
 }
 
 struct SearchResponse
