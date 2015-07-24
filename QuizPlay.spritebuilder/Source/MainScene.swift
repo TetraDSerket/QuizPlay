@@ -2,7 +2,7 @@ import Foundation
 
 class MainScene: CCNode
 {
-    var quizWords = Dictionary<String, String>()
+    var gameData: GameData!
     weak var playFlappyButton: CCButton!
     
     func didLoadFromCCB()
@@ -14,11 +14,10 @@ class MainScene: CCNode
         WebHelper.getQuizletFlashcardData(setNumber: "87515813",resolve: dealWithQuizWordsLoaded)
     }
     
-    func dealWithQuizWordsLoaded(quizWords: Dictionary<String, String>) -> Void
+    func dealWithQuizWordsLoaded(gameData: GameData) -> Void
     {
-        println(quizWords)
-        self.quizWords = quizWords
-        if(quizWords != Dictionary<String, String>())
+        self.gameData = gameData
+        if(gameData.quizWords != Dictionary<String, String>())
         {
             self.playFlappyButton.visible = true
         }
@@ -28,7 +27,7 @@ class MainScene: CCNode
     {
         let scene = CCScene()
         let flappyScene = CCBReader.load("GameplayFlappy") as! GameplayFlappy
-        flappyScene.quizWords = quizWords
+        flappyScene.gameData = gameData
         scene.addChild(flappyScene)
         let transition = CCTransition(fadeWithDuration: 0.8)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)

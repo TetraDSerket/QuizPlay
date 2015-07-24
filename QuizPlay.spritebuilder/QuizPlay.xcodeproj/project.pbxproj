@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28076DC01B61B03300B65802 /* FlappyGameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28076DBF1B61B03300B65802 /* FlappyGameOver.swift */; };
 		2819B4441B55777F00C358E9 /* GameplaySling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B4431B55777F00C358E9 /* GameplaySling.swift */; };
 		2819B45E1B56C4B500C358E9 /* GameplayFlappy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */; };
 		2819B4601B56C98E00C358E9 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B45F1B56C98E00C358E9 /* Obstacle.swift */; };
@@ -208,6 +209,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		28076DBF1B61B03300B65802 /* FlappyGameOver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FlappyGameOver.swift; path = Source/FlappyGameOver.swift; sourceTree = "<group>"; };
 		2819B4431B55777F00C358E9 /* GameplaySling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplaySling.swift; path = Source/GameplaySling.swift; sourceTree = "<group>"; };
 		2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplayFlappy.swift; path = Source/GameplayFlappy.swift; sourceTree = "<group>"; };
 		2819B45F1B56C98E00C358E9 /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Obstacle.swift; path = Source/Obstacle.swift; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 				28615AF31B58539F00E37B45 /* GameplayPlatform.swift */,
 				2819B4431B55777F00C358E9 /* GameplaySling.swift */,
 				2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */,
+				28076DBF1B61B03300B65802 /* FlappyGameOver.swift */,
 				28615B0B1B585B2000E37B45 /* WebHelper.swift */,
 				28615B0D1B585DCD00E37B45 /* QuizletResponseModel.swift */,
 				28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */,
@@ -940,6 +943,7 @@
 			files = (
 				B73789871807631A0076A88C /* main.m in Sources */,
 				7A046D7919E84ED5004C4763 /* MainScene.swift in Sources */,
+				28076DC01B61B03300B65802 /* FlappyGameOver.swift in Sources */,
 				2819B4601B56C98E00C358E9 /* Obstacle.swift in Sources */,
 				28615B101B587E6000E37B45 /* SwiftyJSON.swift in Sources */,
 				28615B0C1B585B2000E37B45 /* WebHelper.swift in Sources */,

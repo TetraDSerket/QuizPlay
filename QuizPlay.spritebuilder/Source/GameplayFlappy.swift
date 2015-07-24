@@ -24,13 +24,15 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     weak var ground1: CCSprite!
     weak var ground2: CCSprite!
     weak var obstaclesLayer: CCNode!
-    weak var restartButton: CCButton!
     weak var scoreLabel: CCLabelTTF!
+    weak var GOsetNameLabel: CCLabelTTF!
+    weak var GOscoreLabel: CCLabelTTF!
     weak var questionLabel: CCLabelTTF!
     var sinceTouch: CCTime = 0
     var sinceRightAnswer: Int = 0
     var scrollSpeed: CGFloat = 80
-    var quizWords = Dictionary<String, String>()
+    var gameData: GameData!
+    //var quizWords = Dictionary<String, String>()
     var question: String!
     {
         didSet
@@ -88,25 +90,17 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     {
         super.onEnter()
         
-        //initializeTrialQuizWordsArray()
-        chooseQuestionAndAnswer()
-//        println("\(choices) and \(question)")
-//        println("Answer is: \(answer)")
         
-        //create three obstacles that will start off the infinite creation system
+        chooseQuestionAndAnswer()
+
         spawnNewObstacle()
         spawnNewObstacle()
         spawnNewObstacle()
     }
-//
-//    override func onEnterTransitionDidFinish()
-//    {
-//        
-//    }
     
     func chooseQuestionAndAnswer()
     {
-        var tempQuizWords = quizWords
+        var tempQuizWords = gameData.quizWords
         if isWordFirst
         {
             for index in 0..<numberOfOptions
@@ -338,15 +332,32 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         }
     }
     
-    //restarts game
-    func restart()
+    //restarts game restart button remove or change this
+    func retryButton()
     {
         let scene = CCScene()
         let flappyScene = CCBReader.load("GameplayFlappy") as! GameplayFlappy
-        flappyScene.quizWords = quizWords
+        flappyScene.gameData = gameData
         scene.addChild(flappyScene)
         let transition = CCTransition(fadeWithDuration: 0.8)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
+    }
+    
+    func downloadedSetsButton()
+    {
+        println("TO THE DOWNLEEDS")
+    }
+    
+    func searchSetsButton()
+    {
+        println("TO THE SEARCH SEETS")
+    }
+    
+    func mainMenuButton()
+    {
+        let mainScene = CCBReader.loadAsScene("MainScene")
+        let transition = CCTransition(fadeWithDuration: 0.8)
+        CCDirector.sharedDirector().presentScene(mainScene, withTransition: transition)
     }
     
     //handles what happens when the game is over
@@ -356,7 +367,6 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         if (gameOver == false)
         {
             gameOver = true
-            restartButton.visible = true
             scrollSpeed = 0
             hero.rotation = 90
             hero.physicsBody.allowsRotation = false
@@ -365,29 +375,19 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
             hero.stopAllActions()
             
             //makes a sequence that shakes the screen up and down (switch to 4,0 for side to side
-            let move = CCActionEaseBounceOut(action: CCActionMoveBy(duration: 0.2, position: ccp(0, 4)))
-            let moveBack = CCActionEaseBounceOut(action: move.reverse())
-            let shakeSequence = CCActionSequence(array: [move, moveBack])
-            runAction(shakeSequence)
-        }
-        
-    }
-    
-    func initializeTrialQuizWordsArray()
-    {
-//        quizWords["Gaius"] = "Stealing candy from a baby is actually really hard"
-//        quizWords["Henry"] = "Oh boy oh boy oh boy are we gonna kill people?"
-//        quizWords["Keladry"] = "Be like stone. Pretty and smooth, but able to bash someone's head in"
-//        quizWords["Inkling"] = "To be a kid or to be a squid, that is the question"
-        quizWords["Mario"] = "It's-a me, ____"
-        quizWords["Sakurai"] = "Lol take this Roy"
-        quizWords["Gandalf"] = "FLY YOU FOOLS"
-        quizWords["Hagrid"] = "yer a wizard harry"
-        //quizWords["mottai"] = "bald; shaved head; no hair"
-        quizWords["sofa"] = "hard and a cushion"
-        quizWords["blender"] = "loud and noisy"
-        quizWords["dumb"] = "not smart"
-        quizWords["gmail"] = "write emails to other people"
-    }
+//            let move = CCActionEaseBounceOut(action: CCActionMoveBy(duration: 0.2, position: ccp(0, 4)))
+//            let moveBack = CCActionEaseBounceOut(action: move.reverse())
+//            let shakeSequence = CCActionSequence(array: [move, moveBack])
+//            runAction(shakeSequence)
+            
 
+            let popup = CCBReader.load("FlappyGameOver", owner: self) as! FlappyGameOver
+            popup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
+            popup.position = CGPoint(x: 0.5, y: 0.5)
+            GOscoreLabel.string = "Score: \(points)"
+            GOsetNameLabel.string = "Quiz Played: \(gameData.title)"
+            parent.addChild(popup)
+            
+        }
+    }
 }

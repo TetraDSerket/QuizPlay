@@ -13,18 +13,17 @@ import Alamofire
 
 class WebHelper: NSObject
 {
-    static var quizWords = Dictionary<String, String>()
+    static var gameData = GameData()
     static var searchValues: [SearchResponse]!
     
-    class func getQuizletFlashcardData(#setNumber: String, resolve: (quizWords: Dictionary<String, String>) -> Void)
+    class func getQuizletFlashcardData(#setNumber: String, resolve: (gameData: GameData) -> Void)
     {
         Alamofire.request(.GET, "https://api.quizlet.com/2.0/sets/\(setNumber)?client_id=d8cM6gPAhD&whitespace=1")
             .responseJSON
         { request, response, data, error in
-            self.quizWords = QuizletResponseModel.parseQuizletFlashcardJSON(data)
-            resolve(quizWords: self.quizWords)
+            self.gameData = QuizletResponseModel.parseQuizletFlashcardJSON(data)
+            resolve(gameData: self.gameData)
         }
-        //println("WebHelper \(quizWords.count)")
     }
     
     class func getQuizletSearchValues(#searchValue: String, resolve: (searchResults: [SearchResponse]) -> Void)

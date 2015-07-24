@@ -11,10 +11,11 @@ import Darwin
 
 class QuizletResponseModel: NSObject
 {
-    class func parseQuizletFlashcardJSON(data: AnyObject!) -> Dictionary<String,String>
+    class func parseQuizletFlashcardJSON(data: AnyObject!) -> GameData
     {
         var quizWords = Dictionary<String, String>()
         let json = JSON(data)
+        println(json)
         
         for index in 0..<json["terms"].count
         {
@@ -22,7 +23,13 @@ class QuizletResponseModel: NSObject
             let definition = json["terms"][index]["definition"].string
             quizWords[term!] = definition
         }
-        return quizWords
+        var gameData = GameData()
+        gameData.quizWords = quizWords
+        gameData.title = json["title"].string
+        var tempInt = json["id"].intValue
+        gameData.id = "\(tempInt)"
+        gameData.createdBy = json["created_by"].string
+        return gameData
     }
     
     class func parseQuizletSearchResultJSON(data: AnyObject!) ->[SearchResponse]

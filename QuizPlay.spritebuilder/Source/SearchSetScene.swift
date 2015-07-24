@@ -13,6 +13,10 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     weak var searchTextField: CCTextField!
     weak var tableNode: CCNode!
     weak var noSearchResultsLabel: CCLabelTTF!
+    weak var cellColorNode: CCNodeColor!
+    weak var cellTitleLabel: CCLabelTTF!
+    weak var cellCreatorLabel: CCLabelTTF!
+    weak var cellPlayButton: CCButton!
     var tableView: CCTableView!
     var searchResults: [SearchResponse] = []
     var quizWords = Dictionary<String, String>()
@@ -55,42 +59,68 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     {
         var tableViewCell: CCTableViewCell = CCTableViewCell()
         
-        //red: colorFactor, green: 1.0 - colorFactor, blue: 0.2+0.5*colorFactor
-        let widthx: Float = Float(CCDirector.sharedDirector().designSize.width) - 20
+        let tableCellNode = CCBReader.load("SearchCellNode", owner: self)
+        tableCellNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        tableCellNode.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
+        
         let colorFactor: Float = (Float(index) / Float(searchResults.count))
-        var colorNode = CCNodeColor(color: CCColor(red: 0.8 - colorFactor, green: 0.2+0.5*colorFactor, blue: colorFactor), width: widthx, height: 30)
-        colorNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        colorNode.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
-        tableViewCell.addChild(colorNode)
+        cellColorNode.color = CCColor(red: 0.8 - colorFactor, green: 0.2+0.5*colorFactor, blue: colorFactor)
         
-        var tableLabel = CCLabelTTF(string: searchResults[Int(index)].title, fontName: "Helvetica", fontSize: 14)
-        tableLabel.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
-        tableViewCell.addChild(tableLabel)
+        cellTitleLabel.string = searchResults[Int(index)].title
+        cellCreatorLabel.string = searchResults[Int(index)].createdBy
         
-        var tablePlayButton = CCButton()
-        tablePlayButton.preferredSize = CGSize(width: 50, height: 40)
-        tablePlayButton.setBackgroundSpriteFrame(CCSpriteFrame(imageNamed: "images/play_button.png"), forState: CCControlState(rawValue: UInt(1))!)
-        tablePlayButton.zoomWhenHighlighted = true
-        tablePlayButton.setTarget(self, selector: "whenPlayButtonsOnMenuArePressed:")
-        tablePlayButton.position = CGPoint(x: CCDirector.sharedDirector().designSize.width*3/4, y: 0)
-        tablePlayButton.name = searchResults[Int(index)].id
-        tableViewCell.addChild(tablePlayButton)
+        cellPlayButton.name = searchResults[Int(index)].id
+        cellPlayButton.setTarget(self, selector: "buttonPressed:")
         
+        tableViewCell.addChild(tableCellNode)
         return tableViewCell
     }
     
-    func whenPlayButtonsOnMenuArePressed(button: CCButton!)
+//    func tableView(tableView: CCTableView, nodeForRowAtIndex index: UInt) -> CCTableViewCell
+//    {
+//        var tableViewCell: CCTableViewCell = CCTableViewCell()
+//        
+//        //red: colorFactor, green: 1.0 - colorFactor, blue: 0.2+0.5*colorFactor
+//        let widthx: Float = Float(CCDirector.sharedDirector().designSize.width) - 20
+//        println(widthx)
+//        let colorFactor: Float = (Float(index) / Float(searchResults.count))
+//        var colorNode = CCNodeColor(color: CCColor(red: 0.8 - colorFactor, green: 0.2+0.5*colorFactor, blue: colorFactor), width: widthx, height: 60)
+//        colorNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+//        colorNode.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
+//        tableViewCell.addChild(colorNode)
+//        
+//        var tableLabel = CCLabelTTF(string: searchResults[Int(index)].title, fontName: "Helvetica", fontSize: 14)
+//        tableLabel.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 10)
+//        tableViewCell.addChild(tableLabel)
+//        
+//        var creatorLabel = CCLabelTTF(string: searchResults[Int(index)].createdBy, fontName: "Helvetica", fontSize: 14)
+//        creatorLabel.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: -10)
+//        tableViewCell.addChild(creatorLabel)
+//        
+//        var tablePlayButton = CCButton()
+//        tablePlayButton.preferredSize = CGSize(width: 50, height: 40)
+//        tablePlayButton.setBackgroundSpriteFrame(CCSpriteFrame(imageNamed: "images/play_button.png"), forState: CCControlState(rawValue: UInt(1))!)
+//        tablePlayButton.zoomWhenHighlighted = true
+//        tablePlayButton.setTarget(self, selector: "whenPlayButtonsOnMenuArePressed:")
+//        tablePlayButton.position = CGPoint(x: CCDirector.sharedDirector().designSize.width*3/4, y: 0)
+//        tablePlayButton.name = searchResults[Int(index)].id
+//        tableViewCell.addChild(tablePlayButton)
+//        
+//        return tableViewCell
+//    }
+    
+    func buttonPressed(button: CCButton!)
     {
         WebHelper.getQuizletFlashcardData(setNumber: button.name,resolve: dealWithQuizWordsLoaded)
     }
     
-    func dealWithQuizWordsLoaded(quizWords: Dictionary<String, String>) -> Void
+    func dealWithQuizWordsLoaded(gameData: GameData) -> Void
     {
-        println(quizWords)
-        self.quizWords = quizWords
+//        println(quizWords)
+//        self.quizWords = gameData.quizWords
         let scene = CCScene()
         let flappyScene = CCBReader.load("GameplayFlappy") as! GameplayFlappy
-        flappyScene.quizWords = quizWords
+        flappyScene.gameData = gameData
         scene.addChild(flappyScene)
         let transition = CCTransition(fadeWithDuration: 0.8)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
@@ -103,14 +133,14 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     
     func tableView(tableView: CCTableView, heightForRowAtIndex index: UInt) -> Float
     {
-        return 40.0
+        return 80.0
     }
 }
 
 struct GameData
 {
     var quizWords = Dictionary<String, String>()
-    var name: String!
+    var title: String!
     var id: String!
     var createdBy: String!
 }
