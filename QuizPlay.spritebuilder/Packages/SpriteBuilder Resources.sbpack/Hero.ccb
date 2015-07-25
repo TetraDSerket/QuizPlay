@@ -35,6 +35,94 @@
 	<false/>
 	<key>nodeGraph</key>
 	<dict>
+		<key>animatedProperties</key>
+		<dict>
+			<key>0</key>
+			<dict>
+				<key>spriteFrame</key>
+				<dict>
+					<key>keyframes</key>
+					<array>
+						<dict>
+							<key>easing</key>
+							<dict>
+								<key>type</key>
+								<integer>0</integer>
+							</dict>
+							<key>name</key>
+							<string>spriteFrame</string>
+							<key>time</key>
+							<real>0.0</real>
+							<key>type</key>
+							<integer>7</integer>
+							<key>value</key>
+							<array>
+								<string>images/IMG_2466.png</string>
+								<string>Use regular file</string>
+							</array>
+						</dict>
+						<dict>
+							<key>easing</key>
+							<dict>
+								<key>type</key>
+								<integer>0</integer>
+							</dict>
+							<key>name</key>
+							<string>spriteFrame</string>
+							<key>time</key>
+							<real>0.066666670143604279</real>
+							<key>type</key>
+							<integer>7</integer>
+							<key>value</key>
+							<array>
+								<string>images/IMG_2467.png</string>
+								<string>Use regular file</string>
+							</array>
+						</dict>
+						<dict>
+							<key>easing</key>
+							<dict>
+								<key>type</key>
+								<integer>0</integer>
+							</dict>
+							<key>name</key>
+							<string>spriteFrame</string>
+							<key>time</key>
+							<real>0.13333334028720856</real>
+							<key>type</key>
+							<integer>7</integer>
+							<key>value</key>
+							<array>
+								<string>images/IMG_2468.png</string>
+								<string>Use regular file</string>
+							</array>
+						</dict>
+						<dict>
+							<key>easing</key>
+							<dict>
+								<key>type</key>
+								<integer>0</integer>
+							</dict>
+							<key>name</key>
+							<string>spriteFrame</string>
+							<key>time</key>
+							<real>0.20000000298023224</real>
+							<key>type</key>
+							<integer>7</integer>
+							<key>value</key>
+							<array>
+								<string>images/IMG_2469.png</string>
+								<string>Use regular file</string>
+							</array>
+						</dict>
+					</array>
+					<key>name</key>
+					<string>spriteFrame</string>
+					<key>type</key>
+					<integer>7</integer>
+				</dict>
+			</dict>
+		</dict>
 		<key>baseClass</key>
 		<string>CCSprite</string>
 		<key>children</key>
@@ -44,7 +132,7 @@
 		<key>displayName</key>
 		<string>CCSprite</string>
 		<key>memberVarAssignmentName</key>
-		<string></string>
+		<string>hero</string>
 		<key>memberVarAssignmentType</key>
 		<integer>1</integer>
 		<key>physicsBody</key>
@@ -60,7 +148,7 @@
 			<key>collisionMask</key>
 			<array/>
 			<key>collisionType</key>
-			<string></string>
+			<string>hero</string>
 			<key>cornerRadius</key>
 			<real>0.0</real>
 			<key>density</key>
@@ -74,40 +162,56 @@
 			<key>points</key>
 			<array>
 				<array>
-					<real>0.0</real>
-					<real>0.0</real>
+					<real>83.070281982421875</real>
+					<real>71.707015991210938</real>
 				</array>
 				<array>
-					<real>0.0</real>
-					<real>16</real>
+					<real>54.531219482421875</real>
+					<real>96.445297241210938</real>
 				</array>
 				<array>
-					<real>16</real>
-					<real>16</real>
+					<real>126.21871948242188</real>
+					<real>141.61715698242188</real>
 				</array>
 				<array>
-					<real>16</real>
-					<real>0.0</real>
+					<real>200.66403198242188</real>
+					<real>98.445297241210938</real>
+				</array>
+				<array>
+					<real>173.03121948242188</real>
+					<real>68.183578491210938</real>
+				</array>
+				<array>
+					<real>129.99606323242188</real>
+					<real>54.718734741210938</real>
 				</array>
 			</array>
 			<key>polygons</key>
 			<array>
 				<array>
 					<array>
-						<real>16</real>
-						<real>0.0</real>
+						<real>129.99606323242188</real>
+						<real>54.718734741210938</real>
 					</array>
 					<array>
-						<real>16</real>
-						<real>16</real>
+						<real>173.03121948242188</real>
+						<real>68.183578491210938</real>
 					</array>
 					<array>
-						<real>0.0</real>
-						<real>16</real>
+						<real>200.66403198242188</real>
+						<real>98.445297241210938</real>
 					</array>
 					<array>
-						<real>0.0</real>
-						<real>0.0</real>
+						<real>126.21871948242188</real>
+						<real>141.61715698242188</real>
+					</array>
+					<array>
+						<real>54.531219482421875</real>
+						<real>96.445297241210938</real>
+					</array>
+					<array>
+						<real>83.070281982421875</real>
+						<real>71.707015991210938</real>
 					</array>
 				</array>
 			</array>
@@ -161,6 +265,11 @@
 				</array>
 			</dict>
 			<dict>
+				<key>baseValue</key>
+				<array>
+					<string>images/bunny1.png</string>
+					<string>Use regular file</string>
+				</array>
 				<key>name</key>
 				<string>spriteFrame</string>
 				<key>type</key>
@@ -168,7 +277,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>images/bunny1.png</string>
+					<string>images/IMG_2466.png</string>
 				</array>
 			</dict>
 			<dict>
@@ -189,8 +298,8 @@
 				<string>Color3</string>
 				<key>value</key>
 				<array>
-					<real>1</real>
-					<real>1</real>
+					<real>0.96396446228027344</real>
+					<real>0.97421777248382568</real>
 					<real>1</real>
 					<real>1</real>
 				</array>
@@ -205,6 +314,8 @@
 			</dict>
 		</array>
 		<key>selected</key>
+		<true/>
+		<key>seqExpanded</key>
 		<true/>
 	</dict>
 	<key>notes</key>
@@ -253,9 +364,9 @@
 				<integer>12</integer>
 			</dict>
 			<key>chainedSequenceId</key>
-			<integer>-1</integer>
+			<integer>0</integer>
 			<key>length</key>
-			<real>10</real>
+			<real>0.26666668057441711</real>
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>

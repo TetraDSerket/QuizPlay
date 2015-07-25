@@ -21,6 +21,9 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     var searchResults: [SearchResponse] = []
     var quizWords = Dictionary<String, String>()
     
+    weak var stencilNode: CCNode!
+    weak var clippingNode: CCClippingNode!
+    
     func searchQuizlet()
     {
         let searchString = searchTextField.string
@@ -53,6 +56,9 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         tableView.contentSize = self.contentSize
         tableView.contentSizeType = self.contentSizeType
         tableNode.addChild(tableView)
+        
+        clippingNode.stencil = stencilNode
+        clippingNode.alphaThreshold = 0.0
     }
     
     func tableView(tableView: CCTableView, nodeForRowAtIndex index: UInt) -> CCTableViewCell
@@ -63,8 +69,9 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         tableCellNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         tableCellNode.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
         
+        //cellColorNode.color = CCColor(red: 0.8 - colorFactor, green: 0.2+0.5*colorFactor, blue: colorFactor)
         let colorFactor: Float = (Float(index) / Float(searchResults.count))
-        cellColorNode.color = CCColor(red: 0.8 - colorFactor, green: 0.2+0.5*colorFactor, blue: colorFactor)
+        cellColorNode.color = CCColor(red: 0.6*colorFactor+0.1, green: 0.6*colorFactor+0.1, blue: 0.8)
         
         cellTitleLabel.string = searchResults[Int(index)].title
         cellCreatorLabel.string = searchResults[Int(index)].createdBy

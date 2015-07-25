@@ -70,7 +70,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     {
         didSet
         {
-            scoreLabel.string = String(points)
+            scoreLabel.string = String("Score: \(points)")
         }
     }
     
@@ -152,8 +152,9 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     {
         if (gameOver == false)
         {
-            hero.physicsBody.applyImpulse(ccp(0, 200))
-            hero.physicsBody.applyAngularImpulse(10000)
+            println("touchBegan")
+            hero.physicsBody.applyImpulse(ccp(0, 3000))
+            hero.physicsBody.applyAngularImpulse(-5000)
             sinceTouch = 0
         }
     }
@@ -168,7 +169,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         //change in time
         sinceTouch += delta
         //limit position between 30 degrees up and 90 down
-        hero.rotation = clampf(hero.rotation, -30, 90)
+        hero.rotation = clampf(hero.rotation, -20, 20)
         if(hero.physicsBody.allowsRotation)
         {
             //limits angular velocity between -2 and 1
@@ -179,7 +180,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         if (sinceTouch > 0.3)
         {
             //applies the downwards impulse to the bunny after a time
-            let impulse = -18000.0 * delta
+            let impulse = 25000.0 * delta
             hero.physicsBody.applyAngularImpulse(CGFloat(impulse))
         }
         
