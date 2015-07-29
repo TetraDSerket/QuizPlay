@@ -10,11 +10,11 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>37</integer>
+	<integer>40</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
-	<integer>0</integer>
+	<integer>2</integer>
 	<key>currentSequenceId</key>
 	<integer>0</integer>
 	<key>docDimensionsType</key>
@@ -327,8 +327,6 @@
 						<array/>
 					</dict>
 				</array>
-				<key>seqExpanded</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -461,12 +459,12 @@
 									<real>0.0</real>
 								</array>
 								<array>
-									<real>0.0</real>
-									<real>92</real>
+									<real>0.47258585691452026</real>
+									<real>82.182243347167969</real>
 								</array>
 								<array>
-									<real>211</real>
-									<real>92</real>
+									<real>210.59111022949219</real>
+									<real>82.283111572265625</real>
 								</array>
 								<array>
 									<real>211</real>
@@ -481,12 +479,12 @@
 										<real>0.0</real>
 									</array>
 									<array>
-										<real>211</real>
-										<real>92</real>
+										<real>210.59111022949219</real>
+										<real>82.283111572265625</real>
 									</array>
 									<array>
-										<real>0.0</real>
-										<real>92</real>
+										<real>0.47258585691452026</real>
+										<real>82.182243347167969</real>
 									</array>
 									<array>
 										<real>0.0</real>
@@ -595,8 +593,6 @@
 								<array/>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -644,12 +640,12 @@
 									<real>0.0</real>
 								</array>
 								<array>
-									<real>0.0</real>
-									<real>92</real>
+									<real>0.22507865726947784</real>
+									<real>82.116683959960938</real>
 								</array>
 								<array>
-									<real>211</real>
-									<real>92</real>
+									<real>211.6986083984375</real>
+									<real>82.0159912109375</real>
 								</array>
 								<array>
 									<real>211</real>
@@ -664,12 +660,12 @@
 										<real>0.0</real>
 									</array>
 									<array>
-										<real>211</real>
-										<real>92</real>
+										<real>211.6986083984375</real>
+										<real>82.0159912109375</real>
 									</array>
 									<array>
-										<real>0.0</real>
-										<real>92</real>
+										<real>0.22507865726947784</real>
+										<real>82.116683959960938</real>
 									</array>
 									<array>
 										<real>0.0</real>
@@ -1037,10 +1033,10 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
-							<real>112.59478759765625</real>
-							<integer>1</integer>
+							<real>10</real>
+							<real>10</real>
 							<integer>2</integer>
+							<integer>0</integer>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -1051,8 +1047,8 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
-							<real>0.5</real>
+							<real>1</real>
+							<real>1</real>
 						</array>
 					</dict>
 					<dict>
@@ -1085,7 +1081,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Chalkduster</string>
+						<string>unexploredGalaxiesFont/Unxgala.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1168,10 +1164,10 @@
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>0.056918516755104065</real>
+							<real>0.23997059464454651</real>
+							<real>0.64460325241088867</real>
+							<real>1</real>
 						</array>
 					</dict>
 					<dict>
@@ -1181,7 +1177,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
+							<real>4</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -1192,10 +1188,10 @@
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>0.055388249456882477</real>
+							<real>0.009692806750535965</real>
+							<real>0.58579349517822266</real>
+							<real>1</real>
 						</array>
 					</dict>
 					<dict>
@@ -1224,6 +1220,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>

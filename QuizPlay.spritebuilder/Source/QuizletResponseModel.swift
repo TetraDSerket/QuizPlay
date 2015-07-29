@@ -15,7 +15,6 @@ class QuizletResponseModel: NSObject
     {
         var quizWords = Dictionary<String, String>()
         let json = JSON(data)
-        println(json)
         
         for index in 0..<json["terms"].count
         {
@@ -37,20 +36,22 @@ class QuizletResponseModel: NSObject
         var searchValues: [SearchResponse] = []
         let json = JSON(data)
         
-        //println(json)
+        println(json)
         //println(json["sets"][0])
         
         for index in 0..<json["sets"].count
         {
-            //id: json["sets"][index]["id"].string, title: json["sets"][index]["title"].string, createdBy: json["sets"][index]["created_by"].string
-            var temp: SearchResponse = SearchResponse()
-            var tempInt = json["sets"][index]["id"].intValue
-            temp.id = "\(tempInt)"
-            temp.title = json["sets"][index]["title"].string
-            temp.createdBy = json["sets"][index]["created_by"].string
-            searchValues.append(temp)
+            if(json["sets"][index]["has_images"].boolValue == false)
+            {
+                var temp: SearchResponse = SearchResponse()
+                var tempInt = json["sets"][index]["id"].intValue
+                temp.id = "\(tempInt)"
+                temp.title = json["sets"][index]["title"].string
+                temp.createdBy = json["sets"][index]["created_by"].string
+                searchValues.append(temp)
+            }
         }
-        println(searchValues)
+
         return searchValues
     }
 }

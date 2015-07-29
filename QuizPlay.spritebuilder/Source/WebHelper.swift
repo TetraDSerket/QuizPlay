@@ -29,7 +29,6 @@ class WebHelper: NSObject
     class func getQuizletSearchValues(#searchValue: String, resolve: (searchResults: [SearchResponse]) -> Void)
     {
         let encodedSearchValue = searchValue.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
-        println(encodedSearchValue!)
         Alamofire.request(.GET, "https://api.quizlet.com/2.0/search/sets?client_id=d8cM6gPAhD&whitespace=1&q=\(encodedSearchValue!)")
             .responseJSON
         { request, response, data, error in

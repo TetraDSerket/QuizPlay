@@ -1,6 +1,6 @@
 #import "cocos2d.h"
 #import "cocos2d-ui.h"
-
+#import "CCPhysics+ObjectiveChipmunk.h"
 // Imported explicitly and with relative path.
 // Class would otherwise be available but not autocompleting/syntax-highlighting.
 // Perhaps an Xcode bug?

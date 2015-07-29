@@ -15,43 +15,44 @@ class Obstacle : CCNode
     weak var topCarrot : CCNode!
     weak var bottomCarrot : CCNode!
     weak var answerLabel: CCLabelTTF!
+    weak var labelBackground: CCNodeColor!
+    weak var positionNode: CCNode!
     
-    let topCarrotMinimumPositionY : CGFloat = 80
-    let bottomCarrotMaximumPositionY : CGFloat = 350
-    let carrotDistance : CGFloat = 130
+//    let topCarrotMinimumPositionY : CGFloat = 80
+//    let bottomCarrotMaximumPositionY : CGFloat = 350
+//    let carrotDistance : CGFloat = 130
+    let range: CGFloat = 200
+    let startingPoint: CGFloat = -80
+    let randomPrecision : UInt32 = 100
     
     func didLoadFromCCB()
     {
         //add sensors to the two carrots
         topCarrot.physicsBody.sensor = true
         bottomCarrot.physicsBody.sensor = true
+        labelBackground.physicsBody.sensor = true
     }
     
     func setupRandomPosition()
     {
-        //random number generator
-        let randomPrecision : UInt32 = 100
-        //make random//float of//random# 0 to randomPrecision    //divide by 100 to get percentage
         let random = CGFloat(arc4random_uniform(randomPrecision)) / CGFloat(randomPrecision)
-        let range = bottomCarrotMaximumPositionY - carrotDistance - topCarrotMinimumPositionY
-        //set top and bottom carrots to position
-        topCarrot.position = ccp(topCarrot.position.x, topCarrotMinimumPositionY + (random * range));
-        bottomCarrot.position = ccp(bottomCarrot.position.x, topCarrot.position.y + carrotDistance);
+        self.position = ccp(self.position.x, startingPoint + (random*range));
     }
     
     func setString(#answerString: String)
     {
         answerLabel.string = answerString
-        let length = count(answerLabel.string)
-        if(length > 13)
-        {
-            answerLabel.fontSize = CGFloat(12)
-            answerLabel.adjustsFontSizeToFit = false
-        }
-        if(length > 16)
-        {
-            answerLabel.fontSize = CGFloat(9)
-        }
+        labelBackground.name = answerString
+//        let length = count(answerLabel.string)
+//        if(length > 13)
+//        {
+//            answerLabel.fontSize = CGFloat(12)
+//            answerLabel.adjustsFontSizeToFit = false
+//        }
+//        if(length > 16)
+//        {
+//            answerLabel.fontSize = CGFloat(9)
+//        }
     }
 }
 

@@ -11,7 +11,7 @@ class MainScene: CCNode
         //Smashing: 87515813
         //Homestuck: 18853693
         //Indonesian: 1716014
-        WebHelper.getQuizletFlashcardData(setNumber: "87515813",resolve: dealWithQuizWordsLoaded)
+        WebHelper.getQuizletFlashcardData(setNumber: "87115813",resolve: dealWithQuizWordsLoaded)
     }
     
     func dealWithQuizWordsLoaded(gameData: GameData) -> Void

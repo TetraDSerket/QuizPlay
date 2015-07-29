@@ -1,16 +1,15 @@
 //
-//  SearchSetScene.swift
+//  ViewDownloadsScene.swift
 //  QuizPlay
 //
-//  Created by Varsha Ramakrishnan on 7/21/15.
+//  Created by Varsha Ramakrishnan on 7/29/15.
 //  Copyright (c) 2015 Apportable. All rights reserved.
 //
 
 import UIKit
 
-class SearchSetScene: CCNode, CCTableViewDataSource
+class ViewDownloadsScene: CCNode, CCTableViewDataSource
 {
-    weak var searchTextField: CCTextField!
     weak var tableNode: CCNode!
     weak var noSearchResultsLabel: CCLabelTTF!
     weak var cellColorNode: CCNodeColor!
@@ -25,36 +24,14 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     weak var stencilNode: CCNode!
     weak var clippingNode: CCClippingNode!
     
-    func searchQuizlet()
-    {
-        loadingScreen.visible = true
-        let searchString = searchTextField.string
-        WebHelper.getQuizletSearchValues(searchValue: searchString, resolve: dealWithSearchResponseResults)
-    }
-    
-    func dealWithSearchResponseResults(searchValues: [SearchResponse])
-    {
-        searchResults = searchValues
-        loadingScreen.visible = false
-        tableView.reloadData()
-        if(searchValues.count == 0)
-        {
-            noSearchResultsLabel.visible = true
-        }
-        else
-        {
-            noSearchResultsLabel.visible = false
-        }
-    }
-    
     func didLoadFromCCB()
     {
         userInteractionEnabled = true
         tableView = CCTableView()
         tableView.dataSource = self
         tableView.block =
-        { (tableView) in
-            NSLog("Selected cell at index: %i", Int(tableView.selectedRow))
+            { (tableView) in
+                NSLog("Selected cell at index: %i", Int(tableView.selectedRow))
         }
         tableView.contentSize = self.contentSize
         tableView.contentSizeType = self.contentSizeType
@@ -68,7 +45,7 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     {
         var tableViewCell: CCTableViewCell = CCTableViewCell()
         
-        let tableCellNode = CCBReader.load("SearchCellNode", owner: self)
+        let tableCellNode = CCBReader.load("DownloadCellNode", owner: self)
         tableCellNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         tableCellNode.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
         
@@ -76,29 +53,19 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         let colorFactor: Float = (Float(index) / Float(searchResults.count))
         cellColorNode.color = CCColor(red: 0.6*colorFactor+0.1, green: 0.6*colorFactor+0.1, blue: 0.8)
         
-        cellTitleLabel.string = searchResults[Int(index)].title
-        cellCreatorLabel.string = searchResults[Int(index)].createdBy
+//        cellTitleLabel.string = searchResults[Int(index)].title
+//        cellCreatorLabel.string = searchResults[Int(index)].createdBy
         
-        cellPlayButton.name = searchResults[Int(index)].id
-        cellPlayButton.setTarget(self, selector: "buttonPressed:")
+//        cellPlayButton.name = searchResults[Int(index)].id
+        cellPlayButton.setTarget(self, selector: "playButtonPressed:")
         
         tableViewCell.addChild(tableCellNode)
         return tableViewCell
     }
     
-    func buttonPressed(button: CCButton!)
+    func playButtonPressed(button: CCButton!)
     {
-        WebHelper.getQuizletFlashcardData(setNumber: button.name,resolve: dealWithQuizWordsLoaded)
-    }
-    
-    func dealWithQuizWordsLoaded(gameData: GameData) -> Void
-    {
-        let scene = CCScene()
-        let flappyScene = CCBReader.load("GameplayFlappy") as! GameplayFlappy
-        flappyScene.gameData = gameData
-        scene.addChild(flappyScene)
-        let transition = CCTransition(fadeWithDuration: 0.8)
-        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
+        //WebHelper.getQuizletFlashcardData(setNumber: button.name,resolve: dealWithQuizWordsLoaded)
     }
     
     func tableViewNumberOfRows(tableView: CCTableView) -> UInt
@@ -110,19 +77,4 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     {
         return 80.0
     }
-}
-
-struct GameData
-{
-    var quizWords = Dictionary<String, String>()
-    var title: String!
-    var id: String!
-    var createdBy: String!
-}
-
-struct SearchResponse
-{
-    var id: String!
-    var title: String!
-    var createdBy: String!
 }

@@ -162,6 +162,36 @@
 			<key>tabletScale</key>
 			<integer>1</integer>
 		</dict>
+		<key>images/Background1.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>images/GraphPaper.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>1</integer>
+		</dict>
+		<key>images/IMG_2466.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>images/IMG_2467.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>images/IMG_2468.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>images/IMG_2469.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
 	</dict>
 	<key>versionStr</key>
 	<string>revision : eea568a5c7

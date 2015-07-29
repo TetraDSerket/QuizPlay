@@ -12,14 +12,14 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
 {
     enum GameState
     {
-        case Playing, GameOver
+        case Playing, GameOver, Tutorial
     }
     
-    var isWordFirst: Bool = true //if true, the word will be first and the definition afterwards in the Dictionary
+    var isWordFirst: Bool = true//if true, the word will be first and the definition afterwards in the Dictionary
     var numberOfOptions: Int = 4
     
     weak var hero: CCSprite!
-    var gameState: GameState = .Playing
+    var gameState: GameState = .Tutorial
     weak var gamePhysicsNode: CCPhysicsNode!
     weak var ground1: CCSprite!
     weak var ground2: CCSprite!
@@ -28,6 +28,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     weak var GOsetNameLabel: CCLabelTTF!
     weak var GOscoreLabel: CCLabelTTF!
     weak var questionLabel: CCLabelTTF!
+    var popup: FlappyGameOver!
     var sinceTouch: CCTime = 0
     var sinceRightAnswer: Int = 0
     var scrollSpeed: CGFloat = 80
@@ -41,11 +42,11 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
             let length = count(questionLabel.string)
             if(length > 10)
             {
-                questionLabel.fontSize = CGFloat(35)
+                questionLabel.fontSize = CGFloat(30)
             }
             if(length > 20)
             {
-                questionLabel.fontSize = CGFloat(30)
+                questionLabel.fontSize = CGFloat(25)
             }
             if(length > 30)
             {
@@ -55,7 +56,10 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
             {
                 questionLabel.fontSize = CGFloat(15)
             }
-            
+            if(length > 50)
+            {
+                questionLabel.fontSize = CGFloat(12)
+            }
         }
     }
     var answer: String!
@@ -90,8 +94,12 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     {
         super.onEnter()
         
+        popup = CCBReader.load("FlappyGameOver", owner: self) as! FlappyGameOver
+        popup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
+        popup.position = CGPoint(x: 0.5, y: 0.5)
         
         chooseQuestionAndAnswer()
+        gamePhysicsNode.paused = true
 
         spawnNewObstacle()
         spawnNewObstacle()
@@ -101,6 +109,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     func chooseQuestionAndAnswer()
     {
         var tempQuizWords = gameData.quizWords
+        choices = []
         if isWordFirst
         {
             for index in 0..<numberOfOptions
@@ -146,13 +155,19 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
             }
 
         }
+        println("Choices: \(choices)")
+        println("q: \(question) and a: \(answer)")
     }
     
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent)
     {
-        if (gameOver == false)
+        if(gameState == .Tutorial)
         {
-            println("touchBegan")
+            gameState = .Playing
+            gamePhysicsNode.paused = false
+        }
+        if (gameState == .Playing)
+        {
             hero.physicsBody.applyImpulse(ccp(0, 3000))
             hero.physicsBody.applyAngularImpulse(-5000)
             sinceTouch = 0
@@ -161,71 +176,73 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     
     override func update(delta: CCTime)
     {
-        //limits velocity between -infinity and 200
-        let velocityY = clampf(Float(hero.physicsBody.velocity.y), -Float(CGFloat.max), 200)
-        //sets velocity back to the limited velocity
-        hero.physicsBody.velocity = ccp(0,CGFloat(velocityY))
-        
-        //change in time
-        sinceTouch += delta
-        //limit position between 30 degrees up and 90 down
-        hero.rotation = clampf(hero.rotation, -20, 20)
-        if(hero.physicsBody.allowsRotation)
+        if(gameState == .Playing)
         {
-            //limits angular velocity between -2 and 1
-            let angularVelocity = clampf(Float(hero.physicsBody.angularVelocity), -2, 1)
-            //set angular velocity back to angularVelocity
-            hero.physicsBody.angularVelocity = CGFloat(angularVelocity)
-        }
-        if (sinceTouch > 0.3)
-        {
-            //applies the downwards impulse to the bunny after a time
-            let impulse = 25000.0 * delta
-            hero.physicsBody.applyAngularImpulse(CGFloat(impulse))
-        }
-        
-        //moves hero to the right
-        //multiplying by delta ensures that the hero moves at the same speed, no matter the frame rate
-        hero.position = ccp(hero.position.x + scrollSpeed * CGFloat(delta), hero.position.y)
-        //moves physics node (camera) to the left
-        gamePhysicsNode.position = ccp(gamePhysicsNode.position.x - scrollSpeed * CGFloat(delta), gamePhysicsNode.position.y)
-        //rounds the physics node to the nearest int to prevent black line artifact / fixes that one problem
-        let scale = CCDirector.sharedDirector().contentScaleFactor
-        gamePhysicsNode.position = ccp(round(gamePhysicsNode.position.x * scale) / scale, round(gamePhysicsNode.position.y * scale) / scale)
-        hero.position = ccp(round(hero.position.x * scale) / scale, round(hero.position.y * scale) / scale)
-        
-        //loop ground whenever the ground image is moved completely off the stage
-        //go through grounds array
-        for ground in grounds
-        {
-            //get the position of the ground on the world, and then on the screen
-            let groundWorldPosition = gamePhysicsNode.convertToWorldSpace(ground.position)
-            let groundScreenPosition = convertToNodeSpace(groundWorldPosition)
-            //if the x-position of the side of the ground is less than the width of the ground (if its off screen)
-            if groundScreenPosition.x <= (-ground.contentSize.width * CGFloat(ground.scaleX))
-            {
-                //move the ground two ground-widths to the right
-                ground.position = ccp(ground.position.x + ground.contentSize.width * CGFloat(ground.scaleX) * 2 - 10, ground.position.y)
-            }
-        }
-        
-        for obstacle in obstacles
-        {
-            //getting obstacle position on screen
-            let obstacleWorldPosition = gamePhysicsNode.convertToWorldSpace(obstacle.position)
-            let obstacleScreenPosition = convertToNodeSpace(obstacleWorldPosition)
+            //limits velocity between -infinity and 200
+            let velocityY = clampf(Float(hero.physicsBody.velocity.y), -Float(CGFloat.max), 150)
+            //sets velocity back to the limited velocity
+            hero.physicsBody.velocity = ccp(0,CGFloat(velocityY))
             
-            // obstacle moved past left side of screen?
-            if obstacleScreenPosition.x < (-obstacle.contentSize.width)
+            //change in time
+            sinceTouch += delta
+            //limit position between 30 degrees up and 90 down
+            hero.rotation = clampf(hero.rotation, -20, 20)
+            if(hero.physicsBody.allowsRotation)
             {
-                obstacle.removeFromParent()
-                obstacles.removeAtIndex(find(obstacles, obstacle)!)
+                //limits angular velocity between -2 and 1
+                let angularVelocity = clampf(Float(hero.physicsBody.angularVelocity), -2, 1)
+                //set angular velocity back to angularVelocity
+                hero.physicsBody.angularVelocity = CGFloat(angularVelocity)
+            }
+            if (sinceTouch > 0.3)
+            {
+                //applies the downwards impulse to the bunny after a time
+                let impulse = 25000.0 * delta
+                hero.physicsBody.applyAngularImpulse(CGFloat(impulse))
+            }
+            
+            //moves hero to the right
+            //multiplying by delta ensures that the hero moves at the same speed, no matter the frame rate
+            hero.position = ccp(hero.position.x + scrollSpeed * CGFloat(delta), hero.position.y)
+            //moves physics node (camera) to the left
+            gamePhysicsNode.position = ccp(gamePhysicsNode.position.x - scrollSpeed * CGFloat(delta), gamePhysicsNode.position.y)
+            //rounds the physics node to the nearest int to prevent black line artifact / fixes that one problem
+            let scale = CCDirector.sharedDirector().contentScaleFactor
+            gamePhysicsNode.position = ccp(round(gamePhysicsNode.position.x * scale) / scale, round(gamePhysicsNode.position.y * scale) / scale)
+            hero.position = ccp(round(hero.position.x * scale) / scale, round(hero.position.y * scale) / scale)
+            
+            //loop ground whenever the ground image is moved completely off the stage
+            //go through grounds array
+            for ground in grounds
+            {
+                //get the position of the ground on the world, and then on the screen
+                let groundWorldPosition = gamePhysicsNode.convertToWorldSpace(ground.position)
+                let groundScreenPosition = convertToNodeSpace(groundWorldPosition)
+                //if the x-position of the side of the ground is less than the width of the ground (if its off screen)
+                if groundScreenPosition.x <= (-ground.contentSize.width * CGFloat(ground.scaleX))
+                {
+                    //move the ground two ground-widths to the right
+                    ground.position = ccp(ground.position.x + ground.contentSize.width * CGFloat(ground.scaleX) * 2 - 10, ground.position.y)
+                }
+            }
+            
+            for obstacle in obstacles
+            {
+                //getting obstacle position on screen
+                let obstacleWorldPosition = gamePhysicsNode.convertToWorldSpace(obstacle.position)
+                let obstacleScreenPosition = convertToNodeSpace(obstacleWorldPosition)
                 
-                // for each removed obstacle, add a new one
-                spawnNewObstacle()
+                // obstacle moved past left side of screen?
+                if obstacleScreenPosition.x < (-obstacle.contentSize.width)
+                {
+                    obstacle.removeFromParent()
+                    obstacles.removeAtIndex(find(obstacles, obstacle)!)
+                    
+                    // for each removed obstacle, add a new one
+                    spawnNewObstacle()
+                }
             }
         }
-        
     }
     
     func spawnNewObstacle()
@@ -279,10 +296,16 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         }
     }
     
-    //detects collisions between hero and level items, which were defined in SpriteBuilder
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, level: CCNode!) -> Bool
     {
-        triggerGameOver()
+        gamePhysicsNode.space.addPostStepBlock(
+        { () -> Void in
+            println("BOOM CRASH")
+            if(self.gameState == .Playing)
+            {
+                self.triggerGameOver()
+            }
+        }, key: hero)
         return true
     }
     
@@ -299,17 +322,20 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     }
     
     //detects collisions between the hero and an answer carrot
-    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, answerCarrot: CCNode!) -> Bool
+    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, answerBackground: CCNode!) -> Bool
     {
-        let answerLabel = answerCarrot.children[0] as! CCLabelTTF
-        answerCarrot.physicsBody.collisionMask = []
-        if(answerLabel.string == answer)
+        if(gameState == .Playing)
         {
-            handleRightAnswer()
-        }
-        else
-        {
-            handleWrongAnswer()
+            answerBackground.physicsBody.collisionMask = []
+            println(answerBackground.name)
+            if(answerBackground.name == answer)
+            {
+                handleRightAnswer()
+            }
+            else
+            {
+                handleWrongAnswer()
+            }
         }
         return true
     }
@@ -361,34 +387,35 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         CCDirector.sharedDirector().presentScene(mainScene, withTransition: transition)
     }
     
+    func switchQAndAButton()
+    {
+        isWordFirst = !isWordFirst
+    }
+    
     //handles what happens when the game is over
     func triggerGameOver()
     {
         gameState = .GameOver
-        if (gameOver == false)
-        {
-            gameOver = true
-            scrollSpeed = 0
-            hero.rotation = 90
-            hero.physicsBody.allowsRotation = false
-            
-            // just in case
-            hero.stopAllActions()
-            
-            //makes a sequence that shakes the screen up and down (switch to 4,0 for side to side
+        GOscoreLabel.string = "Score: \(points)"
+        GOsetNameLabel.string = "Quiz Played: \(gameData.title)"
+        parent.addChild(popup)
+        println("POPUP")
+    }
+}
+
+
+//        if (gameOver == false)
+//        {
+//            gameOver = true
+//            scrollSpeed = 0
+//            hero.rotation = 90
+//            hero.physicsBody.allowsRotation = false
+//
+//            // just in case
+//            hero.stopAllActions()
+
+//makes a sequence that shakes the screen up and down (switch to 4,0 for side to side
 //            let move = CCActionEaseBounceOut(action: CCActionMoveBy(duration: 0.2, position: ccp(0, 4)))
 //            let moveBack = CCActionEaseBounceOut(action: move.reverse())
 //            let shakeSequence = CCActionSequence(array: [move, moveBack])
 //            runAction(shakeSequence)
-            
-
-            let popup = CCBReader.load("FlappyGameOver", owner: self) as! FlappyGameOver
-            popup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
-            popup.position = CGPoint(x: 0.5, y: 0.5)
-            GOscoreLabel.string = "Score: \(points)"
-            GOsetNameLabel.string = "Quiz Played: \(gameData.title)"
-            parent.addChild(popup)
-            
-        }
-    }
-}
