@@ -5,32 +5,49 @@
 //  Created by Varsha Ramakrishnan on 7/29/15.
 //  Copyright (c) 2015 Apportable. All rights reserved.
 //
+/*
+var highScore: Int = NSUserDefaults.standardUserDefaults().integerForKey("myHighScore") ?? 0
+{
+didSet
+{
+    NSUserDefaults.standardUserDefaults().setInteger(highScore, forKey:"myHighScore")
+    NSUserDefaults.standardUserDefaults().synchronize()
+}
+}
+*/
 
 import UIKit
 
 class ViewDownloadsScene: CCNode, CCTableViewDataSource
 {
     weak var tableNode: CCNode!
-    weak var noSearchResultsLabel: CCLabelTTF!
+    weak var noDownloadsLabel: CCLabelTTF!
     weak var cellColorNode: CCNodeColor!
     weak var cellTitleLabel: CCLabelTTF!
     weak var cellCreatorLabel: CCLabelTTF!
     weak var cellPlayButton: CCButton!
+    weak var cellDeleteButton: CCButton!
     weak var loadingScreen: CCNode!
     var tableView: CCTableView!
-    var searchResults: [SearchResponse] = []
-    var quizWords = Dictionary<String, String>()
+    
+    var downloadsArray: [Dictionary<String, String>]!
     
     weak var stencilNode: CCNode!
     weak var clippingNode: CCClippingNode!
     
     func didLoadFromCCB()
     {
+        downloadsArray = NSUserDefaults.standardUserDefaults().arrayForKey("downloads") as? [Dictionary<String,String>] ?? [Dictionary<String,String>]()
+        if(downloadsArray == [Dictionary<String, String>]())
+        {
+            noDownloadsLabel.visible = true
+        }
+        
         userInteractionEnabled = true
         tableView = CCTableView()
         tableView.dataSource = self
         tableView.block =
-            { (tableView) in
+        { (tableView) in
                 NSLog("Selected cell at index: %i", Int(tableView.selectedRow))
         }
         tableView.contentSize = self.contentSize
@@ -50,13 +67,13 @@ class ViewDownloadsScene: CCNode, CCTableViewDataSource
         tableCellNode.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
         
         //cellColorNode.color = CCColor(red: 0.8 - colorFactor, green: 0.2+0.5*colorFactor, blue: colorFactor)
-        let colorFactor: Float = (Float(index) / Float(searchResults.count))
+        let colorFactor: Float = (Float(index) / Float(downloadsArray.count))
         cellColorNode.color = CCColor(red: 0.6*colorFactor+0.1, green: 0.6*colorFactor+0.1, blue: 0.8)
         
-//        cellTitleLabel.string = searchResults[Int(index)].title
-//        cellCreatorLabel.string = searchResults[Int(index)].createdBy
+        cellTitleLabel.string = downloadsArray[Int(index)]["GDtitleVarsha"]
+        cellCreatorLabel.string = downloadsArray[Int(index)]["GDcreatorVarsha"]
         
-//        cellPlayButton.name = searchResults[Int(index)].id
+        cellPlayButton.name = "\(index)" //?
         cellPlayButton.setTarget(self, selector: "playButtonPressed:")
         
         tableViewCell.addChild(tableCellNode)
@@ -70,7 +87,7 @@ class ViewDownloadsScene: CCNode, CCTableViewDataSource
     
     func tableViewNumberOfRows(tableView: CCTableView) -> UInt
     {
-        return UInt(searchResults.count)
+        return UInt(downloadsArray.count)
     }
     
     func tableView(tableView: CCTableView, heightForRowAtIndex index: UInt) -> Float

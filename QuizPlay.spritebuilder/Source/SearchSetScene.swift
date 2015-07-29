@@ -17,6 +17,7 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     weak var cellTitleLabel: CCLabelTTF!
     weak var cellCreatorLabel: CCLabelTTF!
     weak var cellPlayButton: CCButton!
+    weak var cellDownloadButton: CCButton!
     weak var loadingScreen: CCNode!
     var tableView: CCTableView!
     var searchResults: [SearchResponse] = []
@@ -82,6 +83,9 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         cellPlayButton.name = searchResults[Int(index)].id
         cellPlayButton.setTarget(self, selector: "buttonPressed:")
         
+        cellDownloadButton.name = searchResults[Int(index)].id
+        cellDownloadButton.setTarget(self, selector: "downloadButtonPressed:")
+        
         tableViewCell.addChild(tableCellNode)
         return tableViewCell
     }
@@ -89,6 +93,33 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     func buttonPressed(button: CCButton!)
     {
         WebHelper.getQuizletFlashcardData(setNumber: button.name,resolve: dealWithQuizWordsLoaded)
+    }
+    
+    func downloadButtonPressed(button: CCButton!)
+    {
+        WebHelper.getQuizletFlashcardData(setNumber: button.name,resolve: dealWithDownloadWordsLoaded)
+    }
+    
+    func dealWithDownloadWordsLoaded(gameData: GameData) -> Void
+    {
+        //store Game Data in NSUserdefaults array(downloads) of dictionaries(tempDictionary)
+        var downloadsArray = NSUserDefaults.standardUserDefaults().arrayForKey("downloads") as? [Dictionary<String,String>] ?? [Dictionary<String,String>]()
+        println(downloadsArray)
+        var tempDictionary = gameData.quizWords
+        tempDictionary["GDidVarsha"] = gameData.id
+        tempDictionary["GDtitleVarsha"] = gameData.title
+        tempDictionary["GDcreatorVarsha"] = gameData.createdBy
+        println(tempDictionary)
+        downloadsArray.append(tempDictionary)
+        NSUserDefaults.standardUserDefaults().setObject(downloadsArray, forKey: "downloads")
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
+    
+    func clearDownloads()
+    {
+        var clearArray = [Dictionary<String,String>]()
+        NSUserDefaults.standardUserDefaults().setObject(clearArray, forKey: "downloads")
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     func dealWithQuizWordsLoaded(gameData: GameData) -> Void
@@ -109,6 +140,11 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     func tableView(tableView: CCTableView, heightForRowAtIndex index: UInt) -> Float
     {
         return 80.0
+    }
+    
+    func toMainMenu()
+    {
+        
     }
 }
 

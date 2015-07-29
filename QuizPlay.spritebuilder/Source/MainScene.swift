@@ -40,6 +40,13 @@ class MainScene: CCNode
         CCDirector.sharedDirector().presentScene(searchSetScene, withTransition: transition)
     }
     
+    func viewDownloadsButton()
+    {
+        let viewDownloadsScene = CCBReader.loadAsScene("ViewDownloadsScene")
+        let transition = CCTransition(fadeWithDuration: 0.8)
+        CCDirector.sharedDirector().presentScene(viewDownloadsScene, withTransition: transition)
+    }
+    
     func playPlatformButton()
     {
 //        let platformScene = CCBReader.loadAsScene("GameplayPlatform")
