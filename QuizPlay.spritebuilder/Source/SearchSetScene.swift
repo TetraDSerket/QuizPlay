@@ -16,8 +16,10 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     weak var cellColorNode: CCNodeColor!
     weak var cellTitleLabel: CCLabelTTF!
     weak var cellCreatorLabel: CCLabelTTF!
+    weak var cellFlashcardCountLabel: CCLabelTTF!
     weak var cellPlayButton: CCButton!
     weak var cellDownloadButton: CCButton!
+    weak var searchQuizletLabel: CCLabelTTF!
     weak var loadingScreen: CCNode!
     var tableView: CCTableView!
     var searchResults: [SearchResponse] = []
@@ -28,6 +30,7 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     
     func searchQuizlet()
     {
+        searchQuizletLabel.visible = false
         loadingScreen.visible = true
         let searchString = searchTextField.string
         WebHelper.getQuizletSearchValues(searchValue: searchString, resolve: dealWithSearchResponseResults)
@@ -50,6 +53,10 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     
     func didLoadFromCCB()
     {
+        if(searchResults.isEmpty)
+        {
+            searchQuizletLabel.visible = true
+        }
         userInteractionEnabled = true
         tableView = CCTableView()
         tableView.dataSource = self
@@ -75,10 +82,12 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         
         //cellColorNode.color = CCColor(red: 0.8 - colorFactor, green: 0.2+0.5*colorFactor, blue: colorFactor)
         let colorFactor: Float = (Float(index) / Float(searchResults.count))
-        cellColorNode.color = CCColor(red: 0.6*colorFactor+0.1, green: 0.6*colorFactor+0.1, blue: 0.8)
+        cellColorNode.color = CCColor(red: 0.6*colorFactor+0.1, green: 0.6*colorFactor+0.1, blue: 0.7)
         
         cellTitleLabel.string = searchResults[Int(index)].title
+        //cellTitleLabel.fontSize = MiscMethods.getCorrectFontSizeToMatchLabel(cellTitleLabel, maxFontSize: 25)
         cellCreatorLabel.string = searchResults[Int(index)].createdBy
+        cellFlashcardCountLabel.string = searchResults[Int(index)].termCount
         
         cellPlayButton.name = searchResults[Int(index)].id
         cellPlayButton.setTarget(self, selector: "buttonPressed:")
@@ -139,12 +148,12 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     
     func tableView(tableView: CCTableView, heightForRowAtIndex index: UInt) -> Float
     {
-        return 80.0
+        return 70.0
     }
-    
-    func toMainMenu()
+     
+    func toViewDownloadsScene()
     {
-        
+        MiscMethods.toViewDownloadsScene()
     }
 }
 
@@ -161,4 +170,5 @@ struct SearchResponse
     var id: String!
     var title: String!
     var createdBy: String!
+    var termCount: String!
 }

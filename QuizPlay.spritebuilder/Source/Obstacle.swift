@@ -21,7 +21,7 @@ class Obstacle : CCNode
 //    let topCarrotMinimumPositionY : CGFloat = 80
 //    let bottomCarrotMaximumPositionY : CGFloat = 350
 //    let carrotDistance : CGFloat = 130
-    let range: CGFloat = 200
+    let range: CGFloat = 150
     let startingPoint: CGFloat = -80
     let randomPrecision : UInt32 = 100
     
@@ -43,16 +43,7 @@ class Obstacle : CCNode
     {
         answerLabel.string = answerString
         labelBackground.name = answerString
-//        let length = count(answerLabel.string)
-//        if(length > 13)
-//        {
-//            answerLabel.fontSize = CGFloat(12)
-//            answerLabel.adjustsFontSizeToFit = false
-//        }
-//        if(length > 16)
-//        {
-//            answerLabel.fontSize = CGFloat(9)
-//        }
+        answerLabel.fontSize = MiscMethods.getCorrectFontSizeToMatchLabel(answerLabel, maxFontSize: 30)
     }
 }
 

@@ -48,6 +48,8 @@ class QuizletResponseModel: NSObject
                 temp.id = "\(tempInt)"
                 temp.title = json["sets"][index]["title"].string
                 temp.createdBy = json["sets"][index]["created_by"].string
+                var tempTermCount = json["sets"][index]["term_count"].intValue
+                temp.termCount = "\(tempTermCount)"
                 searchValues.append(temp)
             }
         }

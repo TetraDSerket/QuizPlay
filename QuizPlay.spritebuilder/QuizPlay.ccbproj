@@ -192,6 +192,11 @@
 			<key>scaleFrom</key>
 			<integer>4</integer>
 		</dict>
+		<key>images/RoundedRectangle.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>versionStr</key>
 	<string>revision : eea568a5c7

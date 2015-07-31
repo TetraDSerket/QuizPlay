@@ -35,16 +35,12 @@ class MainScene: CCNode
     
     func searchQuizletButton()
     {
-        let searchSetScene = CCBReader.loadAsScene("SearchSetScene")
-        let transition = CCTransition(fadeWithDuration: 0.8)
-        CCDirector.sharedDirector().presentScene(searchSetScene, withTransition: transition)
+        MiscMethods.toSearchSetScene()
     }
     
     func viewDownloadsButton()
     {
-        let viewDownloadsScene = CCBReader.loadAsScene("ViewDownloadsScene")
-        let transition = CCTransition(fadeWithDuration: 0.8)
-        CCDirector.sharedDirector().presentScene(viewDownloadsScene, withTransition: transition)
+        MiscMethods.toViewDownloadsScene()
     }
     
     func playPlatformButton()

@@ -73,8 +73,11 @@ class ViewDownloadsScene: CCNode, CCTableViewDataSource
         cellTitleLabel.string = downloadsArray[Int(index)]["GDtitleVarsha"]
         cellCreatorLabel.string = downloadsArray[Int(index)]["GDcreatorVarsha"]
         
-        cellPlayButton.name = "\(index)" //?
+        cellPlayButton.name = "\(index)"
         cellPlayButton.setTarget(self, selector: "playButtonPressed:")
+        
+        cellDeleteButton.name = "\(index)"
+        cellDeleteButton.setTarget(self, selector: "deleteButtonPressed:")
         
         tableViewCell.addChild(tableCellNode)
         return tableViewCell
@@ -82,7 +85,32 @@ class ViewDownloadsScene: CCNode, CCTableViewDataSource
     
     func playButtonPressed(button: CCButton!)
     {
-        //WebHelper.getQuizletFlashcardData(setNumber: button.name,resolve: dealWithQuizWordsLoaded)
+        var quizWordsAndGameInfo = downloadsArray[button.name.toInt()!]
+        var gameData: GameData = GameData()
+        gameData.title = quizWordsAndGameInfo.removeValueForKey("GDtitleVarsha")
+        gameData.id = quizWordsAndGameInfo.removeValueForKey("GDidVarsha")
+        gameData.createdBy = quizWordsAndGameInfo.removeValueForKey("GDcreatorVarsha")
+        gameData.quizWords = quizWordsAndGameInfo
+        
+        let scene = CCScene()
+        let flappyScene = CCBReader.load("GameplayFlappy") as! GameplayFlappy
+        flappyScene.gameData = gameData
+        scene.addChild(flappyScene)
+        let transition = CCTransition(fadeWithDuration: 0.8)
+        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
+    }
+    
+    func deleteButtonPressed(button: CCButton!)
+    {
+        downloadsArray.removeAtIndex(button.name.toInt()!)
+        NSUserDefaults.standardUserDefaults().setObject(downloadsArray, forKey: "downloads")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        tableView.reloadData()
+    }
+    
+    func toSearchSetScene()
+    {
+        MiscMethods.toSearchSetScene()
     }
     
     func tableViewNumberOfRows(tableView: CCTableView) -> UInt

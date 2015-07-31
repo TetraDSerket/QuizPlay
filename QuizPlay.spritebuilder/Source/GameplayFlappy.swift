@@ -28,6 +28,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     weak var GOsetNameLabel: CCLabelTTF!
     weak var GOscoreLabel: CCLabelTTF!
     weak var questionLabel: CCLabelTTF!
+    weak var tutorialLabel: CCLabelTTF!
     var popup: FlappyGameOver!
     var sinceTouch: CCTime = 0
     var sinceRightAnswer: Int = 0
@@ -39,27 +40,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         didSet
         {
             questionLabel.string = question
-            let length = count(questionLabel.string)
-            if(length > 10)
-            {
-                questionLabel.fontSize = CGFloat(30)
-            }
-            if(length > 20)
-            {
-                questionLabel.fontSize = CGFloat(25)
-            }
-            if(length > 30)
-            {
-                questionLabel.fontSize = CGFloat(20)
-            }
-            if(length > 40)
-            {
-                questionLabel.fontSize = CGFloat(15)
-            }
-            if(length > 50)
-            {
-                questionLabel.fontSize = CGFloat(12)
-            }
+            questionLabel.fontSize = MiscMethods.getCorrectFontSizeToMatchLabel(questionLabel, maxFontSize: 50)
         }
     }
     var answer: String!
@@ -164,6 +145,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         if(gameState == .Tutorial)
         {
             gameState = .Playing
+            self.animationManager.runAnimationsForSequenceNamed("tutorialFade")
             gamePhysicsNode.paused = false
         }
         if (gameState == .Playing)
@@ -321,16 +303,20 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         return true
     }
     
-    //detects collisions between the hero and an answer carrot
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, answerBackground: CCNode!) -> Bool
     {
         if(gameState == .Playing)
         {
-            answerBackground.physicsBody.collisionMask = []
-            println(answerBackground.name)
+            answerBackground.physicsBody = nil
+            //println(answerBackground.name)
             if(answerBackground.name == answer)
             {
-                handleRightAnswer()
+                scheduleBlock(
+                { (timer) -> Void in
+                    answerBackground.animationManager.runAnimationsForSequenceNamed("popAnswer")
+                    self.handleRightAnswer()
+                }, delay: 0.01)
+                
             }
             else
             {
@@ -370,21 +356,14 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
-    func downloadedSetsButton()
+    func toViewDownloadsButton()
     {
-        println("TO THE DOWNLEEDS")
+        MiscMethods.toViewDownloadsScene()
     }
     
-    func searchSetsButton()
+    func toSearchSetsButton()
     {
-        println("TO THE SEARCH SEETS")
-    }
-    
-    func mainMenuButton()
-    {
-        let mainScene = CCBReader.loadAsScene("MainScene")
-        let transition = CCTransition(fadeWithDuration: 0.8)
-        CCDirector.sharedDirector().presentScene(mainScene, withTransition: transition)
+        MiscMethods.toSearchSetScene()
     }
     
     func switchQAndAButton()
