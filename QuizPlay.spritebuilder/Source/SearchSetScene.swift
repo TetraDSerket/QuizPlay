@@ -90,7 +90,7 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         cellFlashcardCountLabel.string = searchResults[Int(index)].termCount
         
         cellPlayButton.name = searchResults[Int(index)].id
-        cellPlayButton.setTarget(self, selector: "buttonPressed:")
+        cellPlayButton.setTarget(self, selector: "playButtonPressed:")
         
         cellDownloadButton.name = searchResults[Int(index)].id
         cellDownloadButton.setTarget(self, selector: "downloadButtonPressed:")
@@ -99,8 +99,9 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         return tableViewCell
     }
     
-    func buttonPressed(button: CCButton!)
+    func playButtonPressed(button: CCButton!)
     {
+        loadingScreen.visible = true
         WebHelper.getQuizletFlashcardData(setNumber: button.name,resolve: dealWithQuizWordsLoaded)
     }
     
@@ -133,6 +134,7 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     
     func dealWithQuizWordsLoaded(gameData: GameData) -> Void
     {
+        loadingScreen.visible = false
         let scene = CCScene()
         let flappyScene = CCBReader.load("GameplayFlappy") as! GameplayFlappy
         flappyScene.gameData = gameData

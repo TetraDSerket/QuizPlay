@@ -41,7 +41,7 @@ class QuizletResponseModel: NSObject
         
         for index in 0..<json["sets"].count
         {
-            if(json["sets"][index]["has_images"].boolValue == false)
+            if(json["sets"][index]["has_images"].boolValue == false && json["sets"][index]["visibility"].string == "public")
             {
                 var temp: SearchResponse = SearchResponse()
                 var tempInt = json["sets"][index]["id"].intValue

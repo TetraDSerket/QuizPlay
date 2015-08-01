@@ -49,7 +49,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     var grounds = [CCSprite]() //array for the ground sprites
     var obstacles : [CCNode] = [] //array of obstacles
     let firstObstaclePosition : CGFloat = 280
-    let distanceBetweenObstacles : CGFloat = 160
+    let distanceBetweenObstacles : CGFloat = 180
     var gameOver = false
     var points: NSInteger = 0
     {
@@ -89,7 +89,14 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     
     func chooseQuestionAndAnswer()
     {
+        if(gameData.quizWords.count == 1)
+        {
+            var newWord = "Please choose another set"
+            var newDef = "You can't play this game with a set that only has one flashcard"
+            gameData.quizWords[newWord] = newDef
+        }
         var tempQuizWords = gameData.quizWords
+        println(tempQuizWords)
         choices = []
         if isWordFirst
         {
@@ -145,7 +152,8 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         if(gameState == .Tutorial)
         {
             gameState = .Playing
-            self.animationManager.runAnimationsForSequenceNamed("tutorialFade")
+            //self.animationManager.runAnimationsForSequenceNamed("tutorialFade")
+            //tutorialLabel.removeFromParent()
             gamePhysicsNode.paused = false
         }
         if (gameState == .Playing)
@@ -215,7 +223,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
                 let obstacleScreenPosition = convertToNodeSpace(obstacleWorldPosition)
                 
                 // obstacle moved past left side of screen?
-                if obstacleScreenPosition.x < (-obstacle.contentSize.width)
+                if obstacleScreenPosition.x < (-obstacle.contentSize.width)*2
                 {
                     obstacle.removeFromParent()
                     obstacles.removeAtIndex(find(obstacles, obstacle)!)
@@ -320,6 +328,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
             }
             else
             {
+                answerBackground.animationManager.runAnimationsForSequenceNamed("wrongAnswer")
                 handleWrongAnswer()
             }
         }
