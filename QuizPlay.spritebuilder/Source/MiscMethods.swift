@@ -13,7 +13,7 @@ class MiscMethods: CCNode
     static func getCorrectFontSizeToMatchLabel(label: CCLabelTTF, maxFontSize: Int) -> CGFloat
     {
         var fontSize = maxFontSize
-        for fontSize; fontSize > 10; fontSize = fontSize-2
+        for fontSize; fontSize > 2; fontSize = fontSize-2
         {
             var string = NSString(string: label.string)
             var font = UIFont(name: label.fontName, size: CGFloat(fontSize))
@@ -26,6 +26,20 @@ class MiscMethods: CCNode
         }
         return CGFloat(fontSize)
     }
+    
+//    static func getCorrectFontSizeToMatchLabel(label: CCLabelTTF, maxFontSize: Int) -> CGFloat
+//    {
+//        var fontSize = maxFontSize
+//        for fontSize; fontSize > 2; fontSize = fontSize-2
+//        {
+//            label.fontSize = CGFloat(fontSize)
+//            if(label.texture.contentSize().height < label.dimensions.height)
+//            {
+//                return CGFloat(fontSize)
+//            }
+//        }
+//        return CGFloat(fontSize)
+//    }
     
     static func toMainMenu()
     {

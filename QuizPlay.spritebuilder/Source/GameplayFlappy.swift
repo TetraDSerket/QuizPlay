@@ -12,7 +12,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
 {
     enum GameState
     {
-        case Playing, GameOver, Tutorial
+        case Playing, GameOver, Tutorial, Paused
     }
     
     var isWordFirst: Bool = true//if true, the word will be first and the definition afterwards in the Dictionary
@@ -28,8 +28,10 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     weak var GOsetNameLabel: CCLabelTTF!
     weak var GOscoreLabel: CCLabelTTF!
     weak var questionLabel: CCLabelTTF!
-    weak var tutorialLabel: CCLabelTTF!
+    weak var tutorialScreen: CCNode!
+    weak var pauseScreen: CCNode!
     var popup: FlappyGameOver!
+    var pausePopup: CCNode!
     var sinceTouch: CCTime = 0
     var sinceRightAnswer: Int = 0
     var scrollSpeed: CGFloat = 80
@@ -79,9 +81,14 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         popup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
         popup.position = CGPoint(x: 0.5, y: 0.5)
         
+        pausePopup = CCBReader.load("PauseScreen", owner: self)
+        pausePopup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
+        pausePopup.position = CGPoint(x: 0.5, y: 0.5)
+        
         chooseQuestionAndAnswer()
         gamePhysicsNode.paused = true
 
+        spawnNewObstacle()
         spawnNewObstacle()
         spawnNewObstacle()
         spawnNewObstacle()
@@ -152,12 +159,11 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         if(gameState == .Tutorial)
         {
             gameState = .Playing
-            //self.animationManager.runAnimationsForSequenceNamed("tutorialFade")
-            //tutorialLabel.removeFromParent()
             gamePhysicsNode.paused = false
         }
         if (gameState == .Playing)
         {
+            tutorialScreen.visible = false
             hero.physicsBody.applyImpulse(ccp(0, 3000))
             hero.physicsBody.applyAngularImpulse(-5000)
             sinceTouch = 0
@@ -168,6 +174,8 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     {
         if(gameState == .Playing)
         {
+            scrollSpeed = CGFloat(points/2+80)
+            
             //limits velocity between -infinity and 200
             let velocityY = clampf(Float(hero.physicsBody.velocity.y), -Float(CGFloat.max), 150)
             //sets velocity back to the limited velocity
@@ -184,9 +192,9 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
                 //set angular velocity back to angularVelocity
                 hero.physicsBody.angularVelocity = CGFloat(angularVelocity)
             }
-            if (sinceTouch > 0.3)
+            if (sinceTouch > 0.25)
             {
-                //applies the downwards impulse to the bunny after a time
+                //applies the upward impulse to the spaceship after a time
                 let impulse = 25000.0 * delta
                 hero.physicsBody.applyAngularImpulse(CGFloat(impulse))
             }
@@ -375,9 +383,31 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         MiscMethods.toSearchSetScene()
     }
     
+    func pauseGame()
+    {
+        gameState = .Paused
+        gamePhysicsNode.paused = true
+        parent.addChild(pausePopup)
+        println("POPUP")
+    }
+    
+    func resumeGame()
+    {
+        parent.removeChild(pausePopup)
+        gameState = .Playing
+        gamePhysicsNode.paused = false
+        println("RESUME")
+    }
+    
     func switchQAndAButton()
     {
         isWordFirst = !isWordFirst
+        //chooseQuestionAndAnswer()
+    }
+    
+    func quitGame()
+    {
+        MiscMethods.toSearchSetScene()
     }
     
     //handles what happens when the game is over
