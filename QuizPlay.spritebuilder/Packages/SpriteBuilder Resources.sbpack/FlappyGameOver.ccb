@@ -1245,7 +1245,7 @@
 										<string>Block</string>
 										<key>value</key>
 										<array>
-											<string>retryButton</string>
+											<string>toStatScreenButton</string>
 											<integer>2</integer>
 										</array>
 									</dict>
@@ -1508,6 +1508,8 @@
 										</array>
 									</dict>
 								</array>
+								<key>selected</key>
+								<true/>
 							</dict>
 							<dict>
 								<key>UUID</key>
@@ -2207,8 +2209,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>

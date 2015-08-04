@@ -20,6 +20,7 @@
 		28615B101B587E6000E37B45 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */; };
 		286ABEE51B69409C0097CE58 /* ViewDownloadsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286ABEE41B69409C0097CE58 /* ViewDownloadsScene.swift */; };
 		28A4FF391B5EB0300024B821 /* SearchSetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A4FF381B5EB0300024B821 /* SearchSetScene.swift */; };
+		28DDACB71B713A1F006E6687 /* StatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DDACB61B713A1F006E6687 /* StatScreen.swift */; };
 		28DE0C351B6A96A200E418BA /* MiscMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE0C341B6A96A200E418BA /* MiscMethods.swift */; };
 		5B121030197484FA004C1E1D /* QuizPlayActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* QuizPlayActivity.m */; };
 		5B121038197487F2004C1E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
@@ -225,6 +226,7 @@
 		28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		286ABEE41B69409C0097CE58 /* ViewDownloadsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewDownloadsScene.swift; path = Source/ViewDownloadsScene.swift; sourceTree = "<group>"; };
 		28A4FF381B5EB0300024B821 /* SearchSetScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchSetScene.swift; path = Source/SearchSetScene.swift; sourceTree = "<group>"; };
+		28DDACB61B713A1F006E6687 /* StatScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatScreen.swift; path = Source/StatScreen.swift; sourceTree = "<group>"; };
 		28DE0C341B6A96A200E418BA /* MiscMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MiscMethods.swift; path = Source/MiscMethods.swift; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
 		5B12100F197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 				2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */,
 				28DE0C341B6A96A200E418BA /* MiscMethods.swift */,
 				286ABEE41B69409C0097CE58 /* ViewDownloadsScene.swift */,
+				28DDACB61B713A1F006E6687 /* StatScreen.swift */,
 				28076DBF1B61B03300B65802 /* FlappyGameOver.swift */,
 				28615B0B1B585B2000E37B45 /* WebHelper.swift */,
 				28615B0D1B585DCD00E37B45 /* QuizletResponseModel.swift */,
@@ -1019,6 +1022,7 @@
 				28615B101B587E6000E37B45 /* SwiftyJSON.swift in Sources */,
 				28615B0C1B585B2000E37B45 /* WebHelper.swift in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
+				28DDACB71B713A1F006E6687 /* StatScreen.swift in Sources */,
 				286ABEE51B69409C0097CE58 /* ViewDownloadsScene.swift in Sources */,
 				2819B4441B55777F00C358E9 /* GameplaySling.swift in Sources */,
 				28A4FF391B5EB0300024B821 /* SearchSetScene.swift in Sources */,

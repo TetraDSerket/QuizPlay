@@ -30,6 +30,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     weak var questionLabel: CCLabelTTF!
     weak var tutorialScreen: CCNode!
     weak var pauseScreen: CCNode!
+    var statArray = Dictionary<String,WordStat>()
     var popup: FlappyGameOver!
     var pausePopup: CCNode!
     var sinceTouch: CCTime = 0
@@ -174,7 +175,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     {
         if(gameState == .Playing)
         {
-            scrollSpeed = CGFloat(points/2+80)
+            scrollSpeed = CGFloat(points/2+100)
             
             //limits velocity between -infinity and 200
             let velocityY = clampf(Float(hero.physicsBody.velocity.y), -Float(CGFloat.max), 150)
@@ -327,15 +328,21 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
             //println(answerBackground.name)
             if(answerBackground.name == answer)
             {
-                scheduleBlock(
-                { (timer) -> Void in
-                    answerBackground.animationManager.runAnimationsForSequenceNamed("popAnswer")
-                    self.handleRightAnswer()
-                }, delay: 0.01)
+//                scheduleBlock(
+//                { (timer) -> Void in
+                var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: question, correctResponses: 0, wrongResponses: 0)
+                wordThing.correctResponses = wordThing.correctResponses + 1
+                statArray[answerBackground.name] = wordThing
+                answerBackground.animationManager.runAnimationsForSequenceNamed("popAnswer")
+                handleRightAnswer()
+//                }, delay: 0.01)
                 
             }
             else
             {
+                var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: gameData.quizWords[answerBackground.name]!, correctResponses: 0, wrongResponses: 0)
+                wordThing.wrongResponses = wordThing.wrongResponses + 1
+                statArray[answerBackground.name] = wordThing
                 answerBackground.animationManager.runAnimationsForSequenceNamed("wrongAnswer")
                 handleWrongAnswer()
             }
@@ -381,6 +388,16 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     func toSearchSetsButton()
     {
         MiscMethods.toSearchSetScene()
+    }
+    
+    func toStatScreenButton()
+    {
+        let scene = CCScene()
+        let statScene = CCBReader.load("StatScreen") as! StatScreen
+        statScene.statsArray = statArray.values.array
+        scene.addChild(statScene)
+        let transition = CCTransition(fadeWithDuration: 0.8)
+        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
     func pauseGame()

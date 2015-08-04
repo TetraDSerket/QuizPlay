@@ -10,11 +10,11 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>26</integer>
+	<integer>27</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>currentSequenceId</key>
 	<integer>0</integer>
 	<key>docDimensionsType</key>
@@ -72,7 +72,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.5</real>
+							<real>1</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -86,7 +86,7 @@
 						<key>value</key>
 						<array>
 							<real>1</real>
-							<real>1</real>
+							<real>0.40000000596046448</real>
 							<integer>2</integer>
 							<integer>2</integer>
 						</array>
@@ -99,7 +99,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.5</real>
+							<real>1</real>
 						</array>
 					</dict>
 					<dict>
@@ -122,9 +122,132 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.027085965499281883</real>
-							<real>0.0064285341650247574</real>
-							<real>0.090779811143875122</real>
+							<real>0.0</real>
+							<real>0.0</real>
+							<real>0.0</real>
+							<real>0.0</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>startOpacity</string>
+						<key>type</key>
+						<string>Float</string>
+						<key>value</key>
+						<real>0.0</real>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>endColor</string>
+						<key>type</key>
+						<string>Color3</string>
+						<key>value</key>
+						<array>
+							<real>0.080796055495738983</real>
+							<real>0.0</real>
+							<real>0.5</real>
+							<real>1</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>vector</string>
+						<key>type</key>
+						<string>Point</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>-1</real>
+						</array>
+					</dict>
+				</array>
+			</dict>
+			<dict>
+				<key>UUID</key>
+				<integer>26</integer>
+				<key>baseClass</key>
+				<string>CCNodeGradient</string>
+				<key>children</key>
+				<array/>
+				<key>customClass</key>
+				<string></string>
+				<key>displayName</key>
+				<string>CCNodeGradient</string>
+				<key>memberVarAssignmentName</key>
+				<string></string>
+				<key>memberVarAssignmentType</key>
+				<integer>1</integer>
+				<key>properties</key>
+				<array>
+					<dict>
+						<key>name</key>
+						<string>name</string>
+						<key>type</key>
+						<string>StringSimple</string>
+						<key>value</key>
+						<string></string>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>position</string>
+						<key>type</key>
+						<string>Position</string>
+						<key>value</key>
+						<array>
+							<real>0.5</real>
+							<real>0.0</real>
+							<integer>0</integer>
+							<integer>2</integer>
+							<integer>2</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>contentSize</string>
+						<key>type</key>
+						<string>Size</string>
+						<key>value</key>
+						<array>
+							<real>1</real>
+							<real>0.40000000596046448</real>
+							<integer>2</integer>
+							<integer>2</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>anchorPoint</string>
+						<key>type</key>
+						<string>Point</string>
+						<key>value</key>
+						<array>
+							<real>0.5</real>
+							<real>0.0</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>scale</string>
+						<key>type</key>
+						<string>ScaleLock</string>
+						<key>value</key>
+						<array>
+							<real>1</real>
+							<real>1</real>
+							<false/>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>startColor</string>
+						<key>type</key>
+						<string>Color3</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>0.020433221012353897</real>
+							<real>0.52226740121841431</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -135,11 +258,19 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.05928797647356987</real>
-							<real>0.20423971116542816</real>
-							<real>0.63909488916397095</real>
-							<real>1</real>
+							<real>0.0</real>
+							<real>0.0</real>
+							<real>0.0</real>
+							<real>0.0</real>
 						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>endOpacity</string>
+						<key>type</key>
+						<string>Float</string>
+						<key>value</key>
+						<real>0.0</real>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -187,7 +318,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>95</real>
+							<real>70.05230712890625</real>
 							<integer>1</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -201,7 +332,7 @@
 						<key>value</key>
 						<array>
 							<real>1</real>
-							<real>0.75</real>
+							<real>0.74000000953674316</real>
 							<integer>2</integer>
 							<integer>2</integer>
 						</array>
@@ -252,8 +383,6 @@
 						<real>0.0</real>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -295,7 +424,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>140</real>
+									<real>100</real>
 									<integer>1</integer>
 									<integer>2</integer>
 									<integer>0</integer>
@@ -309,7 +438,7 @@
 								<key>value</key>
 								<array>
 									<real>1</real>
-									<real>0.75</real>
+									<real>0.80000001192092896</real>
 									<integer>2</integer>
 									<integer>2</integer>
 								</array>
@@ -422,9 +551,9 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>noDownloadsLabel</string>
+				<string>noStatsLabel</string>
 				<key>memberVarAssignmentName</key>
-				<string>noDownloadsLabel</string>
+				<string>noStatsLabel</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -453,7 +582,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>139.01870727539062</real>
+							<real>86.84466552734375</real>
 							<integer>1</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -490,9 +619,7 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>You haven't dowloaded any flashcards yet! 
-
-Go to the Search Menu to get started :)</string>
+							<string>You didn't hit any words! Play again to collect data.</string>
 							<false/>
 						</array>
 					</dict>
@@ -550,7 +677,7 @@ Go to the Search Menu to get started :)</string>
 						<key>type</key>
 						<string>IntegerLabeled</string>
 						<key>value</key>
-						<integer>0</integer>
+						<integer>1</integer>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -628,6 +755,8 @@ Go to the Search Menu to get started :)</string>
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -662,10 +791,10 @@ Go to the Search Menu to get started :)</string>
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.10000000149011612</real>
+							<real>35.839996337890625</real>
 							<integer>1</integer>
 							<integer>2</integer>
-							<integer>2</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -699,8 +828,7 @@ Go to the Search Menu to get started :)</string>
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>Downloaded 
-Flashcards</string>
+							<string>Stats</string>
 							<false/>
 						</array>
 					</dict>
@@ -876,7 +1004,7 @@ Flashcards</string>
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>96</real>
+									<real>41.75</real>
 									<real>22.5</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -914,7 +1042,7 @@ Flashcards</string>
 								<string>Block</string>
 								<key>value</key>
 								<array>
-									<string>toSearchSetScene</string>
+									<string>replayGame</string>
 									<integer>1</integer>
 								</array>
 							</dict>
@@ -959,7 +1087,7 @@ Flashcards</string>
 								<string>String</string>
 								<key>value</key>
 								<array>
-									<string>Search Flashcards</string>
+									<string>Replay</string>
 									<false/>
 								</array>
 							</dict>
@@ -1231,7 +1359,7 @@ Flashcards</string>
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>20</real>
+							<real>10</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -1284,7 +1412,7 @@ Flashcards</string>
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string>ViewDownloadsScene</string>
+		<string>StatScreen</string>
 		<key>displayName</key>
 		<string>CCNode</string>
 		<key>memberVarAssignmentName</key>
