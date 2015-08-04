@@ -61,4 +61,14 @@ class MiscMethods: CCNode
         let transition = CCTransition(fadeWithDuration: 0.8)
         CCDirector.sharedDirector().presentScene(viewDownloadsScene, withTransition: transition)
     }
+    
+    static func toGameplayScene(gameData: GameData)
+    {
+        let scene = CCScene()
+        let flappyScene = CCBReader.load("GameplayFlappy") as! GameplayFlappy
+        flappyScene.gameData = gameData
+        scene.addChild(flappyScene)
+        let transition = CCTransition(fadeWithDuration: 0.8)
+        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
+    }
 }

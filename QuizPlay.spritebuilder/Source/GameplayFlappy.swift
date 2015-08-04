@@ -395,6 +395,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         let scene = CCScene()
         let statScene = CCBReader.load("StatScreen") as! StatScreen
         statScene.statsArray = statArray.values.array
+        statScene.gameData = gameData
         scene.addChild(statScene)
         let transition = CCTransition(fadeWithDuration: 0.8)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)

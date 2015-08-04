@@ -381,7 +381,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>images/DownloadButtonLight.png</string>
+							<string>images/BlankButtonLight.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -461,7 +461,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>22</real>
+							<real>30</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -488,7 +488,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>10</real>
+							<real>0.0</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -510,9 +510,9 @@
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>0.2263636589050293</real>
-							<real>0.29971557855606079</real>
+							<real>0.0</real>
+							<real>0.0</real>
+							<real>0.0</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -536,7 +536,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
+							<real>0.0</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -547,10 +547,10 @@
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>127</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
 						</array>
 					</dict>
 					<dict>
@@ -560,7 +560,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
+							<real>2</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -572,7 +572,7 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>-2</real>
+							<real>0.0</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1200,8 +1200,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

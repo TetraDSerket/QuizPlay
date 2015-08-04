@@ -34,6 +34,7 @@ class StatScreen: CCNode, CCTableViewDataSource
     
     //keys are the words, each is connected to a wordstat object that tells about it
     var statsArray: [WordStat]!
+    var gameData: GameData!
     
     weak var stencilNode: CCNode!
     weak var clippingNode: CCClippingNode!
@@ -61,7 +62,7 @@ class StatScreen: CCNode, CCTableViewDataSource
         defPopup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
         defPopup.position = CGPoint(x: 0.5, y: 0.5)
         defPopup.visible = false
-        //self.addChild(defPopup)
+        self.addChild(defPopup)
         
         clippingNode.stencil = stencilNode
         clippingNode.alphaThreshold = 0.0
@@ -105,9 +106,9 @@ class StatScreen: CCNode, CCTableViewDataSource
         defPopup.visible = false
     }
     
-    func toSearchSetScene()
+    func replayGame()
     {
-        MiscMethods.toSearchSetScene()
+        MiscMethods.toGameplayScene(gameData)
     }
     
     func tableViewNumberOfRows(tableView: CCTableView) -> UInt

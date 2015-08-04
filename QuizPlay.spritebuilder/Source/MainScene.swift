@@ -25,12 +25,7 @@ class MainScene: CCNode
     
     func playButton()
     {
-        let scene = CCScene()
-        let flappyScene = CCBReader.load("GameplayFlappy") as! GameplayFlappy
-        flappyScene.gameData = gameData
-        scene.addChild(flappyScene)
-        let transition = CCTransition(fadeWithDuration: 0.8)
-        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
+        MiscMethods.toGameplayScene(gameData)
     }
     
     func searchQuizletButton()
