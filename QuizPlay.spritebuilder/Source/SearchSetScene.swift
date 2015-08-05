@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Mixpanel
 
 class SearchSetScene: CCNode, CCTableViewDataSource
 {
@@ -24,6 +25,7 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     var tableView: CCTableView!
     var searchResults: [SearchResponse] = []
     var quizWords = Dictionary<String, String>()
+    var mixpanel = Mixpanel.sharedInstance()
     
     weak var stencilNode: CCNode!
     weak var clippingNode: CCClippingNode!
@@ -33,11 +35,13 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         searchQuizletLabel.visible = false
         loadingScreen.visible = true
         let searchString = searchTextField.string
+        mixpanel.track("Search", properties: ["SearchValue" : searchString])
         WebHelper.getQuizletSearchValues(searchValue: searchString, resolve: dealWithSearchResponseResults)
     }
     
-    func dealWithSearchResponseResults(searchValues: [SearchResponse])
+    func dealWithSearchResponseResults(searchString: String, searchValues: [SearchResponse])
     {
+        mixpanel.track("Search Completed", properties: ["SearchValue" : searchString])
         searchResults = searchValues
         loadingScreen.visible = false
         tableView.reloadData()
@@ -80,9 +84,6 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         tableCellNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         tableCellNode.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
         
-        //cellColorNode.color = CCColor(red: 0.8 - colorFactor, green: 0.2+0.5*colorFactor, blue: colorFactor)
-//        let colorFactor: Float = (Float(index) / Float(searchResults.count))
-//        cellColorNode.color = CCColor(red: 0.6*colorFactor+0.1, green: 0.6*colorFactor+0.1, blue: 0.7)
         let thisOrThat = Float(index%2) / 10
         println(thisOrThat)
         cellColorNode.color = CCColor(red: thisOrThat, green: thisOrThat, blue: thisOrThat+0.15)
@@ -105,17 +106,20 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     func playButtonPressed(button: CCButton!)
     {
         loadingScreen.visible = true
+        mixpanel.track("To Another Scene", properties: ["To Scene": "Gameplay", "From Scene": "Search"])
         WebHelper.getQuizletFlashcardData(setNumber: button.name,resolve: dealWithQuizWordsLoaded)
     }
     
     func downloadButtonPressed(button: CCButton!)
     {
+        mixpanel.track("Download", properties: ["SetNumber" : button.name])
         WebHelper.getQuizletFlashcardData(setNumber: button.name,resolve: dealWithDownloadWordsLoaded)
     }
     
     func dealWithDownloadWordsLoaded(gameData: GameData) -> Void
     {
         //store Game Data in NSUserdefaults array(downloads) of dictionaries(tempDictionary)
+        mixpanel.track("Download Completed")
         var downloadsArray = NSUserDefaults.standardUserDefaults().arrayForKey("downloads") as? [Dictionary<String,String>] ?? [Dictionary<String,String>]()
         println(downloadsArray)
         var tempDictionary = gameData.quizWords
@@ -153,7 +157,14 @@ class SearchSetScene: CCNode, CCTableViewDataSource
      
     func toViewDownloadsScene()
     {
+        mixpanel.track("To Another Scene", properties: ["To Scene": "Download", "From Scene": "Search"])
         MiscMethods.toViewDownloadsScene()
+    }
+    
+    func toMainMenu()
+    {
+        mixpanel.track("To Another Scene", properties: ["To Scene": "Main", "From Scene": "Search"])
+        MiscMethods.toMainMenu()
     }
 }
 

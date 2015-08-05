@@ -240,7 +240,7 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>Sample Textajsldfkjalskdffasd</string>
+							<string>Perhaps we are the real devils</string>
 							<false/>
 						</array>
 					</dict>
@@ -307,8 +307,8 @@
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>1</real>
+							<real>0.59453737735748291</real>
+							<real>0.81382369995117188</real>
 							<real>1</real>
 							<real>1</real>
 						</array>
@@ -344,10 +344,10 @@
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>0.17750073969364166</real>
+							<real>0.53060042858123779</real>
+							<real>0.56053787469863892</real>
+							<real>1</real>
 						</array>
 					</dict>
 					<dict>
@@ -376,6 +376,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

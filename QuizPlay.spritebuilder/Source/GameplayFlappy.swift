@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Mixpanel
 
 class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
 {
@@ -15,6 +16,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         case Playing, GameOver, Tutorial, Paused
     }
     
+    var mixpanel = Mixpanel.sharedInstance()
     var isWordFirst: Bool = true//if true, the word will be first and the definition afterwards in the Dictionary
     var numberOfOptions: Int = 4
     
@@ -51,23 +53,28 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     var lastWordChosen: String!
     var grounds = [CCSprite]() //array for the ground sprites
     var obstacles : [CCNode] = [] //array of obstacles
-    let firstObstaclePosition : CGFloat = 280
+    let firstObstaclePosition : CGFloat = 100
     let distanceBetweenObstacles : CGFloat = 180
     var gameOver = false
     var points: NSInteger = 0
     {
         didSet
         {
+            points = max(0,points)
             scoreLabel.string = String("Score: \(points)")
         }
     }
+    var audio = OALSimpleAudio.sharedInstance()
     
     func didLoadFromCCB()
     {
         //add the two grounds to the ground array
         grounds.append(ground1)
         grounds.append(ground2)
-        
+    
+        audio.preloadEffect("Audio/CorrectChime.wav")
+        audio.preloadEffect("Audio/IncorrectChime.wav")
+        audio.preloadEffect("Audio/ShutDownNoise.wav")
         //assigning MainScene as the collision delegate class
         gamePhysicsNode.collisionDelegate = self
         //gamePhysicsNode.debugDraw = true
@@ -161,6 +168,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         {
             gameState = .Playing
             gamePhysicsNode.paused = false
+            audio.playBg("Audio/Wristbands.wav", volume: 0.2, pan: 0.0, loop: true)
         }
         if (gameState == .Playing)
         {
@@ -175,7 +183,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     {
         if(gameState == .Playing)
         {
-            scrollSpeed = CGFloat(points/2+100)
+            scrollSpeed = max(80,CGFloat(points/2+80))
             
             //limits velocity between -infinity and 200
             let velocityY = clampf(Float(hero.physicsBody.velocity.y), -Float(CGFloat.max), 150)
@@ -299,9 +307,9 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     {
         gamePhysicsNode.space.addPostStepBlock(
         { () -> Void in
-            println("BOOM CRASH")
             if(self.gameState == .Playing)
             {
+                self.audio.playEffect("Audio/ShutDownNoise.wav", volume: 0.8, pitch: 1.0, pan: 0.0, loop: false)
                 self.triggerGameOver()
             }
         }, key: hero)
@@ -328,18 +336,16 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
             //println(answerBackground.name)
             if(answerBackground.name == answer)
             {
-//                scheduleBlock(
-//                { (timer) -> Void in
+                self.audio.playEffect("Audio/CorrectChime.wav", volume: 0.7, pitch: 1.0, pan: 0.0, loop: false)
                 var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: question, correctResponses: 0, wrongResponses: 0)
                 wordThing.correctResponses = wordThing.correctResponses + 1
                 statArray[answerBackground.name] = wordThing
                 answerBackground.animationManager.runAnimationsForSequenceNamed("popAnswer")
                 handleRightAnswer()
-//                }, delay: 0.01)
-                
             }
             else
             {
+                self.audio.playEffect("Audio/IncorrectChime.wav", volume: 1.0, pitch: 1.0, pan: 0.0, loop: false)
                 var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: gameData.quizWords[answerBackground.name]!, correctResponses: 0, wrongResponses: 0)
                 wordThing.wrongResponses = wordThing.wrongResponses + 1
                 statArray[answerBackground.name] = wordThing
@@ -382,16 +388,19 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     
     func toViewDownloadsButton()
     {
+        mixpanel.track("To Another Scene", properties: ["To Scene": "Download", "From Scene": "GameOver"])
         MiscMethods.toViewDownloadsScene()
     }
     
     func toSearchSetsButton()
     {
+        mixpanel.track("To Another Scene", properties: ["To Scene": "Search", "From Scene": "GameOver"])
         MiscMethods.toSearchSetScene()
     }
     
     func toStatScreenButton()
     {
+        mixpanel.track("To Another Scene", properties: ["To Scene": "ViewStats", "From Scene": "GameOver"])
         let scene = CCScene()
         let statScene = CCBReader.load("StatScreen") as! StatScreen
         statScene.statsArray = statArray.values.array
@@ -428,12 +437,16 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     
     func quitGame()
     {
-        MiscMethods.toSearchSetScene()
+        mixpanel.track("Quit Game")
+        triggerGameOver()
     }
     
     //handles what happens when the game is over
     func triggerGameOver()
     {
+        //audio.playBg("Audio/ObsidianMirror.wav", loop: true)
+        mixpanel.track("Game Over", properties: ["Score Level": Int(Float(points)/20), "Raw Score": points])
+        audio.playBg("Audio/ObsidianMirror.wav", volume: 0.3, pan: 0.0, loop: true)
         gameState = .GameOver
         GOscoreLabel.string = "Score: \(points)"
         GOsetNameLabel.string = "Quiz Played: \(gameData.title)"

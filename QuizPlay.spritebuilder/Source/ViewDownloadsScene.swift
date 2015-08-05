@@ -17,6 +17,7 @@ didSet
 */
 
 import UIKit
+import Mixpanel
 
 class ViewDownloadsScene: CCNode, CCTableViewDataSource
 {
@@ -34,6 +35,7 @@ class ViewDownloadsScene: CCNode, CCTableViewDataSource
     
     weak var stencilNode: CCNode!
     weak var clippingNode: CCClippingNode!
+    var mixpanel = Mixpanel.sharedInstance()
     
     func didLoadFromCCB()
     {
@@ -109,7 +111,14 @@ class ViewDownloadsScene: CCNode, CCTableViewDataSource
     
     func toSearchSetScene()
     {
+        mixpanel.track("To Another Scene", properties: ["To Scene": "Search", "From Scene": "Download"])
         MiscMethods.toSearchSetScene()
+    }
+    
+    func toMainMenu()
+    {
+        mixpanel.track("To Another Scene", properties: ["To Scene": "Main", "From Scene": "Download"])
+        MiscMethods.toMainMenu()
     }
     
     func tableViewNumberOfRows(tableView: CCTableView) -> UInt

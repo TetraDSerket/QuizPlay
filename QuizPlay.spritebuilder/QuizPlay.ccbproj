@@ -78,6 +78,20 @@
 			<key>previewFolderHidden</key>
 			<true/>
 		</dict>
+		<key>Audio/LLS - Obsidian Mirror.wav</key>
+		<dict>
+			<key>format_ios_sound</key>
+			<integer>1</integer>
+			<key>isDirty</key>
+			<true/>
+		</dict>
+		<key>Audio/LLS - Wristbands.wav</key>
+		<dict>
+			<key>format_ios_sound</key>
+			<integer>1</integer>
+			<key>isDirty</key>
+			<true/>
+		</dict>
 		<key>Sprites</key>
 		<dict/>
 		<key>ccbResources</key>
