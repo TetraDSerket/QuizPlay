@@ -209,6 +209,12 @@
         [super setHitAreaExpansion:_originalHitAreaExpansion + kCCFatFingerExpansion];
     }
     self.highlighted = YES;
+    
+    //fix by Varsha // back to normal
+//    if (self.enabled)
+//    {
+//        [self triggerAction];
+//    }
 }
 
 - (void) touchExited:(CCTouch *)touch withEvent:(CCTouchEvent *)event
@@ -220,6 +226,7 @@
 {
     [super setHitAreaExpansion:_originalHitAreaExpansion];
     
+    //fix by Varsha
     if (self.enabled)
     {
         [self triggerAction];

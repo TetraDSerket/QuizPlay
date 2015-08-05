@@ -81,13 +81,16 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         tableCellNode.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
         
         //cellColorNode.color = CCColor(red: 0.8 - colorFactor, green: 0.2+0.5*colorFactor, blue: colorFactor)
-        let colorFactor: Float = (Float(index) / Float(searchResults.count))
-        cellColorNode.color = CCColor(red: 0.6*colorFactor+0.1, green: 0.6*colorFactor+0.1, blue: 0.7)
+//        let colorFactor: Float = (Float(index) / Float(searchResults.count))
+//        cellColorNode.color = CCColor(red: 0.6*colorFactor+0.1, green: 0.6*colorFactor+0.1, blue: 0.7)
+        let thisOrThat = Float(index%2) / 10
+        println(thisOrThat)
+        cellColorNode.color = CCColor(red: thisOrThat, green: thisOrThat, blue: thisOrThat+0.15)
         
         cellTitleLabel.string = searchResults[Int(index)].title
         //cellTitleLabel.fontSize = MiscMethods.getCorrectFontSizeToMatchLabel(cellTitleLabel, maxFontSize: 25)
         cellCreatorLabel.string = searchResults[Int(index)].createdBy
-        cellFlashcardCountLabel.string = searchResults[Int(index)].termCount
+        cellFlashcardCountLabel.string = "\(searchResults[Int(index)].termCount) cards"
         
         cellPlayButton.name = searchResults[Int(index)].id
         cellPlayButton.setTarget(self, selector: "playButtonPressed:")

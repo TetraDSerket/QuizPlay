@@ -403,10 +403,13 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     
     func pauseGame()
     {
-        gameState = .Paused
-        gamePhysicsNode.paused = true
-        parent.addChild(pausePopup)
-        println("POPUP")
+        if(gameState == .Playing)
+        {
+            gameState = .Paused
+            gamePhysicsNode.paused = true
+            parent.addChild(pausePopup)
+            println("POPUP")
+        }
     }
     
     func resumeGame()

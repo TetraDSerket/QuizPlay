@@ -66,9 +66,13 @@ class ViewDownloadsScene: CCNode, CCTableViewDataSource
         tableCellNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         tableCellNode.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
         
-        //cellColorNode.color = CCColor(red: 0.8 - colorFactor, green: 0.2+0.5*colorFactor, blue: colorFactor)
-        let colorFactor: Float = (Float(index) / Float(downloadsArray.count))
-        cellColorNode.color = CCColor(red: 0.6*colorFactor+0.1, green: 0.6*colorFactor+0.1, blue: 0.8)
+        //cellColorNode.color = CCColor(red: 0.8 - colorFactor, green: 0.2+0.5*colorFactor, blue: colorFactor)    
+//        let colorFactor: Float = (Float(index) / Float(downloadsArray.count))
+//        cellColorNode.color = CCColor(red: 0.6*colorFactor+0.1, green: 0.6*colorFactor+0.1, blue: 0.8)
+        let thisOrThat = Float(index%2) / 10
+        println(thisOrThat)
+        cellColorNode.color = CCColor(red: thisOrThat, green: thisOrThat, blue: thisOrThat+0.15)
+        
         
         cellTitleLabel.string = downloadsArray[Int(index)]["GDtitleVarsha"]
         cellCreatorLabel.string = downloadsArray[Int(index)]["GDcreatorVarsha"]
@@ -115,6 +119,6 @@ class ViewDownloadsScene: CCNode, CCTableViewDataSource
     
     func tableView(tableView: CCTableView, heightForRowAtIndex index: UInt) -> Float
     {
-        return 80.0
+        return 60.0
     }
 }

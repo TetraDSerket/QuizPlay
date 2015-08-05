@@ -18,12 +18,6 @@ struct WordStat
 
 class StatScreen: CCNode, CCTableViewDataSource
 {
-    enum StatState
-    {
-        case Scroll, Definition
-    }
-    var statState: StatState = .Scroll
-    
     weak var tableNode: CCNode!
     weak var noStatsLabel: CCLabelTTF!
     weak var loadingScreen: CCNode!
@@ -48,6 +42,10 @@ class StatScreen: CCNode, CCTableViewDataSource
     override func onEnter()
     {
         userInteractionEnabled = true
+        if(statsArray.count == 0)
+        {
+            noStatsLabel.visible = true
+        }
         tableView = CCTableView()
         tableView.dataSource = self
         tableView.block =
@@ -76,10 +74,8 @@ class StatScreen: CCNode, CCTableViewDataSource
         tableCellNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         tableCellNode.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
         
-//        cellColorNode.color = CCColor(red: 0.8 - colorFactor, green: 0.2+0.5*colorFactor, blue: colorFactor)
-//        let colorFactor: Float = (Float(index) / Float(statsArray.count))
-//        cellColorNode.color = CCColor(red: 0.6*colorFactor+0.1, green: 0.6*colorFactor+0.1, blue: 0.8)
-        let thisOrThat = Float(index%2/4)
+        let thisOrThat = Float(index%2) / 8
+        println(thisOrThat)
         cellColorNode.color = CCColor(red: thisOrThat, green: thisOrThat, blue: thisOrThat)
         
         correctResponsesLabel.string = "\(statsArray[Int(index)].correctResponses)"
@@ -88,23 +84,28 @@ class StatScreen: CCNode, CCTableViewDataSource
         cellWordLabel.fontSize = MiscMethods.getCorrectFontSizeToMatchLabel(cellWordLabel, maxFontSize: 40)
         
         showDefinitionButton.name = "\(statsArray[Int(index)].definition)"
-        showDefinitionButton.setTarget(self, selector: "showDefinition:")
+        showDefinitionButton.setTarget(self, selector: "defButtonPressed:")
         
         tableViewCell.addChild(tableCellNode)
         return tableViewCell
     }
     
-    func showDefinition(button: CCButton!)
+    override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!)
+    {
+        defPopup.visible = false
+    }
+    
+    func defButtonPressed(button: CCButton!)
     {
         defPopup.visible = true
         definitionLabel.string = button.name
         definitionLabel.fontSize = MiscMethods.getCorrectFontSizeToMatchLabel(definitionLabel, maxFontSize: 50)
     }
     
-    func definitionGoAwayButton()
-    {
-        defPopup.visible = false
-    }
+//    func definitionGoAwayButton()
+//    {
+//        defPopup.visible = false
+//    }
     
     func replayGame()
     {
@@ -118,6 +119,6 @@ class StatScreen: CCNode, CCTableViewDataSource
     
     func tableView(tableView: CCTableView, heightForRowAtIndex index: UInt) -> Float
     {
-        return 70.0
+        return 60.0
     }
 }

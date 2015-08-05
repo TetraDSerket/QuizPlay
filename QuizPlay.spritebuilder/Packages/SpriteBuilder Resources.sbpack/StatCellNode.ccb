@@ -392,7 +392,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>images/DownloadButtonDark.png</string>
+							<string>images/BlankButtonDark.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -579,6 +579,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
