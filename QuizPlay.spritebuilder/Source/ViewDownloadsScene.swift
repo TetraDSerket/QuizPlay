@@ -72,7 +72,7 @@ class ViewDownloadsScene: CCNode, CCTableViewDataSource
 //        let colorFactor: Float = (Float(index) / Float(downloadsArray.count))
 //        cellColorNode.color = CCColor(red: 0.6*colorFactor+0.1, green: 0.6*colorFactor+0.1, blue: 0.8)
         let thisOrThat = Float(index%2) / 10
-        println(thisOrThat)
+//        println(thisOrThat)
         cellColorNode.color = CCColor(red: thisOrThat, green: thisOrThat, blue: thisOrThat+0.15)
         
         

@@ -111,7 +111,6 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
             gameData.quizWords[newWord] = newDef
         }
         var tempQuizWords = gameData.quizWords
-        println(tempQuizWords)
         choices = []
         if isWordFirst
         {
@@ -158,8 +157,8 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
             }
 
         }
-        println("Choices: \(choices)")
-        println("q: \(question) and a: \(answer)")
+//        println("Choices: \(choices)")
+//        println("q: \(question) and a: \(answer)")
     }
     
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent)
@@ -281,7 +280,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         if(sinceRightAnswer > 4)
         {
             sinceRightAnswer = 0
-            println("TOO LONG NO ANSWER")
+//            println("TOO LONG NO ANSWER")
             return answer
         }
         if choices[random] != lastWordChosen
@@ -360,7 +359,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     {
         if(gameState == .Playing)
         {
-            println("YOU WON YAY")
+//            println("YOU WON YAY")
             points = points + 10
             chooseQuestionAndAnswer()
         }
@@ -371,7 +370,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         if(gameState == .Playing)
         {
             points = points - 5
-            println("You ARE WRONG VERY WRONG")
+//            println("You ARE WRONG VERY WRONG")
         }
     }
     
@@ -417,7 +416,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
             gameState = .Paused
             gamePhysicsNode.paused = true
             parent.addChild(pausePopup)
-            println("POPUP")
+//            println("POPUP")
         }
     }
     
@@ -426,7 +425,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         parent.removeChild(pausePopup)
         gameState = .Playing
         gamePhysicsNode.paused = false
-        println("RESUME")
+//        println("RESUME")
     }
     
     func switchQAndAButton()
@@ -451,7 +450,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         GOscoreLabel.string = "Score: \(points)"
         GOsetNameLabel.string = "Quiz Played: \(gameData.title)"
         parent.addChild(popup)
-        println("POPUP")
+//        println("POPUP")
     }
 }
 

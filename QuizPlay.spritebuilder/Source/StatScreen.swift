@@ -75,7 +75,7 @@ class StatScreen: CCNode, CCTableViewDataSource
         tableCellNode.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
         
         let thisOrThat = Float(index%2) / 8
-        println(thisOrThat)
+//        println(thisOrThat)
         cellColorNode.color = CCColor(red: thisOrThat, green: thisOrThat, blue: thisOrThat)
         
         correctResponsesLabel.string = "\(statsArray[Int(index)].correctResponses)"

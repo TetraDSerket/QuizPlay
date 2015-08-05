@@ -26,6 +26,7 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     var searchResults: [SearchResponse] = []
     var quizWords = Dictionary<String, String>()
     var mixpanel = Mixpanel.sharedInstance()
+    var buttonsAvailable: Bool = true
     
     weak var stencilNode: CCNode!
     weak var clippingNode: CCClippingNode!
@@ -85,7 +86,6 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         tableCellNode.position = CGPoint(x: CCDirector.sharedDirector().designSize.width/2, y: 0)
         
         let thisOrThat = Float(index%2) / 10
-        println(thisOrThat)
         cellColorNode.color = CCColor(red: thisOrThat, green: thisOrThat, blue: thisOrThat+0.15)
         
         cellTitleLabel.string = searchResults[Int(index)].title
@@ -105,15 +105,21 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     
     func playButtonPressed(button: CCButton!)
     {
+        if(buttonsAvailable){
+            buttonsAvailable = false
         loadingScreen.visible = true
         mixpanel.track("To Another Scene", properties: ["To Scene": "Gameplay", "From Scene": "Search"])
         WebHelper.getQuizletFlashcardData(setNumber: button.name,resolve: dealWithQuizWordsLoaded)
+        }
     }
     
     func downloadButtonPressed(button: CCButton!)
     {
+        if(buttonsAvailable){
+            buttonsAvailable = false
         mixpanel.track("Download", properties: ["SetNumber" : button.name])
         WebHelper.getQuizletFlashcardData(setNumber: button.name,resolve: dealWithDownloadWordsLoaded)
+        }
     }
     
     func dealWithDownloadWordsLoaded(gameData: GameData) -> Void
@@ -121,15 +127,14 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         //store Game Data in NSUserdefaults array(downloads) of dictionaries(tempDictionary)
         mixpanel.track("Download Completed")
         var downloadsArray = NSUserDefaults.standardUserDefaults().arrayForKey("downloads") as? [Dictionary<String,String>] ?? [Dictionary<String,String>]()
-        println(downloadsArray)
         var tempDictionary = gameData.quizWords
         tempDictionary["GDidVarsha"] = gameData.id
         tempDictionary["GDtitleVarsha"] = gameData.title
         tempDictionary["GDcreatorVarsha"] = gameData.createdBy
-        println(tempDictionary)
         downloadsArray.append(tempDictionary)
         NSUserDefaults.standardUserDefaults().setObject(downloadsArray, forKey: "downloads")
         NSUserDefaults.standardUserDefaults().synchronize()
+        buttonsAvailable = true
     }
     
     func clearDownloads()
@@ -143,6 +148,7 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     {
         loadingScreen.visible = false
         MiscMethods.toGameplayScene(gameData)
+        buttonsAvailable = true
     }
     
     func tableViewNumberOfRows(tableView: CCTableView) -> UInt
@@ -157,14 +163,20 @@ class SearchSetScene: CCNode, CCTableViewDataSource
      
     func toViewDownloadsScene()
     {
+        if(buttonsAvailable){
+            buttonsAvailable = false
         mixpanel.track("To Another Scene", properties: ["To Scene": "Download", "From Scene": "Search"])
         MiscMethods.toViewDownloadsScene()
+        }
     }
     
     func toMainMenu()
     {
+        if(buttonsAvailable){
+            buttonsAvailable = false
         mixpanel.track("To Another Scene", properties: ["To Scene": "Main", "From Scene": "Search"])
         MiscMethods.toMainMenu()
+        }
     }
 }
 

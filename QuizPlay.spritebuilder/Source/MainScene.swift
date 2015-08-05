@@ -4,6 +4,7 @@ import Mixpanel
 class MainScene: CCNode
 {
     var mixpanel = Mixpanel.sharedInstance()
+    var buttonsAvailable: Bool = true
     
     func didLoadFromCCB()
     {
@@ -17,13 +18,21 @@ class MainScene: CCNode
     
     func searchQuizletButton()
     {
-        mixpanel.track("To Another Scene", properties: ["To Scene": "Search", "From Scene": "Main"])
-        MiscMethods.toSearchSetScene()
+        if(buttonsAvailable)
+        {
+            buttonsAvailable = false
+            mixpanel.track("To Another Scene", properties: ["To Scene": "Search", "From Scene": "Main"])
+            MiscMethods.toSearchSetScene()
+        }
     }
     
     func viewDownloadsButton()
     {
-        mixpanel.track("To Another Scene", properties: ["To Scene": "Download", "From Scene": "Main"])
-        MiscMethods.toViewDownloadsScene()
+        if(buttonsAvailable)
+        {
+            buttonsAvailable = false
+            mixpanel.track("To Another Scene", properties: ["To Scene": "Download", "From Scene": "Main"])
+            MiscMethods.toViewDownloadsScene()
+        }
     }
 }

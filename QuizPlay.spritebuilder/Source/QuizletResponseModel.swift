@@ -36,7 +36,7 @@ class QuizletResponseModel: NSObject
         var searchValues: [SearchResponse] = []
         let json = JSON(data)
         
-        println(json)
+//        println(json)
         //println(json["sets"][0])
         
         for index in 0..<json["sets"].count
