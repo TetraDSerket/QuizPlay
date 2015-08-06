@@ -374,7 +374,6 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         }
     }
     
-    //restarts game restart button remove or change this
     func retryButton()
     {
         let scene = CCScene()
@@ -383,6 +382,18 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         scene.addChild(flappyScene)
         let transition = CCTransition(fadeWithDuration: 0.8)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
+    }
+    
+    func downloadTheseFlashcardsButton()
+    {
+        var downloadsArray = NSUserDefaults.standardUserDefaults().arrayForKey("downloads") as? [Dictionary<String,String>] ?? [Dictionary<String,String>]()
+        var tempDictionary = gameData.quizWords
+        tempDictionary["GDidVarsha"] = gameData.id
+        tempDictionary["GDtitleVarsha"] = gameData.title
+        tempDictionary["GDcreatorVarsha"] = gameData.createdBy
+        downloadsArray.append(tempDictionary)
+        NSUserDefaults.standardUserDefaults().setObject(downloadsArray, forKey: "downloads")
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     func toViewDownloadsButton()

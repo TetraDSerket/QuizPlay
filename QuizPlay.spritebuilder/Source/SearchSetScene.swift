@@ -22,6 +22,7 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     weak var cellDownloadButton: CCButton!
     weak var searchQuizletLabel: CCLabelTTF!
     weak var loadingScreen: CCNode!
+    weak var downloadCompleteLabel: CCLabelTTF!
     var tableView: CCTableView!
     var searchResults: [SearchResponse] = []
     var quizWords = Dictionary<String, String>()
@@ -134,6 +135,7 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         downloadsArray.append(tempDictionary)
         NSUserDefaults.standardUserDefaults().setObject(downloadsArray, forKey: "downloads")
         NSUserDefaults.standardUserDefaults().synchronize()
+        downloadCompleteLabel.animationManager.runAnimationsForSequenceNamed("downloadCompleteTimeline")
         buttonsAvailable = true
     }
     
