@@ -122,9 +122,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.20999999344348907</real>
-							<real>0.64999997615814209</real>
-							<real>0.87000000476837158</real>
+							<real>0.047799762338399887</real>
+							<real>0.15043368935585022</real>
+							<real>0.2026209682226181</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -192,7 +192,7 @@
 												<key>value</key>
 												<array>
 													<real>0.0</real>
-													<real>1</real>
+													<real>2</real>
 													<integer>0</integer>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -239,7 +239,7 @@
 												<key>type</key>
 												<string>FontTTF</string>
 												<key>value</key>
-												<string>Cochin-Bold</string>
+												<string>unexploredGalaxiesFont/Unxgala.ttf</string>
 											</dict>
 											<dict>
 												<key>name</key>
@@ -411,7 +411,7 @@
 												<string>Position</string>
 												<key>value</key>
 												<array>
-													<real>130</real>
+													<real>129</real>
 													<real>10</real>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -459,7 +459,7 @@
 												<key>type</key>
 												<string>FontTTF</string>
 												<key>value</key>
-												<string>Cochin-Bold</string>
+												<string>unexploredGalaxiesFont/Unxgala.ttf</string>
 											</dict>
 											<dict>
 												<key>name</key>
@@ -500,7 +500,7 @@
 												<string>Size</string>
 												<key>value</key>
 												<array>
-													<real>140</real>
+													<real>150</real>
 													<real>20</real>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -529,8 +529,8 @@
 												<string>Color4</string>
 												<key>value</key>
 												<array>
-													<real>1</real>
-													<real>1</real>
+													<real>0.67232769727706909</real>
+													<real>0.89861077070236206</real>
 													<real>1</real>
 													<real>1</real>
 												</array>
@@ -625,7 +625,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>5</real>
+											<real>3</real>
 											<real>0.0</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -757,7 +757,7 @@
 										<key>type</key>
 										<string>FontTTF</string>
 										<key>value</key>
-										<string>Cochin-Bold</string>
+										<string>unexploredGalaxiesFont/Unxgala.ttf</string>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -814,8 +814,8 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>1</real>
-											<real>1</real>
+											<real>0.69846600294113159</real>
+											<real>0.85465753078460693</real>
 											<real>1</real>
 											<real>1</real>
 										</array>
@@ -961,8 +961,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>

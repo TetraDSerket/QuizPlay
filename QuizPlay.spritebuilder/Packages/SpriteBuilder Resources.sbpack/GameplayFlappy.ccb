@@ -797,79 +797,6 @@
 						<string>hero</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
-						<key>physicsBody</key>
-						<dict>
-							<key>affectedByGravity</key>
-							<true/>
-							<key>allowsRotation</key>
-							<true/>
-							<key>bodyShape</key>
-							<integer>0</integer>
-							<key>collisionCategories</key>
-							<array/>
-							<key>collisionMask</key>
-							<array/>
-							<key>collisionType</key>
-							<string>hero</string>
-							<key>cornerRadius</key>
-							<real>0.0</real>
-							<key>density</key>
-							<real>1</real>
-							<key>dynamic</key>
-							<true/>
-							<key>elasticity</key>
-							<real>0.30000001192092896</real>
-							<key>friction</key>
-							<real>0.30000001192092896</real>
-							<key>points</key>
-							<array>
-								<array>
-									<real>89.311767578125</real>
-									<real>64.510101318359375</real>
-								</array>
-								<array>
-									<real>55.193603515625</real>
-									<real>98.093536376953125</real>
-								</array>
-								<array>
-									<real>124.51840209960938</real>
-									<real>138.44293212890625</real>
-								</array>
-								<array>
-									<real>197.8330078125</real>
-									<real>98.146636962890625</real>
-								</array>
-								<array>
-									<real>164.86021423339844</real>
-									<real>63.497482299804688</real>
-								</array>
-							</array>
-							<key>polygons</key>
-							<array>
-								<array>
-									<array>
-										<real>164.86021423339844</real>
-										<real>63.497482299804688</real>
-									</array>
-									<array>
-										<real>197.8330078125</real>
-										<real>98.146636962890625</real>
-									</array>
-									<array>
-										<real>124.51840209960938</real>
-										<real>138.44293212890625</real>
-									</array>
-									<array>
-										<real>55.193603515625</real>
-										<real>98.093536376953125</real>
-									</array>
-									<array>
-										<real>89.311767578125</real>
-										<real>64.510101318359375</real>
-									</array>
-								</array>
-							</array>
-						</dict>
 						<key>properties</key>
 						<array>
 							<dict>
@@ -887,11 +814,11 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>100.77484130859375</real>
-									<real>344.61407470703125</real>
+									<real>106.42487335205078</real>
+									<real>0.32611095905303955</real>
+									<integer>1</integer>
 									<integer>0</integer>
-									<integer>0</integer>
-									<integer>0</integer>
+									<integer>2</integer>
 								</array>
 							</dict>
 							<dict>
@@ -1649,7 +1576,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>unexploredGalaxiesFont/Unxgala.ttf</string>
+								<string>Cochin</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1775,6 +1702,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -2007,9 +1936,9 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>106.22757720947266</real>
-									<real>0.75304627418518066</real>
-									<integer>0</integer>
+									<real>202.59999084472656</real>
+									<real>0.21994481980800629</real>
+									<integer>1</integer>
 									<integer>0</integer>
 									<integer>2</integer>
 								</array>
@@ -2488,7 +2417,7 @@ your ship!</string>
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>Question</string>
+									<string>Questions</string>
 									<false/>
 								</array>
 							</dict>

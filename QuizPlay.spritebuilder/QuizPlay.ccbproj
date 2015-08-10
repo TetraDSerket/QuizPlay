@@ -82,15 +82,11 @@
 		<dict>
 			<key>format_ios_sound</key>
 			<integer>1</integer>
-			<key>isDirty</key>
-			<true/>
 		</dict>
 		<key>Audio/LLS - Wristbands.wav</key>
 		<dict>
 			<key>format_ios_sound</key>
 			<integer>1</integer>
-			<key>isDirty</key>
-			<true/>
 		</dict>
 		<key>Sprites</key>
 		<dict/>
@@ -175,6 +171,11 @@
 			<integer>2</integer>
 			<key>tabletScale</key>
 			<integer>1</integer>
+		</dict>
+		<key>images</key>
+		<dict>
+			<key>isSmartSpriteSheet</key>
+			<true/>
 		</dict>
 		<key>images/Background1.png</key>
 		<dict>

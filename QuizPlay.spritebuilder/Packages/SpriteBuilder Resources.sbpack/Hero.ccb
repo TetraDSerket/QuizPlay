@@ -132,7 +132,7 @@
 		<key>displayName</key>
 		<string>CCSprite</string>
 		<key>memberVarAssignmentName</key>
-		<string>hero</string>
+		<string></string>
 		<key>memberVarAssignmentType</key>
 		<integer>1</integer>
 		<key>physicsBody</key>

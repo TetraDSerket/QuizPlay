@@ -12,6 +12,7 @@
 		2819B45E1B56C4B500C358E9 /* GameplayFlappy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */; };
 		2819B4601B56C98E00C358E9 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B45F1B56C98E00C358E9 /* Obstacle.swift */; };
 		2819B4621B56C9EB00C358E9 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B4611B56C9EB00C358E9 /* Goal.swift */; };
+		28365CCF1B74679F000D1A37 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28365CCE1B74679F000D1A37 /* Images.xcassets */; };
 		28615AF41B58539F00E37B45 /* GameplayPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28615AF31B58539F00E37B45 /* GameplayPlatform.swift */; };
 		28615B061B585AB200E37B45 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28615AFF1B585A1000E37B45 /* Alamofire.framework */; };
 		28615B071B585AB200E37B45 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28615AFF1B585A1000E37B45 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -20,6 +21,7 @@
 		28615B101B587E6000E37B45 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */; };
 		286ABEE51B69409C0097CE58 /* ViewDownloadsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286ABEE41B69409C0097CE58 /* ViewDownloadsScene.swift */; };
 		28A4FF391B5EB0300024B821 /* SearchSetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A4FF381B5EB0300024B821 /* SearchSetScene.swift */; };
+		28A812911B73C00B000B58A7 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A812901B73C00B000B58A7 /* Credits.swift */; };
 		28DDACB71B713A1F006E6687 /* StatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DDACB61B713A1F006E6687 /* StatScreen.swift */; };
 		28DE0C351B6A96A200E418BA /* MiscMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE0C341B6A96A200E418BA /* MiscMethods.swift */; };
 		5B121030197484FA004C1E1D /* QuizPlayActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* QuizPlayActivity.m */; };
@@ -219,6 +221,7 @@
 		2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplayFlappy.swift; path = Source/GameplayFlappy.swift; sourceTree = "<group>"; };
 		2819B45F1B56C98E00C358E9 /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Obstacle.swift; path = Source/Obstacle.swift; sourceTree = "<group>"; };
 		2819B4611B56C9EB00C358E9 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Goal.swift; path = Source/Goal.swift; sourceTree = "<group>"; };
+		28365CCE1B74679F000D1A37 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		28615AF31B58539F00E37B45 /* GameplayPlatform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplayPlatform.swift; path = Source/GameplayPlatform.swift; sourceTree = "<group>"; };
 		28615AF71B585A1000E37B45 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = ../alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		28615B0B1B585B2000E37B45 /* WebHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebHelper.swift; path = Source/WebHelper.swift; sourceTree = "<group>"; };
@@ -226,6 +229,7 @@
 		28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		286ABEE41B69409C0097CE58 /* ViewDownloadsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewDownloadsScene.swift; path = Source/ViewDownloadsScene.swift; sourceTree = "<group>"; };
 		28A4FF381B5EB0300024B821 /* SearchSetScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchSetScene.swift; path = Source/SearchSetScene.swift; sourceTree = "<group>"; };
+		28A812901B73C00B000B58A7 /* Credits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Credits.swift; path = Source/Credits.swift; sourceTree = "<group>"; };
 		28DDACB61B713A1F006E6687 /* StatScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatScreen.swift; path = Source/StatScreen.swift; sourceTree = "<group>"; };
 		28DE0C341B6A96A200E418BA /* MiscMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MiscMethods.swift; path = Source/MiscMethods.swift; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
@@ -542,6 +546,7 @@
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				7A046D7519E84C36004C4763 /* MainScene.swift */,
 				28A4FF381B5EB0300024B821 /* SearchSetScene.swift */,
+				28A812901B73C00B000B58A7 /* Credits.swift */,
 				28615AF31B58539F00E37B45 /* GameplayPlatform.swift */,
 				2819B4431B55777F00C358E9 /* GameplaySling.swift */,
 				2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */,
@@ -583,6 +588,7 @@
 		B77F1B2517B978D7009739AE = {
 			isa = PBXGroup;
 			children = (
+				28365CCE1B74679F000D1A37 /* Images.xcassets */,
 				B737893C1807616C0076A88C /* Source */,
 				B77F1B4617B978D7009739AE /* Resources */,
 				9222E2B918734FF800A246C7 /* libs */,
@@ -895,6 +901,7 @@
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
+				28365CCF1B74679F000D1A37 /* Images.xcassets in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
 				B71F5911188484E7003F4D28 /* iPad-old.png in Resources */,
 			);
@@ -1024,6 +1031,7 @@
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 				28DDACB71B713A1F006E6687 /* StatScreen.swift in Sources */,
 				286ABEE51B69409C0097CE58 /* ViewDownloadsScene.swift in Sources */,
+				28A812911B73C00B000B58A7 /* Credits.swift in Sources */,
 				2819B4441B55777F00C358E9 /* GameplaySling.swift in Sources */,
 				28A4FF391B5EB0300024B821 /* SearchSetScene.swift in Sources */,
 				2819B45E1B56C4B500C358E9 /* GameplayFlappy.swift in Sources */,
@@ -1259,6 +1267,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1292,6 +1301,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1317,10 +1327,12 @@
 			baseConfigurationReference = 97466FC99A86E26F1728428B /* Pods-QuizPlay iOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1343,7 +1355,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = QuizPlay;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1f1ee974-5feb-48be-9837-5f905b9a443b";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
@@ -1355,10 +1367,12 @@
 			baseConfigurationReference = 1F64D65D81BB63D309BDAD98 /* Pods-QuizPlay iOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Varsha Ramakrishnan (FZ7ESCL8YU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
@@ -1379,7 +1393,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = QuizPlay;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1f1ee974-5feb-48be-9837-5f905b9a443b";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

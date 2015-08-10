@@ -35,4 +35,16 @@ class MainScene: CCNode
             MiscMethods.toViewDownloadsScene()
         }
     }
+    
+    func toCreditsSceneButton()
+    {
+        if(buttonsAvailable)
+        {
+            buttonsAvailable = false
+            mixpanel.track("To Another Scene", properties: ["To Scene": "Credits", "From Scene": "Main"])
+            let creditsScene = CCBReader.loadAsScene("Credits")
+            let transition = CCTransition(fadeWithDuration: 0.8)
+            CCDirector.sharedDirector().presentScene(creditsScene, withTransition: transition)
+        }
+    }
 }

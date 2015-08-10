@@ -577,7 +577,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>unexploredGalaxiesFont/Unxgala.ttf</string>
+								<string>Cochin</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -887,8 +887,6 @@
 								<array/>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 						<key>seqExpanded</key>
 						<true/>
 					</dict>
@@ -1211,8 +1209,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>38.149997711181641</real>
-							<real>191.9564208984375</real>
+							<real>38</real>
+							<real>179.33680725097656</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1286,6 +1284,8 @@
 						<array/>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>

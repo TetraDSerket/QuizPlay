@@ -84,7 +84,6 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     override func onEnter()
     {
         super.onEnter()
-        
         popup = CCBReader.load("FlappyGameOver", owner: self) as! FlappyGameOver
         popup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
         popup.position = CGPoint(x: 0.5, y: 0.5)
@@ -166,7 +165,9 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         if(gameState == .Tutorial)
         {
             gameState = .Playing
+            hero.positionType = CCPositionTypeMake(.Points, .Points, .BottomLeft)
             gamePhysicsNode.paused = false
+            
             audio.playBg("Audio/Wristbands.wav", volume: 0.2, pan: 0.0, loop: true)
         }
         if (gameState == .Playing)
@@ -331,23 +332,31 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     {
         if(gameState == .Playing)
         {
+            hero.physicsBody.applyImpulse(CGPoint(x: 0, y: 10000))
+            println("\(answer) and \(question)")
+            println(statArray[question])
+            var wordThing = statArray[answer] ?? WordStat(word: answer, definition: question, correctResponses: 0, wrongResponses: 0)
+//            hero.physicsBody.velocity = CGPoint(x: hero.physicsBody.velocity.x, y: 2000)
             answerBackground.physicsBody = nil
             //println(answerBackground.name)
             if(answerBackground.name == answer)
             {
+                println("Right Answer")
                 self.audio.playEffect("Audio/CorrectChime.wav", volume: 0.7, pitch: 1.0, pan: 0.0, loop: false)
-                var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: question, correctResponses: 0, wrongResponses: 0)
+                //var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: question, correctResponses: 0, wrongResponses: 0)
                 wordThing.correctResponses = wordThing.correctResponses + 1
-                statArray[answerBackground.name] = wordThing
+                statArray[answer] = wordThing
                 answerBackground.animationManager.runAnimationsForSequenceNamed("popAnswer")
                 handleRightAnswer()
             }
             else
             {
                 self.audio.playEffect("Audio/IncorrectChime.wav", volume: 1.0, pitch: 1.0, pan: 0.0, loop: false)
-                var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: gameData.quizWords[answerBackground.name]!, correctResponses: 0, wrongResponses: 0)
+                println("Wrong Answer")
+                //println("\(answer) and \(question)")
+                //var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: gameData.quizWords[answerBackground.name]!, correctResponses: 0, wrongResponses: 0)
                 wordThing.wrongResponses = wordThing.wrongResponses + 1
-                statArray[answerBackground.name] = wordThing
+                statArray[answer] = wordThing
                 answerBackground.animationManager.runAnimationsForSequenceNamed("wrongAnswer")
                 handleWrongAnswer()
             }

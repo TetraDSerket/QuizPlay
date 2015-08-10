@@ -34,11 +34,15 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     
     func searchQuizlet()
     {
-        searchQuizletLabel.visible = false
-        loadingScreen.visible = true
-        let searchString = searchTextField.string
-        mixpanel.track("Search", properties: ["SearchValue" : searchString])
-        WebHelper.getQuizletSearchValues(searchValue: searchString, resolve: dealWithSearchResponseResults)
+//        if(buttonsAvailable)
+//        {
+//            buttonsAvailable = false
+            searchQuizletLabel.visible = false
+            loadingScreen.visible = true
+            let searchString = searchTextField.string
+            mixpanel.track("Search", properties: ["SearchValue" : searchString])
+            WebHelper.getQuizletSearchValues(searchValue: searchString, resolve: dealWithSearchResponseResults)
+//        }
     }
     
     func dealWithSearchResponseResults(searchString: String, searchValues: [SearchResponse])
@@ -55,6 +59,7 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         {
             noSearchResultsLabel.visible = false
         }
+//        buttonsAvailable = true
     }
     
     func didLoadFromCCB()

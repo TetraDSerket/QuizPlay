@@ -2657,10 +2657,10 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>160</real>
+							<real>0.5</real>
 							<real>240</real>
 							<integer>0</integer>
-							<integer>0</integer>
+							<integer>2</integer>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -2735,20 +2735,7 @@ Complete!</string>
 						<key>type</key>
 						<string>Float</string>
 						<key>value</key>
-						<real>0.86666667461395264</real>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>color</string>
-						<key>type</key>
-						<string>Color3</string>
-						<key>value</key>
-						<array>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
-							<real>0.86666667461395264</real>
-						</array>
+						<real>1</real>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -3036,7 +3023,7 @@ Complete!</string>
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>0.56666666269302368</real>
+			<real>0.0</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
