@@ -1002,7 +1002,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>95.75</real>
+									<real>114.5</real>
 									<real>22.5</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -1085,7 +1085,7 @@
 								<string>String</string>
 								<key>value</key>
 								<array>
-									<string>Search Flashcards</string>
+									<string>Search for Flashcards</string>
 									<false/>
 								</array>
 							</dict>
@@ -1364,7 +1364,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>233.75</real>
+									<real>289.75</real>
 									<real>22.5</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -1447,7 +1447,7 @@
 								<string>String</string>
 								<key>value</key>
 								<array>
-									<string>Replay</string>
+									<string>Play Again</string>
 									<false/>
 								</array>
 							</dict>

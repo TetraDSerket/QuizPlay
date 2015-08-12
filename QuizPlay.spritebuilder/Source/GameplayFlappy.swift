@@ -9,67 +9,31 @@
 import Foundation
 import Mixpanel
 
-class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
+class GameplayFlappy: Gameplay
 {
     enum GameState
     {
         case Playing, GameOver, Tutorial, Paused, TempPaused
     }
     
-    var mixpanel = Mixpanel.sharedInstance()
-    var isWordFirst: Bool = true//if true, the word will be first and the definition afterwards in the Dictionary
-    var numberOfOptions: Int = 4
     weak var hero: CCSprite!
-    var gameState: GameState = .Tutorial
-    weak var gamePhysicsNode: CCPhysicsNode!
     weak var ground1: CCSprite!
     weak var ground2: CCSprite!
     weak var obstaclesLayer: CCNode!
-    weak var scoreLabel: CCLabelTTF!
-    weak var GOsetNameLabel: CCLabelTTF!
-    weak var GOscoreLabel: CCLabelTTF!
-    weak var questionLabel: CCLabelTTF!
+
     weak var tutorialScreen: CCNode!
-    weak var pauseScreen: CCNode!
-    weak var pauseToReadQuestion: CCNode!
-    weak var pauseToReadExplanation: CCNode!
-    var statArray = Dictionary<String,WordStat>()
-    var numberOfRightAnswers: Int = 0
-    var popup: FlappyGameOver!
-    var pausePopup: CCNode!
     var sinceTouch: CCTime = 0
-    var sinceRightAnswer: Int = 0
     var scrollSpeed: CGFloat = 80
-    var gameData: GameData!
-    //var quizWords = Dictionary<String, String>()
-    var question: String!
-    {
-        didSet
-        {
-            questionLabel.string = question
-            questionLabel.fontSize = MiscMethods.getCorrectFontSizeToMatchLabel(questionLabel, maxFontSize: 50)
-        }
-    }
-    var answer: String!
-    var choices = [String]()
-    var lastWordChosen: String!
+
     var grounds = [CCSprite]() //array for the ground sprites
     var obstacles : [CCNode] = [] //array of obstacles
     let firstObstaclePosition : CGFloat = 100
     let distanceBetweenObstacles : CGFloat = 180
-    var gameOver = false
-    var points: NSInteger = 0
-    {
-        didSet
-        {
-            points = max(0,points)
-            scoreLabel.string = String("Score: \(points)")
-        }
-    }
-    var audio = OALSimpleAudio.sharedInstance()
     
-    func didLoadFromCCB()
+    override func didLoadFromCCB()
     {
+        super.didLoadFromCCB()
+        nameOfGame = "Flappy"
         //add the two grounds to the ground array
         grounds.append(ground1)
         grounds.append(ground2)
@@ -77,93 +41,35 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         audio.preloadEffect("Audio/CorrectChime.wav")
         audio.preloadEffect("Audio/IncorrectChime.wav")
         audio.preloadEffect("Audio/ShutDownNoise.wav")
-        //assigning MainScene as the collision delegate class
-        gamePhysicsNode.collisionDelegate = self
-        //gamePhysicsNode.debugDraw = true
-        userInteractionEnabled = true
+//        //assigning MainScene as the collision delegate class
+//        gamePhysicsNode.collisionDelegate = self
+//        //gamePhysicsNode.debugDraw = true
+//        userInteractionEnabled = true
     }
     
     override func onEnter()
     {
         super.onEnter()
-        popup = CCBReader.load("FlappyGameOver", owner: self) as! FlappyGameOver
-        popup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
-        popup.position = CGPoint(x: 0.5, y: 0.5)
-        
-        pausePopup = CCBReader.load("PauseScreen", owner: self)
-        pausePopup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
-        pausePopup.position = CGPoint(x: 0.5, y: 0.5)
-        
-        chooseQuestionAndAnswer()
-        gamePhysicsNode.paused = true
+//        popup = CCBReader.load("FlappyGameOver", owner: self) as! FlappyGameOver
+//        popup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
+//        popup.position = CGPoint(x: 0.5, y: 0.5)
+//        
+//        pausePopup = CCBReader.load("PauseScreen", owner: self)
+//        pausePopup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
+//        pausePopup.position = CGPoint(x: 0.5, y: 0.5)
+//        
+//        chooseQuestionAndAnswer()
+//        gamePhysicsNode.paused = true
 
         spawnNewObstacle()
         spawnNewObstacle()
         spawnNewObstacle()
         spawnNewObstacle()
-    }
-    
-    func chooseQuestionAndAnswer()
-    {
-        if(gameData.quizWords.count == 1)
-        {
-            var newWord = "Please choose another set"
-            var newDef = "You can't play this game with a set that only has one flashcard"
-            gameData.quizWords[newWord] = newDef
-        }
-        var tempQuizWords = gameData.quizWords
-        choices = []
-        if isWordFirst
-        {
-            for index in 0..<numberOfOptions
-            {
-                //let random = arc4random_uniform(UInt32(numberOfOptions))
-                if(index == 0)
-                {
-                    //a random key is put into the question variable and its pair is put into the answer, then both are removed from the temp dictionary
-                    let random = Int(arc4random_uniform(UInt32(tempQuizWords.count)))
-                    answer = Array(tempQuizWords.keys)[random]
-                    question = tempQuizWords[answer]!
-                    choices.append(answer)
-                    tempQuizWords.removeValueForKey(answer)
-                    lastWordChosen = answer
-                }
-                else
-                {
-                    let random = Int(arc4random_uniform(UInt32(tempQuizWords.count)))
-                    let key = Array(tempQuizWords.keys)[random]
-                    choices.append(key)
-                }
-            }
-        }
-        else //if definition first is chosen
-        {
-            for index in 0..<numberOfOptions
-            {
-                if(index == 0)
-                {
-                    let random = Int(arc4random_uniform(UInt32(tempQuizWords.count)))
-                    question = Array(tempQuizWords.keys)[random]
-                    answer = tempQuizWords[question]!
-                    choices.append(answer)
-                    tempQuizWords.removeValueForKey(question)
-                    lastWordChosen = answer
-                }
-                else
-                {
-                    let random = Int(arc4random_uniform(UInt32(tempQuizWords.count)))
-                    let key = Array(tempQuizWords.keys)[random]
-                    choices.append(tempQuizWords[key]!)
-                }
-            }
-
-        }
-//        println("Choices: \(choices)")
-//        println("q: \(question) and a: \(answer)")
     }
     
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent)
     {
+        super.touchBegan(touch, withEvent: event)
         if(gameState == .Tutorial)
         {
             gameState = .Playing
@@ -178,21 +84,15 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
             hero.physicsBody.applyAngularImpulse(-5000)
             sinceTouch = 0
         }
-        if(gameState == .TempPaused)
-        {
-            gameState = .Playing
-            pauseToReadQuestion.visible = false
-            pauseToReadExplanation.visible = false
-            gamePhysicsNode.paused = false
-            //audio.playBg("Audio/Wristbands.wav", volume: 0.2, pan: 0.0, loop: true)
-        }
+        
     }
     
     override func update(delta: CCTime)
     {
+        super.update(delta)
         if(gameState == .Playing)
         {
-            scrollSpeed = max(80,CGFloat(points/2+80))
+            scrollSpeed = max(100,CGFloat(points/2+100))
             
             //limits velocity between -infinity and 200
             let velocityY = clampf(Float(hero.physicsBody.velocity.y), -Float(CGFloat.max), 150)
@@ -284,46 +184,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         obstacles.append(obstacle)
     }
     
-    func chooseStringToPutOnCarrot() -> String
-    {
-        let random = Int(arc4random_uniform(UInt32(choices.count)))
-        if(sinceRightAnswer > 4)
-        {
-            sinceRightAnswer = 0
-//            println("TOO LONG NO ANSWER")
-            return answer
-        }
-        if choices[random] != lastWordChosen
-        {
-            lastWordChosen = choices[random]
-            if(choices[random] == answer)
-            {
-                sinceRightAnswer = 0
-            }
-            else
-            {
-                sinceRightAnswer++
-            }
-            return choices[random]
-        }
-        else
-        {
-            return chooseStringToPutOnCarrot()
-        }
-    }
-    
-    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, level: CCNode!) -> Bool
-    {
-        gamePhysicsNode.space.addPostStepBlock(
-        { () -> Void in
-            if(self.gameState == .Playing)
-            {
-                self.audio.playEffect("Audio/ShutDownNoise.wav", volume: 0.8, pitch: 1.0, pan: 0.0, loop: false)
-                self.triggerGameOver()
-            }
-        }, key: hero)
-        return true
-    }
+    //level collision taken care of in Gameplay
     
     //detects collisions between the hero and the goal
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, goal: CCNode!) -> Bool
@@ -342,70 +203,51 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         if(gameState == .Playing)
         {
             hero.physicsBody.applyImpulse(CGPoint(x: 0, y: 10000))
-            println("\(answer) and \(question)")
-            println(statArray[question])
-            var wordThing = statArray[answer] ?? WordStat(word: answer, definition: question, correctResponses: 0, wrongResponses: 0)
-//            hero.physicsBody.velocity = CGPoint(x: hero.physicsBody.velocity.x, y: 2000)
-            answerBackground.physicsBody = nil
-            //println(answerBackground.name)
-            if(answerBackground.name == answer)
-            {
-                println("Right Answer")
-                self.audio.playEffect("Audio/CorrectChime.wav", volume: 0.7, pitch: 1.0, pan: 0.0, loop: false)
-                //var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: question, correctResponses: 0, wrongResponses: 0)
-                wordThing.correctResponses = wordThing.correctResponses + 1
-                statArray[answer] = wordThing
-                answerBackground.animationManager.runAnimationsForSequenceNamed("popAnswer")
-                handleRightAnswer()
-            }
-            else
-            {
-                self.audio.playEffect("Audio/IncorrectChime.wav", volume: 1.0, pitch: 1.0, pan: 0.0, loop: false)
-                println("Wrong Answer")
-                //println("\(answer) and \(question)")
-                //var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: gameData.quizWords[answerBackground.name]!, correctResponses: 0, wrongResponses: 0)
-                wordThing.wrongResponses = wordThing.wrongResponses + 1
-                statArray[answer] = wordThing
-                answerBackground.animationManager.runAnimationsForSequenceNamed("wrongAnswer")
-                handleWrongAnswer()
-            }
+            super.dealWithWrongAndRightAnswers(answerBackground)
+//            println("\(answer) and \(question)")
+//            println(statArray[question])
+//            var wordThing = statArray[answer] ?? WordStat(word: answer, definition: question, correctResponses: 0, wrongResponses: 0)
+////            hero.physicsBody.velocity = CGPoint(x: hero.physicsBody.velocity.x, y: 2000)
+//            answerBackground.physicsBody = nil
+//            //println(answerBackground.name)
+//            if(answerBackground.name == answer)
+//            {
+//                println("Right Answer")
+//                self.audio.playEffect("Audio/CorrectChime.wav", volume: 0.7, pitch: 1.0, pan: 0.0, loop: false)
+//                //var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: question, correctResponses: 0, wrongResponses: 0)
+//                wordThing.correctResponses = wordThing.correctResponses + 1
+//                statArray[answer] = wordThing
+//                answerBackground.animationManager.runAnimationsForSequenceNamed("popAnswer")
+//                handleRightAnswer()
+//            }
+//            else
+//            {
+//                self.audio.playEffect("Audio/IncorrectChime.wav", volume: 1.0, pitch: 1.0, pan: 0.0, loop: false)
+//                println("Wrong Answer")
+//                //println("\(answer) and \(question)")
+//                //var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: gameData.quizWords[answerBackground.name]!, correctResponses: 0, wrongResponses: 0)
+//                wordThing.wrongResponses = wordThing.wrongResponses + 1
+//                statArray[answer] = wordThing
+//                answerBackground.animationManager.runAnimationsForSequenceNamed("wrongAnswer")
+//                handleWrongAnswer()
+//            }
         }
         return true
     }
     
-    func handleRightAnswer()
+    override func handleRightAnswer()
     {
-        if(gameState == .Playing)
-        {
-//            println("YOU WON YAY")
-            points = points + 10
-            chooseQuestionAndAnswer()
-            pauseForReadingQuestion()
-        }
+        super.handleRightAnswer()
     }
     
-    func pauseForReadingQuestion()
+    override func pauseForReadingQuestion()
     {
-        if(gameState == .Playing)
-        {
-            gameState = .TempPaused
-            gamePhysicsNode.paused = true
-            pauseToReadQuestion.visible = true
-            if(numberOfRightAnswers < 3)
-            {
-                pauseToReadExplanation.visible = true
-                numberOfRightAnswers++
-            }
-        }
+        super.pauseForReadingQuestion()
     }
     
-    func handleWrongAnswer()
+    override func handleWrongAnswer()
     {
-        if(gameState == .Playing)
-        {
-            points = points - 5
-//            println("You ARE WRONG VERY WRONG")
-        }
+        super.handleWrongAnswer()
     }
     
     func retryButton()
@@ -416,86 +258,6 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         scene.addChild(flappyScene)
         let transition = CCTransition(fadeWithDuration: 0.8)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
-    }
-    
-    func downloadTheseFlashcardsButton()
-    {
-        var downloadsArray = NSUserDefaults.standardUserDefaults().arrayForKey("downloads") as? [Dictionary<String,String>] ?? [Dictionary<String,String>]()
-        var tempDictionary = gameData.quizWords
-        tempDictionary["GDidVarsha"] = gameData.id
-        tempDictionary["GDtitleVarsha"] = gameData.title
-        tempDictionary["GDcreatorVarsha"] = gameData.createdBy
-        downloadsArray.append(tempDictionary)
-        NSUserDefaults.standardUserDefaults().setObject(downloadsArray, forKey: "downloads")
-        NSUserDefaults.standardUserDefaults().synchronize()
-    }
-    
-    func toViewDownloadsButton()
-    {
-        mixpanel.track("To Another Scene", properties: ["To Scene": "Download", "From Scene": "GameOver"])
-        MiscMethods.toViewDownloadsScene()
-    }
-    
-    func toSearchSetsButton()
-    {
-        mixpanel.track("To Another Scene", properties: ["To Scene": "Search", "From Scene": "GameOver"])
-        MiscMethods.toSearchSetScene()
-    }
-    
-    func toStatScreenButton()
-    {
-        mixpanel.track("To Another Scene", properties: ["To Scene": "ViewStats", "From Scene": "GameOver"])
-        let scene = CCScene()
-        let statScene = CCBReader.load("StatScreen") as! StatScreen
-        statScene.statsArray = statArray.values.array
-        statScene.gameData = gameData
-        scene.addChild(statScene)
-        let transition = CCTransition(fadeWithDuration: 0.8)
-        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
-    }
-    
-    func pauseGame()
-    {
-        if(gameState == .Playing)
-        {
-            gameState = .Paused
-            gamePhysicsNode.paused = true
-            parent.addChild(pausePopup)
-//            println("POPUP")
-        }
-    }
-    
-    func resumeGame()
-    {
-        parent.removeChild(pausePopup)
-        gameState = .Playing
-        gamePhysicsNode.paused = false
-//        println("RESUME")
-    }
-    
-    func switchQAndAButton()
-    {
-        isWordFirst = !isWordFirst
-        //chooseQuestionAndAnswer()
-    }
-    
-    func quitGame()
-    {
-        mixpanel.track("Quit Game")
-        triggerGameOver()
-    }
-    
-    //handles what happens when the game is over
-    func triggerGameOver()
-    {
-        //audio.playBg("Audio/ObsidianMirror.wav", loop: true)
-        mixpanel.track("Game Over", properties: ["Score Level": Int(Float(points)/20), "Raw Score": points])
-        audio.playBg("Audio/ObsidianMirror.wav", volume: 0.3, pan: 0.0, loop: true)
-        gameState = .GameOver
-        GOscoreLabel.string = "Score: \(points)"
-        GOsetNameLabel.string = "Quiz Played: \(gameData.title)"
-        parent.addChild(popup)
-//        println("POPUP")
     }
 }
 

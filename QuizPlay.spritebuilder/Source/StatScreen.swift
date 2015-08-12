@@ -112,7 +112,7 @@ class StatScreen: CCNode, CCTableViewDataSource
         MiscMethods.toGameplayScene(gameData)
     }
     
-    func toSearchSetScreen()
+    func toSearchSetScene()
     {
         MiscMethods.toSearchSetScene()
     }
