@@ -499,8 +499,8 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.30015119910240173</real>
-											<real>0.30015119910240173</real>
+											<real>0.20575597882270813</real>
+											<real>0.15789380669593811</real>
 											<real>0.30015119910240173</real>
 											<real>1</real>
 										</array>
@@ -523,10 +523,10 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.0</real>
-											<real>0.0</real>
-											<real>0.0</real>
-											<real>127</real>
+											<real>0.70938938856124878</real>
+											<real>0.70938938856124878</real>
+											<real>0.70938938856124878</real>
+											<real>1</real>
 										</array>
 									</dict>
 									<dict>
@@ -820,9 +820,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.5035211443901062</real>
+											<real>0.28096958994865417</real>
+											<real>0.49943789839744568</real>
 											<real>0.85438865423202515</real>
-											<real>0.84687143564224243</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -833,8 +833,8 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.35971701145172119</real>
-											<real>0.35971701145172119</real>
+											<real>0.17846666276454926</real>
+											<real>0.27020794153213501</real>
 											<real>0.35971701145172119</real>
 											<real>1</real>
 										</array>
@@ -857,10 +857,10 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.0</real>
-											<real>0.0</real>
-											<real>0.0</real>
-											<real>127</real>
+											<real>0.70784127712249756</real>
+											<real>0.70784127712249756</real>
+											<real>0.70784127712249756</real>
+											<real>1</real>
 										</array>
 									</dict>
 									<dict>
@@ -923,7 +923,7 @@
 										<key>value</key>
 										<array>
 											<real>150</real>
-											<real>116</real>
+											<real>111</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -972,7 +972,7 @@
 										<key>value</key>
 										<array>
 											<real>40</real>
-											<real>60</real>
+											<real>50</real>
 											<integer>0</integer>
 											<integer>0</integer>
 										</array>
@@ -1154,9 +1154,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.65183913707733154</real>
-											<real>0.93813002109527588</real>
-											<real>0.6786959171295166</real>
+											<real>0.36814084649085999</real>
+											<real>0.7122156023979187</real>
+											<real>0.44857671856880188</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -1167,9 +1167,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
+											<real>0.099099427461624146</real>
 											<real>0.3260008692741394</real>
-											<real>0.3260008692741394</real>
-											<real>0.3260008692741394</real>
+											<real>0.32546168565750122</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -1191,10 +1191,10 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.0</real>
-											<real>0.0</real>
-											<real>0.0</real>
-											<real>127</real>
+											<real>1</real>
+											<real>1</real>
+											<real>1</real>
+											<real>1</real>
 										</array>
 									</dict>
 									<dict>
@@ -1257,7 +1257,7 @@
 										<key>value</key>
 										<array>
 											<real>150.5</real>
-											<real>176</real>
+											<real>162.5</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -1306,7 +1306,7 @@
 										<key>value</key>
 										<array>
 											<real>40</real>
-											<real>60</real>
+											<real>50</real>
 											<integer>0</integer>
 											<integer>0</integer>
 										</array>
@@ -1364,6 +1364,19 @@
 									</dict>
 									<dict>
 										<key>name</key>
+										<string>backgroundColor|Normal</string>
+										<key>type</key>
+										<string>Color3</string>
+										<key>value</key>
+										<array>
+											<real>0.0</real>
+											<real>0.087100058794021606</real>
+											<real>0.43742799758911133</real>
+											<real>1</real>
+										</array>
+									</dict>
+									<dict>
+										<key>name</key>
 										<string>backgroundSpriteFrame|Highlighted</string>
 										<key>type</key>
 										<string>SpriteFrame</string>
@@ -1394,7 +1407,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>ccbResources/ccbButtonNormal.png</string>
+											<string></string>
 										</array>
 									</dict>
 									<dict>
@@ -1488,9 +1501,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
+											<real>0.74952125549316406</real>
 											<real>0.93813002109527588</real>
-											<real>0.65143156051635742</real>
-											<real>0.57693701982498169</real>
+											<real>0.84305518865585327</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -1501,9 +1514,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.3260008692741394</real>
-											<real>0.3260008692741394</real>
-											<real>0.3260008692741394</real>
+											<real>0.23744916915893555</real>
+											<real>0.38261449337005615</real>
+											<real>0.2824958860874176</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -1525,10 +1538,10 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.0</real>
-											<real>0.0</real>
-											<real>0.0</real>
-											<real>127</real>
+											<real>1</real>
+											<real>1</real>
+											<real>1</real>
+											<real>1</real>
 										</array>
 									</dict>
 									<dict>
@@ -1591,7 +1604,7 @@
 										<key>value</key>
 										<array>
 											<real>150</real>
-											<real>226</real>
+											<real>209</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -1798,7 +1811,7 @@
 										<key>value</key>
 										<array>
 											<real>150</real>
-											<real>266</real>
+											<real>249</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2131,8 +2144,8 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>150.5</real>
-											<real>368</real>
+											<real>150</real>
+											<real>351</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2169,7 +2182,7 @@
 										<string>Text</string>
 										<key>value</key>
 										<array>
-											<string>Flashcards: magic the gathering is overrated and hearthstone is too</string>
+											<string>Flashcards: magic the gathering is overratedjhbkkjkjj</string>
 											<false/>
 										</array>
 									</dict>
@@ -2339,7 +2352,7 @@
 										<key>value</key>
 										<array>
 											<real>150</real>
-											<real>408</real>
+											<real>391</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2456,9 +2469,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>1</real>
-											<real>0.018015403300523758</real>
 											<real>0.0</real>
+											<real>0.32623201608657837</real>
+											<real>1</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -2469,7 +2482,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>1</real>
+											<real>2</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -2480,9 +2493,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>1</real>
 											<real>0.0</real>
-											<real>0.1165320873260498</real>
+											<real>0.071447946131229401</real>
+											<real>1</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -2512,8 +2525,6 @@
 										</array>
 									</dict>
 								</array>
-								<key>selected</key>
-								<true/>
 							</dict>
 						</array>
 						<key>customClass</key>
@@ -2625,7 +2636,7 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>600</real>
+							<real>63.343620300292969</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -2743,6 +2754,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
@@ -2798,7 +2811,7 @@
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>0.0</real>
+			<real>1.0666667222976685</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>

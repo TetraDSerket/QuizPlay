@@ -47,4 +47,10 @@ class MainScene: CCNode
             CCDirector.sharedDirector().presentScene(creditsScene, withTransition: transition)
         }
     }
+    
+    func openQuizlet()
+    {
+        let url = NSURL(fileURLWithPath: "https://quizlet.com/create-set")
+        UIApplication.sharedApplication().openURL(url!)
+    }
 }

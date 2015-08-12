@@ -112,6 +112,11 @@ class StatScreen: CCNode, CCTableViewDataSource
         MiscMethods.toGameplayScene(gameData)
     }
     
+    func toSearchSetScreen()
+    {
+        MiscMethods.toSearchSetScene()
+    }
+    
     func tableViewNumberOfRows(tableView: CCTableView) -> UInt
     {
         return UInt(statsArray.count)

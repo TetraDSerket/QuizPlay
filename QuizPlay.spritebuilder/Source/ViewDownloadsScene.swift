@@ -91,6 +91,7 @@ class ViewDownloadsScene: CCNode, CCTableViewDataSource
     
     func playButtonPressed(button: CCButton!)
     {
+        loadingScreen.visible = true
         var quizWordsAndGameInfo = downloadsArray[button.name.toInt()!]
         var gameData: GameData = GameData()
         gameData.title = quizWordsAndGameInfo.removeValueForKey("GDtitleVarsha")

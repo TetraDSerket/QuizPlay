@@ -13,13 +13,12 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
 {
     enum GameState
     {
-        case Playing, GameOver, Tutorial, Paused
+        case Playing, GameOver, Tutorial, Paused, TempPaused
     }
     
     var mixpanel = Mixpanel.sharedInstance()
     var isWordFirst: Bool = true//if true, the word will be first and the definition afterwards in the Dictionary
     var numberOfOptions: Int = 4
-    
     weak var hero: CCSprite!
     var gameState: GameState = .Tutorial
     weak var gamePhysicsNode: CCPhysicsNode!
@@ -32,7 +31,10 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
     weak var questionLabel: CCLabelTTF!
     weak var tutorialScreen: CCNode!
     weak var pauseScreen: CCNode!
+    weak var pauseToReadQuestion: CCNode!
+    weak var pauseToReadExplanation: CCNode!
     var statArray = Dictionary<String,WordStat>()
+    var numberOfRightAnswers: Int = 0
     var popup: FlappyGameOver!
     var pausePopup: CCNode!
     var sinceTouch: CCTime = 0
@@ -167,7 +169,6 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
             gameState = .Playing
             hero.positionType = CCPositionTypeMake(.Points, .Points, .BottomLeft)
             gamePhysicsNode.paused = false
-            
             audio.playBg("Audio/Wristbands.wav", volume: 0.2, pan: 0.0, loop: true)
         }
         if (gameState == .Playing)
@@ -176,6 +177,14 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
             hero.physicsBody.applyImpulse(ccp(0, 3000))
             hero.physicsBody.applyAngularImpulse(-5000)
             sinceTouch = 0
+        }
+        if(gameState == .TempPaused)
+        {
+            gameState = .Playing
+            pauseToReadQuestion.visible = false
+            pauseToReadExplanation.visible = false
+            gamePhysicsNode.paused = false
+            //audio.playBg("Audio/Wristbands.wav", volume: 0.2, pan: 0.0, loop: true)
         }
     }
     
@@ -323,7 +332,7 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
         goal.removeFromParent()
         if(gameState == .Playing)
         {
-            points++
+            //points++
         }
         return true
     }
@@ -371,6 +380,22 @@ class GameplayFlappy: CCNode, CCPhysicsCollisionDelegate
 //            println("YOU WON YAY")
             points = points + 10
             chooseQuestionAndAnswer()
+            pauseForReadingQuestion()
+        }
+    }
+    
+    func pauseForReadingQuestion()
+    {
+        if(gameState == .Playing)
+        {
+            gameState = .TempPaused
+            gamePhysicsNode.paused = true
+            pauseToReadQuestion.visible = true
+            if(numberOfRightAnswers < 3)
+            {
+                pauseToReadExplanation.visible = true
+                numberOfRightAnswers++
+            }
         }
     }
     
