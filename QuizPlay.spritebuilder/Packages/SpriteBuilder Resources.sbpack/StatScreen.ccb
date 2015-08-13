@@ -14,7 +14,7 @@
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
-	<integer>1</integer>
+	<integer>2</integer>
 	<key>currentSequenceId</key>
 	<integer>0</integer>
 	<key>docDimensionsType</key>
@@ -1002,7 +1002,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>114.5</real>
+									<real>92.5</real>
 									<real>22.5</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -1085,7 +1085,7 @@
 								<string>String</string>
 								<key>value</key>
 								<array>
-									<string>Search for Flashcards</string>
+									<string>Search for more!</string>
 									<false/>
 								</array>
 							</dict>
@@ -1115,9 +1115,9 @@
 								<string>Color3</string>
 								<key>value</key>
 								<array>
-									<real>0.49120348691940308</real>
-									<real>0.67176038026809692</real>
-									<real>1</real>
+									<real>0.22985087335109711</real>
+									<real>0.31354555487632751</real>
+									<real>0.46887600421905518</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -1329,8 +1329,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -1364,7 +1362,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>289.75</real>
+									<real>246</real>
 									<real>22.5</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -1477,9 +1475,9 @@
 								<string>Color3</string>
 								<key>value</key>
 								<array>
-									<real>0.49120348691940308</real>
-									<real>0.67176038026809692</real>
-									<real>1</real>
+									<real>0.14536543190479279</real>
+									<real>0.19829677045345306</real>
+									<real>0.29653298854827881</real>
 									<real>1</real>
 								</array>
 							</dict>

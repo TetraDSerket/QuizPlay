@@ -23,6 +23,8 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     var nameOfGame: String!
     var startTime: NSTimeInterval = NSDate().timeIntervalSince1970
     var startTimeForTempPauseScreen: NSTimeInterval!
+    weak var tutorialScreen: CCNode!
+    weak var gamePhysicsNode: CCPhysicsNode!
     
     //Controlling question allocation
     var isWordFirst: Bool = true
@@ -38,9 +40,6 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     var answer: String!
     var choices = [String]()
     var lastWordChosen: String!
-    
-    //Gameplay
-    weak var gamePhysicsNode: CCPhysicsNode!
     
     //Score
     weak var scoreLabel: CCLabelTTF!
@@ -58,12 +57,18 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     //Pause Screen
     var pausePopup: CCNode!
     weak var pauseScreen: CCNode!
+    weak var tempPausesButton: CCButton!
     
     //Temp Pause for Questions
     weak var pauseToReadQuestion: CCNode!
     weak var pauseToReadExplanation: CCNode!
     weak var readQuestionLabel: CCLabelTTF!
     var numberOfRightAnswers: Int = 0
+    var tempPauseEnabled: Bool = NSUserDefaults.standardUserDefaults().boolForKey("flappyTempPauseEnabled") ?? true
+    { didSet {
+        NSUserDefaults.standardUserDefaults().setBool(tempPauseEnabled, forKey: "flappyTempPauseEnabled")
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }        }
     
     //collect stats
     var statArray = Dictionary<String,WordStat>()
@@ -74,6 +79,9 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
         gamePhysicsNode.collisionDelegate = self
         //gamePhysicsNode.debugDraw = true
         userInteractionEnabled = true
+        pauseToReadExplanation.visible = false
+        pauseToReadQuestion.visible = false
+        tutorialScreen.visible = true
     }
     
     override func onEnter()
@@ -93,7 +101,14 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!)
     {
-        if(gameState == .TempPaused)
+        if(gameState == .Tutorial)
+        {
+            tutorialScreen.visible = false
+            gameState = .Playing
+            gamePhysicsNode.paused = false
+            audio.playBg("Audio/Wristbands.wav", volume: 0.2, pan: 0.0, loop: true)
+        }
+        if(gameState == .TempPaused && tempPauseEnabled)
         {
             var deltaTime = NSDate().timeIntervalSince1970 - startTimeForTempPauseScreen
             if(deltaTime > 2)
@@ -112,7 +127,7 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     
     override func update(delta: CCTime)
     {
-        if(gameState == .TempPaused)
+        if(gameState == .TempPaused && tempPauseEnabled)
         {
             var deltaTime = NSDate().timeIntervalSince1970 - startTimeForTempPauseScreen
             if(deltaTime > 2)
@@ -260,7 +275,7 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     
     func pauseForReadingQuestion()
     {
-        if(gameState == .Playing)
+        if(gameState == .Playing && tempPauseEnabled)
         {
             startTimeForTempPauseScreen = NSDate().timeIntervalSince1970
             gameState = .TempPaused
@@ -283,7 +298,7 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     }
     
     
-    //All those buttons
+    //All buttons on Game Over Screen except for Replay
     func downloadTheseFlashcardsButton()
     {
         var downloadsArray = NSUserDefaults.standardUserDefaults().arrayForKey("downloads") as? [Dictionary<String,String>] ?? [Dictionary<String,String>]()
@@ -295,19 +310,16 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
         NSUserDefaults.standardUserDefaults().setObject(downloadsArray, forKey: "downloads")
         NSUserDefaults.standardUserDefaults().synchronize()
     }
-    
     func toViewDownloadsButton()
     {
         mixpanel.track("To Another Scene", properties: ["To Scene": "Download", "From Scene": "\(nameOfGame)GameOver"])
         MiscMethods.toViewDownloadsScene()
     }
-    
     func toSearchSetsButton()
     {
         mixpanel.track("To Another Scene", properties: ["To Scene": "Search", "From Scene": "\(nameOfGame)GameOver"])
         MiscMethods.toSearchSetScene()
     }
-    
     func toStatScreenButton()
     {
         mixpanel.track("To Another Scene", properties: ["To Scene": "ViewStats", "From Scene": "\(nameOfGame)GameOver"])
@@ -319,7 +331,8 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
         let transition = CCTransition(fadeWithDuration: 0.8)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
-    
+
+    //Pause Screen Related Buttons
     func pauseGame()
     {
         if(gameState == .Playing)
@@ -327,9 +340,9 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
             gameState = .Paused
             gamePhysicsNode.paused = true
             parent.addChild(pausePopup)
+            setTempPausesButtonTitle()
         }
     }
-    
     func resumeGame()
     {
         parent.removeChild(pausePopup)
@@ -337,17 +350,26 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
         gamePhysicsNode.paused = false
         //        println("RESUME")
     }
-    
-//    func switchQAndAButton()
-//    {
-//        isWordFirst = !isWordFirst
-//        //chooseQuestionAndAnswer()
-//    }
-    
     func quitGame()
     {
         mixpanel.track("Quit Game", properties: ["Game Name": nameOfGame])
         triggerGameOver()
+    }
+    func switchBoolTempPauses()
+    {
+        tempPauseEnabled = !tempPauseEnabled
+        setTempPausesButtonTitle()
+    }
+    func setTempPausesButtonTitle()
+    {
+        if(tempPauseEnabled)
+        {
+            tempPausesButton.title = "Disable Temporary Pauses"
+        }
+        else
+        {
+            tempPausesButton.title = "Enable Temporary Pauses"
+        }
     }
     
     //handles what happens when the game is over
@@ -363,5 +385,11 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
         //        println("POPUP")
     }
 }
+
+//    func switchQAndAButton()
+//    {
+//        isWordFirst = !isWordFirst
+//        //chooseQuestionAndAnswer()
+//    }
 
 

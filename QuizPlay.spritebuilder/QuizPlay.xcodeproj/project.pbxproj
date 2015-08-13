@@ -13,7 +13,6 @@
 		2819B4601B56C98E00C358E9 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B45F1B56C98E00C358E9 /* Obstacle.swift */; };
 		2819B4621B56C9EB00C358E9 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B4611B56C9EB00C358E9 /* Goal.swift */; };
 		28365CCF1B74679F000D1A37 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28365CCE1B74679F000D1A37 /* Images.xcassets */; };
-		28615AF41B58539F00E37B45 /* GameplayPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28615AF31B58539F00E37B45 /* GameplayPlatform.swift */; };
 		28615B061B585AB200E37B45 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28615AFF1B585A1000E37B45 /* Alamofire.framework */; };
 		28615B071B585AB200E37B45 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28615AFF1B585A1000E37B45 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28615B0C1B585B2000E37B45 /* WebHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28615B0B1B585B2000E37B45 /* WebHelper.swift */; };
@@ -21,6 +20,7 @@
 		28615B101B587E6000E37B45 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */; };
 		286ABEE51B69409C0097CE58 /* ViewDownloadsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286ABEE41B69409C0097CE58 /* ViewDownloadsScene.swift */; };
 		289FB4831B7BE32F006E3F4E /* Gameplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289FB4821B7BE32F006E3F4E /* Gameplay.swift */; };
+		289FB48A1B7D0953006E3F4E /* GameplayShoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289FB4891B7D0953006E3F4E /* GameplayShoot.swift */; };
 		28A4FF391B5EB0300024B821 /* SearchSetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A4FF381B5EB0300024B821 /* SearchSetScene.swift */; };
 		28A812911B73C00B000B58A7 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A812901B73C00B000B58A7 /* Credits.swift */; };
 		28DDACB71B713A1F006E6687 /* StatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DDACB61B713A1F006E6687 /* StatScreen.swift */; };
@@ -223,13 +223,13 @@
 		2819B45F1B56C98E00C358E9 /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Obstacle.swift; path = Source/Obstacle.swift; sourceTree = "<group>"; };
 		2819B4611B56C9EB00C358E9 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Goal.swift; path = Source/Goal.swift; sourceTree = "<group>"; };
 		28365CCE1B74679F000D1A37 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		28615AF31B58539F00E37B45 /* GameplayPlatform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplayPlatform.swift; path = Source/GameplayPlatform.swift; sourceTree = "<group>"; };
 		28615AF71B585A1000E37B45 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = ../alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		28615B0B1B585B2000E37B45 /* WebHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebHelper.swift; path = Source/WebHelper.swift; sourceTree = "<group>"; };
 		28615B0D1B585DCD00E37B45 /* QuizletResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizletResponseModel.swift; path = Source/QuizletResponseModel.swift; sourceTree = "<group>"; };
 		28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		286ABEE41B69409C0097CE58 /* ViewDownloadsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewDownloadsScene.swift; path = Source/ViewDownloadsScene.swift; sourceTree = "<group>"; };
 		289FB4821B7BE32F006E3F4E /* Gameplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gameplay.swift; sourceTree = "<group>"; };
+		289FB4891B7D0953006E3F4E /* GameplayShoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameplayShoot.swift; sourceTree = "<group>"; };
 		28A4FF381B5EB0300024B821 /* SearchSetScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchSetScene.swift; path = Source/SearchSetScene.swift; sourceTree = "<group>"; };
 		28A812901B73C00B000B58A7 /* Credits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Credits.swift; path = Source/Credits.swift; sourceTree = "<group>"; };
 		28DDACB61B713A1F006E6687 /* StatScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatScreen.swift; path = Source/StatScreen.swift; sourceTree = "<group>"; };
@@ -549,9 +549,9 @@
 				7A046D7519E84C36004C4763 /* MainScene.swift */,
 				28A4FF381B5EB0300024B821 /* SearchSetScene.swift */,
 				28A812901B73C00B000B58A7 /* Credits.swift */,
-				28615AF31B58539F00E37B45 /* GameplayPlatform.swift */,
 				2819B4431B55777F00C358E9 /* GameplaySling.swift */,
 				2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */,
+				289FB4891B7D0953006E3F4E /* GameplayShoot.swift */,
 				289FB4821B7BE32F006E3F4E /* Gameplay.swift */,
 				28DE0C341B6A96A200E418BA /* MiscMethods.swift */,
 				286ABEE41B69409C0097CE58 /* ViewDownloadsScene.swift */,
@@ -1040,9 +1040,9 @@
 				28A4FF391B5EB0300024B821 /* SearchSetScene.swift in Sources */,
 				2819B45E1B56C4B500C358E9 /* GameplayFlappy.swift in Sources */,
 				28DE0C351B6A96A200E418BA /* MiscMethods.swift in Sources */,
-				28615AF41B58539F00E37B45 /* GameplayPlatform.swift in Sources */,
 				2819B4621B56C9EB00C358E9 /* Goal.swift in Sources */,
 				28615B0E1B585DCD00E37B45 /* QuizletResponseModel.swift in Sources */,
+				289FB48A1B7D0953006E3F4E /* GameplayShoot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

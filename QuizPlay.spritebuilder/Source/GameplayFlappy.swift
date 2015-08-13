@@ -21,7 +21,6 @@ class GameplayFlappy: Gameplay
     weak var ground2: CCSprite!
     weak var obstaclesLayer: CCNode!
 
-    weak var tutorialScreen: CCNode!
     var sinceTouch: CCTime = 0
     var scrollSpeed: CGFloat = 80
 
@@ -69,17 +68,13 @@ class GameplayFlappy: Gameplay
     
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent)
     {
-        super.touchBegan(touch, withEvent: event)
         if(gameState == .Tutorial)
         {
-            gameState = .Playing
             hero.positionType = CCPositionTypeMake(.Points, .Points, .BottomLeft)
-            gamePhysicsNode.paused = false
-            audio.playBg("Audio/Wristbands.wav", volume: 0.2, pan: 0.0, loop: true)
         }
+        super.touchBegan(touch, withEvent: event)
         if (gameState == .Playing)
         {
-            tutorialScreen.visible = false
             hero.physicsBody.applyImpulse(ccp(0, 3000))
             hero.physicsBody.applyAngularImpulse(-5000)
             sinceTouch = 0
@@ -250,6 +245,7 @@ class GameplayFlappy: Gameplay
         super.handleWrongAnswer()
     }
     
+    //On the Game Over scene
     func retryButton()
     {
         let scene = CCScene()
