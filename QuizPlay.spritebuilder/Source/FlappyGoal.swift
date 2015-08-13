@@ -1,5 +1,5 @@
 //
-//  Goal.swift
+//  FlappyGoal.swift
 //  QuizPlay
 //
 //  Created by Varsha Ramakrishnan on 7/15/15.
@@ -10,7 +10,7 @@ import UIKit
 
 import Foundation
 
-class Goal: CCNode
+class FlappyGoal: CCNode
 {
     func didLoadFromCCB()
     {

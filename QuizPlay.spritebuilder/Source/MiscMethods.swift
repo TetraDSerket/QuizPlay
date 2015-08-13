@@ -62,12 +62,26 @@ class MiscMethods: CCNode
         CCDirector.sharedDirector().presentScene(viewDownloadsScene, withTransition: transition)
     }
     
-    static func toGameplayScene(gameData: GameData)
+    static func toGameplayScene(gameData: GameData, nameOfGame: String)
     {
         let scene = CCScene()
-        let flappyScene = CCBReader.load("GameplayFlappy") as! GameplayFlappy
-        flappyScene.gameData = gameData
-        scene.addChild(flappyScene)
+//        var gameScene = CCBReader.load("FlappyGameplay") as! FlappyGameplay
+        switch(nameOfGame)
+        {
+        case "Flappy":
+            let gameScene = CCBReader.load("FlappyGameplay") as! FlappyGameplay
+            gameScene.gameData = gameData
+            scene.addChild(gameScene)
+        case "Shoot":
+            let gameScene = CCBReader.load("ShootGameplay") as! ShootGameplay
+            gameScene.gameData = gameData
+            scene.addChild(gameScene)
+        default:
+            println("default got called")
+            let gameScene = CCBReader.load("FlappyGameplay") as! FlappyGameplay
+            gameScene.gameData = gameData
+            scene.addChild(gameScene)
+        }
         let transition = CCTransition(fadeWithDuration: 0.8)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }

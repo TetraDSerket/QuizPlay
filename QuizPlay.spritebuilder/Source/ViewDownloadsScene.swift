@@ -29,6 +29,7 @@ class ViewDownloadsScene: CCNode, CCTableViewDataSource
     weak var cellPlayButton: CCButton!
     weak var cellDeleteButton: CCButton!
     weak var loadingScreen: CCNode!
+    var chooseGamePopup: ChooseGameScene!
     var tableView: CCTableView!
     
     var downloadsArray: [Dictionary<String, String>]!
@@ -58,6 +59,10 @@ class ViewDownloadsScene: CCNode, CCTableViewDataSource
         
         clippingNode.stencil = stencilNode
         clippingNode.alphaThreshold = 0.0
+        
+        chooseGamePopup = CCBReader.load("ChooseGameScene") as! ChooseGameScene
+        chooseGamePopup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
+        chooseGamePopup.position = CGPoint(x: 0.5, y: 0.5)
     }
     
     func tableView(tableView: CCTableView, nodeForRowAtIndex index: UInt) -> CCTableViewCell
@@ -99,7 +104,9 @@ class ViewDownloadsScene: CCNode, CCTableViewDataSource
         gameData.createdBy = quizWordsAndGameInfo.removeValueForKey("GDcreatorVarsha")
         gameData.quizWords = quizWordsAndGameInfo
         
-        MiscMethods.toGameplayScene(gameData)
+        //need to open Game Choice Scene here
+        chooseGamePopup.gameData = gameData
+        parent.addChild(chooseGamePopup)
     }
     
     func deleteButtonPressed(button: CCButton!)

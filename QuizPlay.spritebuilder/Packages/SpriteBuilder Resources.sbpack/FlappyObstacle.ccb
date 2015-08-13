@@ -1284,8 +1284,6 @@
 						<array/>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1295,7 +1293,7 @@
 				<key>children</key>
 				<array/>
 				<key>customClass</key>
-				<string>Goal</string>
+				<string>FlappyGoal</string>
 				<key>displayName</key>
 				<string>CCNode</string>
 				<key>memberVarAssignmentName</key>
@@ -1429,10 +1427,12 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string>Obstacle</string>
+		<string>FlappyObstacle</string>
 		<key>displayName</key>
 		<string>CCNode</string>
 		<key>memberVarAssignmentName</key>

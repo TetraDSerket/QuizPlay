@@ -1,15 +1,15 @@
 //
-//  GameplayShoot.swift
+//  FlappyGameplay.swift
 //  QuizPlay
 //
-//  Created by Varsha Ramakrishnan on 8/13/15.
+//  Created by Varsha Ramakrishnan on 7/15/15.
 //  Copyright (c) 2015 Apportable. All rights reserved.
 //
 
 import Foundation
 import Mixpanel
 
-class GameplayShoot: Gameplay
+class FlappyGameplay: Gameplay
 {
     enum GameState
     {
@@ -17,11 +17,14 @@ class GameplayShoot: Gameplay
     }
     
     weak var hero: CCSprite!
+    weak var ground1: CCSprite!
+    weak var ground2: CCSprite!
     weak var obstaclesLayer: CCNode!
-    
+
     var sinceTouch: CCTime = 0
     var scrollSpeed: CGFloat = 80
-    
+
+    var grounds = [CCSprite]() //array for the ground sprites
     var obstacles : [CCNode] = [] //array of obstacles
     let firstObstaclePosition : CGFloat = 100
     let distanceBetweenObstacles : CGFloat = 180
@@ -29,17 +32,34 @@ class GameplayShoot: Gameplay
     override func didLoadFromCCB()
     {
         super.didLoadFromCCB()
-        nameOfGame = "Shoot"
-        
+        nameOfGame = "Flappy"
+        //add the two grounds to the ground array
+        grounds.append(ground1)
+        grounds.append(ground2)
+    
         audio.preloadEffect("Audio/CorrectChime.wav")
         audio.preloadEffect("Audio/IncorrectChime.wav")
         audio.preloadEffect("Audio/ShutDownNoise.wav")
+//        //assigning MainScene as the collision delegate class
+//        gamePhysicsNode.collisionDelegate = self
+//        //gamePhysicsNode.debugDraw = true
+//        userInteractionEnabled = true
     }
     
     override func onEnter()
     {
         super.onEnter()
-        
+//        popup = CCBReader.load("FlappyGameOver", owner: self) as! FlappyGameOver
+//        popup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
+//        popup.position = CGPoint(x: 0.5, y: 0.5)
+//        
+//        pausePopup = CCBReader.load("PauseScreen", owner: self)
+//        pausePopup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
+//        pausePopup.position = CGPoint(x: 0.5, y: 0.5)
+//        
+//        chooseQuestionAndAnswer()
+//        gamePhysicsNode.paused = true
+
         spawnNewObstacle()
         spawnNewObstacle()
         spawnNewObstacle()
@@ -104,18 +124,18 @@ class GameplayShoot: Gameplay
             
             //loop ground whenever the ground image is moved completely off the stage
             //go through grounds array
-//            for ground in grounds
-//            {
-//                //get the position of the ground on the world, and then on the screen
-//                let groundWorldPosition = gamePhysicsNode.convertToWorldSpace(ground.position)
-//                let groundScreenPosition = convertToNodeSpace(groundWorldPosition)
-//                //if the x-position of the side of the ground is less than the width of the ground (if its off screen)
-//                if groundScreenPosition.x <= (-ground.contentSize.width * CGFloat(ground.scaleX))
-//                {
-//                    //move the ground two ground-widths to the right
-//                    ground.position = ccp(ground.position.x + ground.contentSize.width * CGFloat(ground.scaleX) * 2 - 10, ground.position.y)
-//                }
-//            }
+            for ground in grounds
+            {
+                //get the position of the ground on the world, and then on the screen
+                let groundWorldPosition = gamePhysicsNode.convertToWorldSpace(ground.position)
+                let groundScreenPosition = convertToNodeSpace(groundWorldPosition)
+                //if the x-position of the side of the ground is less than the width of the ground (if its off screen)
+                if groundScreenPosition.x <= (-ground.contentSize.width * CGFloat(ground.scaleX))
+                {
+                    //move the ground two ground-widths to the right
+                    ground.position = ccp(ground.position.x + ground.contentSize.width * CGFloat(ground.scaleX) * 2 - 10, ground.position.y)
+                }
+            }
             
             for obstacle in obstacles
             {
@@ -147,7 +167,7 @@ class GameplayShoot: Gameplay
         }
         
         // create and add a new obstacle, cast as Obstacle
-        let obstacle = CCBReader.load("Obstacle") as! Obstacle
+        let obstacle = CCBReader.load("FlappyObstacle") as! FlappyObstacle
         //set position of new obstacle
         obstacle.position = ccp(prevObstaclePos + distanceBetweenObstacles, 0)
         //call Obstacle method to randomize position
@@ -179,33 +199,33 @@ class GameplayShoot: Gameplay
         {
             hero.physicsBody.applyImpulse(CGPoint(x: 0, y: 10000))
             super.dealWithWrongAndRightAnswers(answerBackground)
-            //            println("\(answer) and \(question)")
-            //            println(statArray[question])
-            //            var wordThing = statArray[answer] ?? WordStat(word: answer, definition: question, correctResponses: 0, wrongResponses: 0)
-            ////            hero.physicsBody.velocity = CGPoint(x: hero.physicsBody.velocity.x, y: 2000)
-            //            answerBackground.physicsBody = nil
-            //            //println(answerBackground.name)
-            //            if(answerBackground.name == answer)
-            //            {
-            //                println("Right Answer")
-            //                self.audio.playEffect("Audio/CorrectChime.wav", volume: 0.7, pitch: 1.0, pan: 0.0, loop: false)
-            //                //var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: question, correctResponses: 0, wrongResponses: 0)
-            //                wordThing.correctResponses = wordThing.correctResponses + 1
-            //                statArray[answer] = wordThing
-            //                answerBackground.animationManager.runAnimationsForSequenceNamed("popAnswer")
-            //                handleRightAnswer()
-            //            }
-            //            else
-            //            {
-            //                self.audio.playEffect("Audio/IncorrectChime.wav", volume: 1.0, pitch: 1.0, pan: 0.0, loop: false)
-            //                println("Wrong Answer")
-            //                //println("\(answer) and \(question)")
-            //                //var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: gameData.quizWords[answerBackground.name]!, correctResponses: 0, wrongResponses: 0)
-            //                wordThing.wrongResponses = wordThing.wrongResponses + 1
-            //                statArray[answer] = wordThing
-            //                answerBackground.animationManager.runAnimationsForSequenceNamed("wrongAnswer")
-            //                handleWrongAnswer()
-            //            }
+//            println("\(answer) and \(question)")
+//            println(statArray[question])
+//            var wordThing = statArray[answer] ?? WordStat(word: answer, definition: question, correctResponses: 0, wrongResponses: 0)
+////            hero.physicsBody.velocity = CGPoint(x: hero.physicsBody.velocity.x, y: 2000)
+//            answerBackground.physicsBody = nil
+//            //println(answerBackground.name)
+//            if(answerBackground.name == answer)
+//            {
+//                println("Right Answer")
+//                self.audio.playEffect("Audio/CorrectChime.wav", volume: 0.7, pitch: 1.0, pan: 0.0, loop: false)
+//                //var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: question, correctResponses: 0, wrongResponses: 0)
+//                wordThing.correctResponses = wordThing.correctResponses + 1
+//                statArray[answer] = wordThing
+//                answerBackground.animationManager.runAnimationsForSequenceNamed("popAnswer")
+//                handleRightAnswer()
+//            }
+//            else
+//            {
+//                self.audio.playEffect("Audio/IncorrectChime.wav", volume: 1.0, pitch: 1.0, pan: 0.0, loop: false)
+//                println("Wrong Answer")
+//                //println("\(answer) and \(question)")
+//                //var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: gameData.quizWords[answerBackground.name]!, correctResponses: 0, wrongResponses: 0)
+//                wordThing.wrongResponses = wordThing.wrongResponses + 1
+//                statArray[answer] = wordThing
+//                answerBackground.animationManager.runAnimationsForSequenceNamed("wrongAnswer")
+//                handleWrongAnswer()
+//            }
         }
         return true
     }
@@ -223,16 +243,22 @@ class GameplayShoot: Gameplay
     override func handleWrongAnswer()
     {
         super.handleWrongAnswer()
-    }
-    
-    //On the Game Over scene
-    func retryButton()
-    {
-        let scene = CCScene()
-        let flappyScene = CCBReader.load("GameplayFlappy") as! GameplayFlappy
-        flappyScene.gameData = gameData
-        scene.addChild(flappyScene)
-        let transition = CCTransition(fadeWithDuration: 0.8)
-        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
-    }
+    }    
 }
+
+
+//        if (gameOver == false)
+//        {
+//            gameOver = true
+//            scrollSpeed = 0
+//            hero.rotation = 90
+//            hero.physicsBody.allowsRotation = false
+//
+//            // just in case
+//            hero.stopAllActions()
+
+//makes a sequence that shakes the screen up and down (switch to 4,0 for side to side
+//            let move = CCActionEaseBounceOut(action: CCActionMoveBy(duration: 0.2, position: ccp(0, 4)))
+//            let moveBack = CCActionEaseBounceOut(action: move.reverse())
+//            let shakeSequence = CCActionSequence(array: [move, moveBack])
+//            runAction(shakeSequence)

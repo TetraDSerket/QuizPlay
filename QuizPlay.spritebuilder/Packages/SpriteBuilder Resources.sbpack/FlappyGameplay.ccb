@@ -840,7 +840,7 @@
 								<key>type</key>
 								<string>CCBFile</string>
 								<key>value</key>
-								<string>Hero.ccb</string>
+								<string>FlappyHero.ccb</string>
 							</dict>
 						</array>
 					</dict>
@@ -1881,8 +1881,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -3676,7 +3674,7 @@ your ship!</string>
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string>GameplayFlappy</string>
+		<string>FlappyGameplay</string>
 		<key>displayName</key>
 		<string>CCNode</string>
 		<key>memberVarAssignmentName</key>

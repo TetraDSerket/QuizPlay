@@ -154,7 +154,8 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     func dealWithQuizWordsLoaded(gameData: GameData) -> Void
     {
         loadingScreen.visible = false
-        MiscMethods.toGameplayScene(gameData)
+        //open Game Choice Scene here
+        MiscMethods.toGameplayScene(gameData, nameOfGame: "Flappy")
         buttonsAvailable = true
     }
     

@@ -1,5 +1,5 @@
 //
-//  Obstacle.swift
+//  FlappyObstacle.swift
 //  QuizPlay
 //
 //  Created by Varsha Ramakrishnan on 7/15/15.
@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class Obstacle : CCNode
+class FlappyObstacle : CCNode
 {
     //defining the carrot pictures
     weak var topCarrot : CCNode!

@@ -238,14 +238,14 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     
     func dealWithWrongAndRightAnswers(answerBackground: CCNode!)
     {
-        println("\(answer) and \(question)")
-        println(statArray[question])
+//        println("\(answer) and \(question)")
+//        println(statArray[question])
         var wordThing = statArray[answer] ?? WordStat(word: answer, definition: question, correctResponses: 0, wrongResponses: 0)
         answerBackground.physicsBody = nil
         //println(answerBackground.name)
         if(answerBackground.name == answer)
         {
-            println("Right Answer")
+//            println("Right Answer")
             self.audio.playEffect("Audio/CorrectChime.wav", volume: 0.7, pitch: 1.0, pan: 0.0, loop: false)
             wordThing.correctResponses = wordThing.correctResponses + 1
             statArray[answer] = wordThing
@@ -255,7 +255,7 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
         else
         {
             self.audio.playEffect("Audio/IncorrectChime.wav", volume: 1.0, pitch: 1.0, pan: 0.0, loop: false)
-            println("Wrong Answer")
+//            println("Wrong Answer")
             wordThing.wrongResponses = wordThing.wrongResponses + 1
             statArray[answer] = wordThing
             answerBackground.animationManager.runAnimationsForSequenceNamed("wrongAnswer")
@@ -327,10 +327,17 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
         let statScene = CCBReader.load("StatScreen") as! StatScreen
         statScene.statsArray = statArray.values.array
         statScene.gameData = gameData
+        statScene.nameOfGame = nameOfGame
         scene.addChild(statScene)
         let transition = CCTransition(fadeWithDuration: 0.8)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
+    //On the Game Over scene
+    func retryButton()
+    {
+        MiscMethods.toGameplayScene(gameData, nameOfGame: nameOfGame)
+    }
+
 
     //Pause Screen Related Buttons
     func pauseGame()

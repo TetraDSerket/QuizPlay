@@ -29,6 +29,7 @@ class StatScreen: CCNode, CCTableViewDataSource
     //keys are the words, each is connected to a wordstat object that tells about it
     var statsArray: [WordStat]!
     var gameData: GameData!
+    var nameOfGame: String!
     
     weak var stencilNode: CCNode!
     weak var clippingNode: CCClippingNode!
@@ -109,7 +110,7 @@ class StatScreen: CCNode, CCTableViewDataSource
     
     func replayGame()
     {
-        MiscMethods.toGameplayScene(gameData)
+        MiscMethods.toGameplayScene(gameData, nameOfGame: nameOfGame)
     }
     
     func toSearchSetScene()

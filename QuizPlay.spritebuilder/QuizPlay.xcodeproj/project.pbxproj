@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		28076DC01B61B03300B65802 /* FlappyGameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28076DBF1B61B03300B65802 /* FlappyGameOver.swift */; };
 		2819B4441B55777F00C358E9 /* GameplaySling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B4431B55777F00C358E9 /* GameplaySling.swift */; };
-		2819B45E1B56C4B500C358E9 /* GameplayFlappy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */; };
-		2819B4601B56C98E00C358E9 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B45F1B56C98E00C358E9 /* Obstacle.swift */; };
-		2819B4621B56C9EB00C358E9 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B4611B56C9EB00C358E9 /* Goal.swift */; };
+		2819B45E1B56C4B500C358E9 /* FlappyGameplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B45D1B56C4B500C358E9 /* FlappyGameplay.swift */; };
+		2819B4601B56C98E00C358E9 /* FlappyObstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B45F1B56C98E00C358E9 /* FlappyObstacle.swift */; };
+		2819B4621B56C9EB00C358E9 /* FlappyGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819B4611B56C9EB00C358E9 /* FlappyGoal.swift */; };
 		28365CCF1B74679F000D1A37 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28365CCE1B74679F000D1A37 /* Images.xcassets */; };
 		28615B061B585AB200E37B45 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28615AFF1B585A1000E37B45 /* Alamofire.framework */; };
 		28615B071B585AB200E37B45 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28615AFF1B585A1000E37B45 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -20,9 +20,11 @@
 		28615B101B587E6000E37B45 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */; };
 		286ABEE51B69409C0097CE58 /* ViewDownloadsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286ABEE41B69409C0097CE58 /* ViewDownloadsScene.swift */; };
 		289FB4831B7BE32F006E3F4E /* Gameplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289FB4821B7BE32F006E3F4E /* Gameplay.swift */; };
-		289FB48A1B7D0953006E3F4E /* GameplayShoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289FB4891B7D0953006E3F4E /* GameplayShoot.swift */; };
+		289FB48A1B7D0953006E3F4E /* ShootGameplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289FB4891B7D0953006E3F4E /* ShootGameplay.swift */; };
 		28A4FF391B5EB0300024B821 /* SearchSetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A4FF381B5EB0300024B821 /* SearchSetScene.swift */; };
 		28A812911B73C00B000B58A7 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A812901B73C00B000B58A7 /* Credits.swift */; };
+		28C991861B7D27630031478A /* ChooseGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C991851B7D27630031478A /* ChooseGameScene.swift */; };
+		28C991881B7D3D780031478A /* ShootObstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C991871B7D3D780031478A /* ShootObstacle.swift */; };
 		28DDACB71B713A1F006E6687 /* StatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DDACB61B713A1F006E6687 /* StatScreen.swift */; };
 		28DE0C351B6A96A200E418BA /* MiscMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE0C341B6A96A200E418BA /* MiscMethods.swift */; };
 		5B121030197484FA004C1E1D /* QuizPlayActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* QuizPlayActivity.m */; };
@@ -219,9 +221,9 @@
 		1F64D65D81BB63D309BDAD98 /* Pods-QuizPlay iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuizPlay iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuizPlay iOS/Pods-QuizPlay iOS.release.xcconfig"; sourceTree = "<group>"; };
 		28076DBF1B61B03300B65802 /* FlappyGameOver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FlappyGameOver.swift; path = Source/FlappyGameOver.swift; sourceTree = "<group>"; };
 		2819B4431B55777F00C358E9 /* GameplaySling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplaySling.swift; path = Source/GameplaySling.swift; sourceTree = "<group>"; };
-		2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplayFlappy.swift; path = Source/GameplayFlappy.swift; sourceTree = "<group>"; };
-		2819B45F1B56C98E00C358E9 /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Obstacle.swift; path = Source/Obstacle.swift; sourceTree = "<group>"; };
-		2819B4611B56C9EB00C358E9 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Goal.swift; path = Source/Goal.swift; sourceTree = "<group>"; };
+		2819B45D1B56C4B500C358E9 /* FlappyGameplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FlappyGameplay.swift; path = Source/FlappyGameplay.swift; sourceTree = "<group>"; };
+		2819B45F1B56C98E00C358E9 /* FlappyObstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FlappyObstacle.swift; path = Source/FlappyObstacle.swift; sourceTree = "<group>"; };
+		2819B4611B56C9EB00C358E9 /* FlappyGoal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FlappyGoal.swift; path = Source/FlappyGoal.swift; sourceTree = "<group>"; };
 		28365CCE1B74679F000D1A37 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		28615AF71B585A1000E37B45 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = ../alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		28615B0B1B585B2000E37B45 /* WebHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebHelper.swift; path = Source/WebHelper.swift; sourceTree = "<group>"; };
@@ -229,9 +231,11 @@
 		28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		286ABEE41B69409C0097CE58 /* ViewDownloadsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewDownloadsScene.swift; path = Source/ViewDownloadsScene.swift; sourceTree = "<group>"; };
 		289FB4821B7BE32F006E3F4E /* Gameplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gameplay.swift; sourceTree = "<group>"; };
-		289FB4891B7D0953006E3F4E /* GameplayShoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameplayShoot.swift; sourceTree = "<group>"; };
+		289FB4891B7D0953006E3F4E /* ShootGameplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShootGameplay.swift; sourceTree = "<group>"; };
 		28A4FF381B5EB0300024B821 /* SearchSetScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchSetScene.swift; path = Source/SearchSetScene.swift; sourceTree = "<group>"; };
 		28A812901B73C00B000B58A7 /* Credits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Credits.swift; path = Source/Credits.swift; sourceTree = "<group>"; };
+		28C991851B7D27630031478A /* ChooseGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseGameScene.swift; sourceTree = "<group>"; };
+		28C991871B7D3D780031478A /* ShootObstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShootObstacle.swift; sourceTree = "<group>"; };
 		28DDACB61B713A1F006E6687 /* StatScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatScreen.swift; path = Source/StatScreen.swift; sourceTree = "<group>"; };
 		28DE0C341B6A96A200E418BA /* MiscMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MiscMethods.swift; path = Source/MiscMethods.swift; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
@@ -548,20 +552,22 @@
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				7A046D7519E84C36004C4763 /* MainScene.swift */,
 				28A4FF381B5EB0300024B821 /* SearchSetScene.swift */,
+				286ABEE41B69409C0097CE58 /* ViewDownloadsScene.swift */,
+				28C991851B7D27630031478A /* ChooseGameScene.swift */,
 				28A812901B73C00B000B58A7 /* Credits.swift */,
 				2819B4431B55777F00C358E9 /* GameplaySling.swift */,
-				2819B45D1B56C4B500C358E9 /* GameplayFlappy.swift */,
-				289FB4891B7D0953006E3F4E /* GameplayShoot.swift */,
 				289FB4821B7BE32F006E3F4E /* Gameplay.swift */,
-				28DE0C341B6A96A200E418BA /* MiscMethods.swift */,
-				286ABEE41B69409C0097CE58 /* ViewDownloadsScene.swift */,
-				28DDACB61B713A1F006E6687 /* StatScreen.swift */,
+				2819B45D1B56C4B500C358E9 /* FlappyGameplay.swift */,
+				2819B45F1B56C98E00C358E9 /* FlappyObstacle.swift */,
+				2819B4611B56C9EB00C358E9 /* FlappyGoal.swift */,
+				289FB4891B7D0953006E3F4E /* ShootGameplay.swift */,
+				28C991871B7D3D780031478A /* ShootObstacle.swift */,
 				28076DBF1B61B03300B65802 /* FlappyGameOver.swift */,
+				28DDACB61B713A1F006E6687 /* StatScreen.swift */,
+				28DE0C341B6A96A200E418BA /* MiscMethods.swift */,
 				28615B0B1B585B2000E37B45 /* WebHelper.swift */,
 				28615B0D1B585DCD00E37B45 /* QuizletResponseModel.swift */,
 				28615B0F1B587E6000E37B45 /* SwiftyJSON.swift */,
-				2819B45F1B56C98E00C358E9 /* Obstacle.swift */,
-				2819B4611B56C9EB00C358E9 /* Goal.swift */,
 				D352B48019EC608A00829775 /* MetalShaders */,
 			);
 			name = Source;
@@ -1028,7 +1034,8 @@
 				B73789871807631A0076A88C /* main.m in Sources */,
 				7A046D7919E84ED5004C4763 /* MainScene.swift in Sources */,
 				28076DC01B61B03300B65802 /* FlappyGameOver.swift in Sources */,
-				2819B4601B56C98E00C358E9 /* Obstacle.swift in Sources */,
+				2819B4601B56C98E00C358E9 /* FlappyObstacle.swift in Sources */,
+				28C991881B7D3D780031478A /* ShootObstacle.swift in Sources */,
 				28615B101B587E6000E37B45 /* SwiftyJSON.swift in Sources */,
 				28615B0C1B585B2000E37B45 /* WebHelper.swift in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
@@ -1036,13 +1043,14 @@
 				28DDACB71B713A1F006E6687 /* StatScreen.swift in Sources */,
 				286ABEE51B69409C0097CE58 /* ViewDownloadsScene.swift in Sources */,
 				28A812911B73C00B000B58A7 /* Credits.swift in Sources */,
+				28C991861B7D27630031478A /* ChooseGameScene.swift in Sources */,
 				2819B4441B55777F00C358E9 /* GameplaySling.swift in Sources */,
 				28A4FF391B5EB0300024B821 /* SearchSetScene.swift in Sources */,
-				2819B45E1B56C4B500C358E9 /* GameplayFlappy.swift in Sources */,
+				2819B45E1B56C4B500C358E9 /* FlappyGameplay.swift in Sources */,
 				28DE0C351B6A96A200E418BA /* MiscMethods.swift in Sources */,
-				2819B4621B56C9EB00C358E9 /* Goal.swift in Sources */,
+				2819B4621B56C9EB00C358E9 /* FlappyGoal.swift in Sources */,
 				28615B0E1B585DCD00E37B45 /* QuizletResponseModel.swift in Sources */,
-				289FB48A1B7D0953006E3F4E /* GameplayShoot.swift in Sources */,
+				289FB48A1B7D0953006E3F4E /* ShootGameplay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
