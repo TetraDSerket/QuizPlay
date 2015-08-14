@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+class ShootBullet: CCSprite
+{
+    let bulletVelocity: Int = 200
+    
+    func didLoadFromCCB()
+    {
+        self.physicsBody.collisionMask = []
+        self.physicsBody.velocity = CGPoint(x: 0, y: bulletVelocity)
+    }
+}

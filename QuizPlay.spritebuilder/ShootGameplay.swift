@@ -19,6 +19,8 @@ class ShootGameplay: Gameplay
     weak var hero: CCSprite!
     var heroSpeed: Int = 30
     weak var obstaclesLayer: CCNode!
+    weak var bulletsLayer: CCNode!
+    weak var buttonNode: CCNode!
     
     var sinceTouch: CCTime = 0
     var scrollSpeed: CGFloat = 80
@@ -27,10 +29,19 @@ class ShootGameplay: Gameplay
     let firstObstaclePosition : CGFloat = 100
     let distanceBetweenObstacles : CGFloat = 180
     
+    func shootButtonPressed()
+    {
+        println("SHOOT THEM BULLETS")
+        let bullet = CCBReader.load("ShootBullet")
+        bullet.position = hero.position
+        bulletsLayer.addChild(bullet)
+    }
+    
     override func didLoadFromCCB()
     {
         super.didLoadFromCCB()
         nameOfGame = "Shoot"
+        multipleTouchEnabled = true
         
         audio.preloadEffect("Audio/CorrectChime.wav")
         audio.preloadEffect("Audio/IncorrectChime.wav")
@@ -40,8 +51,9 @@ class ShootGameplay: Gameplay
     override func onEnter()
     {
         super.onEnter()
-        
-//        spawnNewObstacle()
+//        let actionFollow = CCActionFollow(target: mouseNode, worldBoundary: gamePhysicsNode.boundingBox())
+//        hero.runAction(actionFollow)
+        spawnNewObstacle()
 //        spawnNewObstacle()
 //        spawnNewObstacle()
 //        spawnNewObstacle()
@@ -57,8 +69,26 @@ class ShootGameplay: Gameplay
         if (gameState == .Playing)
         {
             sinceTouch = 0
+            if(touch.locationInWorld().x < 90 && touch.locationInWorld().y < 60)
+            {
+                shootButtonPressed()
+            }
+            else
+            {
+                hero.position = touch.locationInNode(gamePhysicsNode)
+                println(hero.position)
+            }
         }
-        
+    }
+    
+    override func touchMoved(touch: CCTouch!, withEvent event: CCTouchEvent!)
+    {
+        if (gameState == .Playing)
+        {
+            hero.position = touch.locationInNode(gamePhysicsNode)
+            println(hero.position)
+            sinceTouch = 0
+        }
     }
     
     override func update(delta: CCTime)
@@ -69,6 +99,7 @@ class ShootGameplay: Gameplay
             scrollSpeed = max(100,CGFloat(points/2+100))
             sinceTouch += delta
     
+            
             if(hero.physicsBody.allowsRotation)
             {
                 //limits angular velocity between -2 and 1
@@ -108,7 +139,7 @@ class ShootGameplay: Gameplay
     
     func spawnNewObstacle()
     {
-        let obstacle = CCBReader.load("ShootAnswer") as! ShootObstacle
+        let obstacle = CCBReader.load("ShootObstacle") as! ShootObstacle
         //set position of new obstacle
         //call Obstacle method to randomize position
         let screenWidth = CCDirector.sharedDirector().designSize.width
@@ -126,14 +157,9 @@ class ShootGameplay: Gameplay
     //level collision taken care of in Gameplay
     
     //detects collisions between the hero and the goal
-    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, goal: CCNode!) -> Bool
+    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, bullet: CCNode!, eraseBullets: CCNode!) -> Bool
     {
-        //remove goal so no duplicate scoring
-        goal.removeFromParent()
-        if(gameState == .Playing)
-        {
-            //points++
-        }
+        bullet.removeFromParent()
         return true
     }
     

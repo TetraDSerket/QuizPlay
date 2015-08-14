@@ -25,6 +25,7 @@
 		28A812911B73C00B000B58A7 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A812901B73C00B000B58A7 /* Credits.swift */; };
 		28C991861B7D27630031478A /* ChooseGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C991851B7D27630031478A /* ChooseGameScene.swift */; };
 		28C991881B7D3D780031478A /* ShootObstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C991871B7D3D780031478A /* ShootObstacle.swift */; };
+		28C991961B7D62730031478A /* ShootBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C991951B7D62730031478A /* ShootBullet.swift */; };
 		28DDACB71B713A1F006E6687 /* StatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DDACB61B713A1F006E6687 /* StatScreen.swift */; };
 		28DE0C351B6A96A200E418BA /* MiscMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE0C341B6A96A200E418BA /* MiscMethods.swift */; };
 		5B121030197484FA004C1E1D /* QuizPlayActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* QuizPlayActivity.m */; };
@@ -236,6 +237,7 @@
 		28A812901B73C00B000B58A7 /* Credits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Credits.swift; path = Source/Credits.swift; sourceTree = "<group>"; };
 		28C991851B7D27630031478A /* ChooseGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseGameScene.swift; sourceTree = "<group>"; };
 		28C991871B7D3D780031478A /* ShootObstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShootObstacle.swift; sourceTree = "<group>"; };
+		28C991951B7D62730031478A /* ShootBullet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShootBullet.swift; sourceTree = "<group>"; };
 		28DDACB61B713A1F006E6687 /* StatScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatScreen.swift; path = Source/StatScreen.swift; sourceTree = "<group>"; };
 		28DE0C341B6A96A200E418BA /* MiscMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MiscMethods.swift; path = Source/MiscMethods.swift; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
@@ -561,6 +563,7 @@
 				2819B45F1B56C98E00C358E9 /* FlappyObstacle.swift */,
 				2819B4611B56C9EB00C358E9 /* FlappyGoal.swift */,
 				289FB4891B7D0953006E3F4E /* ShootGameplay.swift */,
+				28C991951B7D62730031478A /* ShootBullet.swift */,
 				28C991871B7D3D780031478A /* ShootObstacle.swift */,
 				28076DBF1B61B03300B65802 /* FlappyGameOver.swift */,
 				28DDACB61B713A1F006E6687 /* StatScreen.swift */,
@@ -1051,6 +1054,7 @@
 				2819B4621B56C9EB00C358E9 /* FlappyGoal.swift in Sources */,
 				28615B0E1B585DCD00E37B45 /* QuizletResponseModel.swift in Sources */,
 				289FB48A1B7D0953006E3F4E /* ShootGameplay.swift in Sources */,
+				28C991961B7D62730031478A /* ShootBullet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
