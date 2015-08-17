@@ -21,4 +21,10 @@ class ChooseGameScene: CCNode
     {
         MiscMethods.toGameplayScene(gameData, nameOfGame: "Shoot")
     }
+    
+    func deleteChooseGamePopup()
+    {
+        println("delete")
+        self.removeFromParent()
+    }
 }

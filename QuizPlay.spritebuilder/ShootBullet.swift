@@ -10,11 +10,11 @@ import Foundation
 
 class ShootBullet: CCSprite
 {
-    let bulletVelocity: Int = 200
+    let bulletVelocity: Int = 500
     
     func didLoadFromCCB()
     {
-        self.physicsBody.collisionMask = []
+        self.physicsBody.sensor = true
         self.physicsBody.velocity = CGPoint(x: 0, y: bulletVelocity)
     }
 }

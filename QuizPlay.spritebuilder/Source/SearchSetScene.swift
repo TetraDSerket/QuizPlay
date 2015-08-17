@@ -23,6 +23,7 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     weak var searchQuizletLabel: CCLabelTTF!
     weak var loadingScreen: CCNode!
     weak var downloadCompleteLabel: CCLabelTTF!
+    var chooseGamePopup: ChooseGameScene!
     var tableView: CCTableView!
     var searchResults: [SearchResponse] = []
     var quizWords = Dictionary<String, String>()
@@ -81,6 +82,10 @@ class SearchSetScene: CCNode, CCTableViewDataSource
         
         clippingNode.stencil = stencilNode
         clippingNode.alphaThreshold = 0.0
+        
+        chooseGamePopup = CCBReader.load("ChooseGameScene") as! ChooseGameScene
+        chooseGamePopup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
+        chooseGamePopup.position = CGPoint(x: 0.5, y: 0.5)
     }
     
     func tableView(tableView: CCTableView, nodeForRowAtIndex index: UInt) -> CCTableViewCell
@@ -154,8 +159,12 @@ class SearchSetScene: CCNode, CCTableViewDataSource
     func dealWithQuizWordsLoaded(gameData: GameData) -> Void
     {
         loadingScreen.visible = false
-        //open Game Choice Scene here
+        
         MiscMethods.toGameplayScene(gameData, nameOfGame: "Flappy")
+//        //open Game Choice Scene here
+//        chooseGamePopup.gameData = gameData
+//        parent.addChild(chooseGamePopup)
+        
         buttonsAvailable = true
     }
     

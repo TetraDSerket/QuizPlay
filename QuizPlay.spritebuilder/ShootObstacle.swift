@@ -11,11 +11,10 @@ class ShootObstacle: CCNode
 {
     weak var answerLabel: CCLabelTTF!
     weak var labelBackground: CCNode!
-    var fallingSpeed: Int = 30
     
     func didLoadFromCCB()
     {
-        
+        labelBackground.physicsBody.sensor = true
     }
     
     func setString(#answerString: String)

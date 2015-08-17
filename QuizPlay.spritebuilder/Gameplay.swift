@@ -25,6 +25,7 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     var startTimeForTempPauseScreen: NSTimeInterval!
     weak var tutorialScreen: CCNode!
     weak var gamePhysicsNode: CCPhysicsNode!
+    var chooseGamePopup: ChooseGameScene!
     
     //Controlling question allocation
     var isWordFirst: Bool = true
@@ -40,6 +41,17 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     var answer: String!
     var choices = [String]()
     var lastWordChosen: String!
+    
+    //Lives
+    var redFlashPopup: CCNode!
+    weak var numOfLivesLabel: CCLabelTTF!
+    var numOfLives: Int = 4
+    { didSet {
+        let greenVariable = min((Float(numOfLives-1)*2/4), 0.7)
+        let redVariable = min(2 - (Float(numOfLives-1)*2/4), 0.7)
+        numOfLivesLabel.outlineColor = CCColor(red: redVariable, green: greenVariable, blue: 0)
+        numOfLivesLabel.string = "Lives: \(numOfLives)"
+    }        }
     
     //Score
     weak var scoreLabel: CCLabelTTF!
@@ -64,9 +76,9 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     weak var pauseToReadExplanation: CCNode!
     weak var readQuestionLabel: CCLabelTTF!
     var numberOfRightAnswers: Int = 0
-    var tempPauseEnabled: Bool = NSUserDefaults.standardUserDefaults().boolForKey("flappyTempPauseEnabled") ?? true
+    var tempPauseDisabled: Bool = NSUserDefaults.standardUserDefaults().boolForKey("flappyTempPauseEnabled") ?? true
     { didSet {
-        NSUserDefaults.standardUserDefaults().setBool(tempPauseEnabled, forKey: "flappyTempPauseEnabled")
+        NSUserDefaults.standardUserDefaults().setBool(tempPauseDisabled, forKey: "flappyTempPauseEnabled")
         NSUserDefaults.standardUserDefaults().synchronize()
     }        }
     
@@ -75,6 +87,7 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     
     func didLoadFromCCB()
     {
+        println(tempPauseDisabled)
         //assigning MainScene as the collision delegate class
         gamePhysicsNode.collisionDelegate = self
         //gamePhysicsNode.debugDraw = true
@@ -95,6 +108,10 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
         pausePopup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
         pausePopup.position = CGPoint(x: 0.5, y: 0.5)
         
+        chooseGamePopup = CCBReader.load("ChooseGameScene") as! ChooseGameScene
+        chooseGamePopup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
+        chooseGamePopup.position = CGPoint(x: 0.5, y: 0.5)
+        
         chooseQuestionAndAnswer()
         gamePhysicsNode.paused = true
     }
@@ -108,14 +125,14 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
             gamePhysicsNode.paused = false
             audio.playBg("Audio/Wristbands.wav", volume: 0.2, pan: 0.0, loop: true)
         }
-        if(gameState == .TempPaused && tempPauseEnabled)
+        if(gameState == .TempPaused && !tempPauseDisabled)
         {
             var deltaTime = NSDate().timeIntervalSince1970 - startTimeForTempPauseScreen
             if(deltaTime > 2)
             {
                 gameState = .Playing
                 pauseToReadQuestion.visible = false
-                if(numberOfRightAnswers < 4)
+                if(numberOfRightAnswers < 3)
                 {
                     pauseToReadExplanation.visible = false
                     readQuestionLabel.string = "Read the new question!"
@@ -127,7 +144,8 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     
     override func update(delta: CCTime)
     {
-        if(gameState == .TempPaused && tempPauseEnabled)
+        println(tempPauseDisabled)
+        if(gameState == .TempPaused && !tempPauseDisabled)
         {
             var deltaTime = NSDate().timeIntervalSince1970 - startTimeForTempPauseScreen
             if(deltaTime > 2)
@@ -136,6 +154,7 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
             }
         }
     }
+    
     func chooseQuestionAndAnswer()
     {
         if(gameData.quizWords.count == 1)
@@ -229,6 +248,9 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
             { () -> Void in
                 if(self.gameState == .Playing)
                 {
+                    level.physicsBody.collisionMask = []
+                    level.opacity = 0.5
+                    println(hero.position.y)
                     self.audio.playEffect("Audio/ShutDownNoise.wav", volume: 0.8, pitch: 1.0, pan: 0.0, loop: false)
                     self.triggerGameOver()
                 }
@@ -275,13 +297,13 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     
     func pauseForReadingQuestion()
     {
-        if(gameState == .Playing && tempPauseEnabled)
+        if(gameState == .Playing && !tempPauseDisabled)
         {
             startTimeForTempPauseScreen = NSDate().timeIntervalSince1970
             gameState = .TempPaused
             gamePhysicsNode.paused = true
             pauseToReadQuestion.visible = true
-            if(numberOfRightAnswers < 3)
+            if(numberOfRightAnswers < 2)
             {
                 pauseToReadExplanation.visible = true
                 numberOfRightAnswers++
@@ -298,7 +320,7 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     }
     
     
-    //All buttons on Game Over Screen except for Replay
+    //All buttons on Game Over Screen
     func downloadTheseFlashcardsButton()
     {
         var downloadsArray = NSUserDefaults.standardUserDefaults().arrayForKey("downloads") as? [Dictionary<String,String>] ?? [Dictionary<String,String>]()
@@ -332,10 +354,14 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
         let transition = CCTransition(fadeWithDuration: 0.8)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
-    //On the Game Over scene
     func retryButton()
     {
         MiscMethods.toGameplayScene(gameData, nameOfGame: nameOfGame)
+    }
+    func switchGameButton()
+    {
+        chooseGamePopup.gameData = gameData
+        parent.addChild(chooseGamePopup)
     }
 
 
@@ -364,12 +390,12 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     }
     func switchBoolTempPauses()
     {
-        tempPauseEnabled = !tempPauseEnabled
+        tempPauseDisabled = !tempPauseDisabled
         setTempPausesButtonTitle()
     }
     func setTempPausesButtonTitle()
     {
-        if(tempPauseEnabled)
+        if(!tempPauseDisabled)
         {
             tempPausesButton.title = "Disable Temporary Pauses"
         }
@@ -383,12 +409,20 @@ class Gameplay: CCNode, CCPhysicsCollisionDelegate
     func triggerGameOver()
     {
         //audio.playBg("Audio/ObsidianMirror.wav", loop: true)
-        mixpanel.track("Game Over", properties: ["Score Level": Int(Float(points)/20), "Raw Score": points, "Game Name": nameOfGame])
-        audio.playBg("Audio/ObsidianMirror.wav", volume: 0.3, pan: 0.0, loop: true)
-        gameState = .GameOver
-        GOscoreLabel.string = "Score: \(points)"
-        GOsetNameLabel.string = "Quiz Played: \(gameData.title)"
-        parent.addChild(popup)
+        numOfLives--
+        redFlashPopup = CCBReader.load("RedFlash")
+        redFlashPopup.positionType = CCPositionType(xUnit: .Normalized, yUnit: .Normalized, corner: .BottomLeft)
+        redFlashPopup.position = CGPoint(x: 0.5, y: 0.5)
+        parent.addChild(redFlashPopup)
+        if(numOfLives == 0)
+        {
+            mixpanel.track("Game Over", properties: ["Score Level": Int(Float(points)/20), "Raw Score": points, "Game Name": nameOfGame])
+            audio.playBg("Audio/ObsidianMirror.wav", volume: 0.3, pan: 0.0, loop: true)
+            gameState = .GameOver
+            GOscoreLabel.string = "Score: \(points)"
+            GOsetNameLabel.string = "Quiz Played: \(gameData.title)"
+            parent.addChild(popup)
+        }
         //        println("POPUP")
     }
 }

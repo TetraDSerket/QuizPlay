@@ -243,7 +243,7 @@ class FlappyGameplay: Gameplay
     override func handleWrongAnswer()
     {
         super.handleWrongAnswer()
-    }    
+    }
 }
 
 

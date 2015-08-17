@@ -8,6 +8,7 @@
 
 import Foundation
 import Mixpanel
+import CoreMotion
 
 class ShootGameplay: Gameplay
 {
@@ -17,7 +18,7 @@ class ShootGameplay: Gameplay
     }
     
     weak var hero: CCSprite!
-    var heroSpeed: Int = 30
+    var heroMaxSpeed: CGFloat = 300
     weak var obstaclesLayer: CCNode!
     weak var bulletsLayer: CCNode!
     weak var buttonNode: CCNode!
@@ -25,17 +26,12 @@ class ShootGameplay: Gameplay
     var sinceTouch: CCTime = 0
     var scrollSpeed: CGFloat = 80
     
-    var obstacles : [CCNode] = [] //array of obstacles
+    var obstacles: [CCNode] = [] //array of obstacles
+    var bullets: [CCNode] = []
     let firstObstaclePosition : CGFloat = 100
-    let distanceBetweenObstacles : CGFloat = 180
+    let distanceBetweenObstacles : CGFloat = 230
     
-    func shootButtonPressed()
-    {
-        println("SHOOT THEM BULLETS")
-        let bullet = CCBReader.load("ShootBullet")
-        bullet.position = hero.position
-        bulletsLayer.addChild(bullet)
-    }
+    var motionManager: CMMotionManager! = CMMotionManager()
     
     override func didLoadFromCCB()
     {
@@ -46,6 +42,8 @@ class ShootGameplay: Gameplay
         audio.preloadEffect("Audio/CorrectChime.wav")
         audio.preloadEffect("Audio/IncorrectChime.wav")
         audio.preloadEffect("Audio/ShutDownNoise.wav")
+        
+        motionManager.startAccelerometerUpdates()
     }
     
     override func onEnter()
@@ -54,14 +52,14 @@ class ShootGameplay: Gameplay
 //        let actionFollow = CCActionFollow(target: mouseNode, worldBoundary: gamePhysicsNode.boundingBox())
 //        hero.runAction(actionFollow)
         spawnNewObstacle()
-//        spawnNewObstacle()
-//        spawnNewObstacle()
-//        spawnNewObstacle()
+        spawnNewObstacle()
+        spawnNewObstacle()
+        spawnNewObstacle()
     }
     
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent)
     {
-        if(gameState == .Tutorial)
+        if (gameState == .Tutorial)
         {
             hero.positionType = CCPositionTypeMake(.Points, .Points, .BottomLeft)
         }
@@ -69,14 +67,14 @@ class ShootGameplay: Gameplay
         if (gameState == .Playing)
         {
             sinceTouch = 0
-            if(touch.locationInWorld().x < 90 && touch.locationInWorld().y < 60)
+            println("\(touch.locationInNode(gamePhysicsNode)) and \(touch.locationInWorld())")
+            if(touch.locationInWorld().y > 60)
             {
-                shootButtonPressed()
+                hero.position = touch.locationInNode(gamePhysicsNode)
             }
             else
             {
-                hero.position = touch.locationInNode(gamePhysicsNode)
-                println(hero.position)
+                shootButtonPressed()
             }
         }
     }
@@ -85,9 +83,10 @@ class ShootGameplay: Gameplay
     {
         if (gameState == .Playing)
         {
-            hero.position = touch.locationInNode(gamePhysicsNode)
-            println(hero.position)
-            sinceTouch = 0
+            if(touch.locationInWorld().y > 60)
+            {
+                hero.position = touch.locationInNode(gamePhysicsNode)
+            }
         }
     }
     
@@ -96,24 +95,45 @@ class ShootGameplay: Gameplay
         super.update(delta)
         if(gameState == .Playing)
         {
-            scrollSpeed = max(100,CGFloat(points/2+100))
+            scrollSpeed = max(100,CGFloat(points+100))
             sinceTouch += delta
     
-            
-            if(hero.physicsBody.allowsRotation)
+            if hero.position.x > CCDirector.sharedDirector().designSize.width
             {
-                //limits angular velocity between -2 and 1
-                let angularVelocity = clampf(Float(hero.physicsBody.angularVelocity), -2, 1)
-                //set angular velocity back to angularVelocity
-                hero.physicsBody.angularVelocity = CGFloat(angularVelocity)
+                hero.position.x = CCDirector.sharedDirector().designSize.width
             }
-            if (sinceTouch > 0.25)
+            if hero.position.x < 0
             {
-                //applies the upward impulse to the spaceship after a time
-                let impulse = 25000.0 * delta
-                hero.physicsBody.applyAngularImpulse(CGFloat(impulse))
+                hero.position.x = 0
             }
             
+//            if(hero.physicsBody.allowsRotation)
+//            {
+//                //limits angular velocity between -2 and 1
+//                let angularVelocity = clampf(Float(hero.physicsBody.angularVelocity), -2, 1)
+//                //set angular velocity back to angularVelocity
+//                hero.physicsBody.angularVelocity = CGFloat(angularVelocity)
+//            }
+//            if (sinceTouch > 0.25)
+//            {
+//                //applies the upward impulse to the spaceship after a time
+//                let impulse = 25000.0 * delta
+//                hero.physicsBody.applyAngularImpulse(CGFloat(impulse))
+//            }
+            
+//            if let accelerometerData: CMAccelerometerData = motionManager.accelerometerData
+//            {
+//                let acceleration: CMAcceleration = accelerometerData.acceleration
+//                let accelFloat: CGFloat = CGFloat(acceleration.x)
+//                
+//                //
+//                var newXVel: CGFloat = hero.physicsBody.velocity.x + accelFloat*2000.0*CGFloat(delta)
+//                hero.physicsBody.velocity.x = min(max(newXVel, -heroMaxSpeed), heroMaxSpeed)
+//            }
+            
+            hero.position = ccp(hero.position.x, hero.position.y + scrollSpeed * CGFloat(delta))
+            gamePhysicsNode.position = ccp(gamePhysicsNode.position.x, gamePhysicsNode.position.y - scrollSpeed * CGFloat(delta))
+            //rounds the physics node to the nearest int to prevent black line artifact / fixes that one problem
             let scale = CCDirector.sharedDirector().contentScaleFactor
             gamePhysicsNode.position = ccp(round(gamePhysicsNode.position.x * scale) / scale, round(gamePhysicsNode.position.y * scale) / scale)
             hero.position = ccp(round(hero.position.x * scale) / scale, round(hero.position.y * scale) / scale)
@@ -124,7 +144,7 @@ class ShootGameplay: Gameplay
                 let obstacleWorldPosition = gamePhysicsNode.convertToWorldSpace(obstacle.position)
                 let obstacleScreenPosition = convertToNodeSpace(obstacleWorldPosition)
                 
-                // obstacle moved past left side of screen?
+                // obstacle moved past bottom of screen?
                 if obstacleScreenPosition.y < (-obstacle.contentSize.height)*2
                 {
                     obstacle.removeFromParent()
@@ -134,19 +154,41 @@ class ShootGameplay: Gameplay
                     spawnNewObstacle()
                 }
             }
+            
+            for bullet in bullets
+            {
+                //getting obstacle position on screen
+                let bulletWorldPosition = gamePhysicsNode.convertToWorldSpace(bullet.position)
+                let bulletScreenPosition = convertToNodeSpace(bulletWorldPosition)
+                
+//                println(bulletScreenPosition)
+                // obstacle moved past bottom of screen?
+                if bulletScreenPosition.y > CCDirector.sharedDirector().designSize.height
+                {
+                    bullet.removeFromParent()
+                    bullets.removeAtIndex(find(bullets, bullet)!)
+                }
+            }
         }
     }
     
     func spawnNewObstacle()
     {
+        var prevObstaclePos = firstObstaclePosition
+        //previous position set to position of the last one
+        if obstacles.count > 0
+        {
+            prevObstaclePos = obstacles.last!.position.y
+        }
         let obstacle = CCBReader.load("ShootObstacle") as! ShootObstacle
         //set position of new obstacle
         //call Obstacle method to randomize position
         let screenWidth = CCDirector.sharedDirector().designSize.width
+        let screenHeight = CCDirector.sharedDirector().designSize.height
         let random = CGFloat(arc4random_uniform(100)) / CGFloat(100)
         let obstaclePosition = (screenWidth - 100)*random + 50
-        obstacle.position = ccp(obstaclePosition, 10)
-        println(obstaclePosition)
+        obstacle.position = ccp(obstaclePosition, prevObstaclePos + distanceBetweenObstacles)
+//        println("\(prevObstaclePos) and \(obstacle.position)")
         obstacle.setString(answerString: chooseStringToPutOnCarrot())
         //add new obstacle to the physics node
         obstaclesLayer.addChild(obstacle)
@@ -154,12 +196,28 @@ class ShootGameplay: Gameplay
         obstacles.append(obstacle)
     }
     
+    func shootButtonPressed()
+    {
+        if(gameState == .Playing)
+        {
+            println("SHOOT THEM BULLETS")
+            let bullet = CCBReader.load("ShootBullet")
+            bullet.position = hero.position
+            bullets.append(bullet)
+            bulletsLayer.addChild(bullet)
+        }
+    }
+    
     //level collision taken care of in Gameplay
     
-    //detects collisions between the hero and the goal
-    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, bullet: CCNode!, eraseBullets: CCNode!) -> Bool
+    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, bullet: CCNode!, answerBackground: CCNode!) -> Bool
     {
-        bullet.removeFromParent()
+        if(gameState == .Playing)
+        {
+            bullet.removeFromParent()
+            bullets.removeAtIndex(find(bullets, bullet)!)
+            super.dealWithWrongAndRightAnswers(answerBackground)
+        }
         return true
     }
     
@@ -167,35 +225,10 @@ class ShootGameplay: Gameplay
     {
         if(gameState == .Playing)
         {
-            hero.physicsBody.applyImpulse(CGPoint(x: 0, y: 10000))
-            super.dealWithWrongAndRightAnswers(answerBackground)
-            //            println("\(answer) and \(question)")
-            //            println(statArray[question])
-            //            var wordThing = statArray[answer] ?? WordStat(word: answer, definition: question, correctResponses: 0, wrongResponses: 0)
-            ////            hero.physicsBody.velocity = CGPoint(x: hero.physicsBody.velocity.x, y: 2000)
-            //            answerBackground.physicsBody = nil
-            //            //println(answerBackground.name)
-            //            if(answerBackground.name == answer)
-            //            {
-            //                println("Right Answer")
-            //                self.audio.playEffect("Audio/CorrectChime.wav", volume: 0.7, pitch: 1.0, pan: 0.0, loop: false)
-            //                //var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: question, correctResponses: 0, wrongResponses: 0)
-            //                wordThing.correctResponses = wordThing.correctResponses + 1
-            //                statArray[answer] = wordThing
-            //                answerBackground.animationManager.runAnimationsForSequenceNamed("popAnswer")
-            //                handleRightAnswer()
-            //            }
-            //            else
-            //            {
-            //                self.audio.playEffect("Audio/IncorrectChime.wav", volume: 1.0, pitch: 1.0, pan: 0.0, loop: false)
-            //                println("Wrong Answer")
-            //                //println("\(answer) and \(question)")
-            //                //var wordThing = statArray[answerBackground.name] ?? WordStat(word: answerBackground.name, definition: gameData.quizWords[answerBackground.name]!, correctResponses: 0, wrongResponses: 0)
-            //                wordThing.wrongResponses = wordThing.wrongResponses + 1
-            //                statArray[answer] = wordThing
-            //                answerBackground.animationManager.runAnimationsForSequenceNamed("wrongAnswer")
-            //                handleWrongAnswer()
-            //            }
+            gameState = .GameOver
+            hero.physicsBody.applyImpulse(CGPoint(x: 0, y: 1000))
+            hero.physicsBody.applyAngularImpulse(CGFloat(100))
+            triggerGameOver()
         }
         return true
     }
@@ -213,5 +246,11 @@ class ShootGameplay: Gameplay
     override func handleWrongAnswer()
     {
         super.handleWrongAnswer()
+    }
+    
+    override func onExit()
+    {
+        motionManager.stopAccelerometerUpdates()
+        super.onExit()
     }
 }

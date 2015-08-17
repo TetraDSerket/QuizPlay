@@ -26,6 +26,7 @@
 		28C991861B7D27630031478A /* ChooseGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C991851B7D27630031478A /* ChooseGameScene.swift */; };
 		28C991881B7D3D780031478A /* ShootObstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C991871B7D3D780031478A /* ShootObstacle.swift */; };
 		28C991961B7D62730031478A /* ShootBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C991951B7D62730031478A /* ShootBullet.swift */; };
+		28C991981B7E614D0031478A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C991971B7E614D0031478A /* CoreMotion.framework */; };
 		28DDACB71B713A1F006E6687 /* StatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DDACB61B713A1F006E6687 /* StatScreen.swift */; };
 		28DE0C351B6A96A200E418BA /* MiscMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE0C341B6A96A200E418BA /* MiscMethods.swift */; };
 		5B121030197484FA004C1E1D /* QuizPlayActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* QuizPlayActivity.m */; };
@@ -238,6 +239,7 @@
 		28C991851B7D27630031478A /* ChooseGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseGameScene.swift; sourceTree = "<group>"; };
 		28C991871B7D3D780031478A /* ShootObstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShootObstacle.swift; sourceTree = "<group>"; };
 		28C991951B7D62730031478A /* ShootBullet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShootBullet.swift; sourceTree = "<group>"; };
+		28C991971B7E614D0031478A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		28DDACB61B713A1F006E6687 /* StatScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatScreen.swift; path = Source/StatScreen.swift; sourceTree = "<group>"; };
 		28DE0C341B6A96A200E418BA /* MiscMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MiscMethods.swift; path = Source/MiscMethods.swift; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
@@ -348,6 +350,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28C991981B7E614D0031478A /* CoreMotion.framework in Frameworks */,
 				7A97911819E631CD001FFC4D /* libcocos2d.a in Frameworks */,
 				8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */,
 				B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */,
@@ -624,6 +627,7 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				28C991971B7E614D0031478A /* CoreMotion.framework */,
 				BC5399D31A44DCC90063F482 /* AndroidKit.framework */,
 				BC5399D41A44DCC90063F482 /* CoreJava.framework */,
 				BC5399D51A44DCC90063F482 /* GLActivityKit.framework */,
@@ -1347,7 +1351,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1387,7 +1391,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Varsha Ramakrishnan (FZ7ESCL8YU)";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
